@@ -6,4 +6,6 @@
     <string name="login">Entrar</string>
     <string name="back">Voltar</string>
     <string name="find_mechanic">Encontrar mecânico</string>
+    <string name="logo">Logo do Mechanize</string>
+    <string name="create_account">Criar conta</string>
 </resources>
