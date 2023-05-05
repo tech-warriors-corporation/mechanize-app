@@ -15,4 +15,5 @@ You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
 - [ ] Review all project files;
 - [ ] Delete unused files;
 - [ ] Customize theme;
+- [ ] Study about elevation (shadow);
 - [ ] Use notifications.
