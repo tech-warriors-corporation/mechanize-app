@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/welcome"
-            android:textSize="32sp"
+            android:textSize="@dimen/title_size"
             android:id="@+id/title"
             android:paddingTop="@dimen/half_space"
             android:textColor="@color/white"
