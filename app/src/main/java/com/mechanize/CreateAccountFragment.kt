@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.mechanize.databinding.FragmentHomeBinding
+import com.mechanize.databinding.FragmentCreateAccountBinding
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
+class CreateAccountFragment : Fragment() {
+    private var _binding: FragmentCreateAccountBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateAccountBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -25,12 +25,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.loginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_LoginFragment)
-        }
-
-        binding.createAccountButton.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_CreateAccountFragment)
+        binding.homeButton.setOnClickListener {
+            findNavController().navigate(R.id.action_CreateAccountFragment_to_HomeFragment)
         }
     }
 

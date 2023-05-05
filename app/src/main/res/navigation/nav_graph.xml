@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_HomeFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
+
+        <action
+            android:id="@+id/action_HomeFragment_to_CreateAccountFragment"
+            app:destination="@id/CreateAccountFragment" />
     </fragment>
 
     <fragment
@@ -23,6 +27,17 @@
 
         <action
             android:id="@+id/action_LoginFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CreateAccountFragment"
+        android:name="com.mechanize.CreateAccountFragment"
+        android:label="@string/create_account_label"
+        tools:layout="@layout/fragment_create_account">
+
+        <action
+            android:id="@+id/action_CreateAccountFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
 </navigation>

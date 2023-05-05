@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Mechanize</string>
-    <string name="logout">Sair</string>
     <string name="home_label">Home</string>
     <string name="login_label">Login</string>
     <string name="login">Entrar</string>
     <string name="back">Voltar</string>
-    <string name="find_mechanic">Encontrar mecânico</string>
     <string name="logo">Logo do Mechanize</string>
     <string name="create_account">Criar conta</string>
+    <string name="welcome">Bem-vindo</string>
+    <string name="welcome_description">Para continuar é necessário fazer login ou criar conta.</string>
+    <string name="create_account_label">Criação de conta</string>
 </resources>
