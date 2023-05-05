@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Mechanize" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">#29B6F6</item>
+        <item name="colorPrimary">@color/primary</item>
         <item name="colorAccent">#01579A</item>
         <item name="android:textColor">#141414</item>
         <item name="android:textSize">16sp</item>
