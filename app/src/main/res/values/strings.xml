@@ -4,6 +4,8 @@
     <string name="login_label">Login</string>
     <string name="login">Entrar</string>
     <string name="back">Voltar</string>
+    <string name="logout">Sair</string>
+    <string name="logout_success">Você se deslogou</string>
     <string name="logo">Logo do Mechanize</string>
     <string name="create_account">Criar conta</string>
     <string name="welcome">Bem-vindo</string>

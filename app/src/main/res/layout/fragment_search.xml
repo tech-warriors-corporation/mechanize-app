@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context=".SearchFragment">
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        app:rippleColor="@android:color/transparent"
+        android:background="@android:color/transparent"
+        android:id="@+id/logout_button"
+        android:contentDescription="@string/logout"
+        app:icon="@drawable/baseline_power_settings_new_24"
+        app:iconSize="@dimen/icon_button_size"
+        app:iconGravity="textStart"
+        app:iconTint="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/space"
+        android:layout_marginTop="@dimen/space"
+        app:iconPadding="0dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

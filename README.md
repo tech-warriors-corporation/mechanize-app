@@ -16,5 +16,6 @@ You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
 - [ ] Delete unused files;
 - [ ] Customize theme;
 - [ ] Hide environment variables;
+- [ ] Send access token in headers request;
 - [ ] Study about elevation (shadow);
 - [ ] Use notifications.

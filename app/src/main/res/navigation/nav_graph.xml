@@ -17,6 +17,10 @@
         <action
             android:id="@+id/action_HomeFragment_to_CreateAccountFragment"
             app:destination="@id/CreateAccountFragment" />
+
+        <action
+            android:id="@+id/action_HomeFragment_to_SearchFragment"
+            app:destination="@id/SearchFragment" />
     </fragment>
 
     <fragment
@@ -28,6 +32,10 @@
         <action
             android:id="@+id/action_LoginFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
+
+        <action
+            android:id="@+id/action_LoginFragment_to_SearchFragment"
+            app:destination="@id/SearchFragment" />
     </fragment>
 
     <fragment
@@ -38,6 +46,17 @@
 
         <action
             android:id="@+id/action_CreateAccountFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SearchFragment"
+        android:name="com.mechanize.SearchFragment"
+        android:label="@string/search_label"
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_SearchFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
 </navigation>
