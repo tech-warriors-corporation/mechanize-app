@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.security.crypto.EncryptedSharedPreferences
 import com.mechanize.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -24,6 +25,24 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val userSharedPreferences = EncryptedSharedPreferences.create(
+            "user",
+            BuildConfig.SHARED_PREF_KEY,
+            binding.root.context,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
+        val accessToken = userSharedPreferences.getString("accessToken", "")
+        val name = userSharedPreferences.getString("name", "")
+        val role = userSharedPreferences.getString("role", "")
+
+        if(accessToken != "" && name != "" && role != ""){
+            findNavController().navigate(R.id.action_HomeFragment_to_SearchFragment)
+
+            return
+        }
 
         binding.loginButton.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_LoginFragment)
