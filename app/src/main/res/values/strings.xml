@@ -10,4 +10,13 @@
     <string name="welcome_description">Para continuar é necessário fazer login ou criar conta.</string>
     <string name="create_account_label">Criação de conta</string>
     <string name="login_description">Para entrar utilize seu e-mail e senha cadastrados.</string>
+    <string name="email_label">E-mail</string>
+    <string name="email_placeholder">Coloque o e-mail</string>
+    <string name="password_label">Senha</string>
+    <string name="password_placeholder">Coloque a senha</string>
+    <string name="invalid_email">E-mail é obrigatório</string>
+    <string name="invalid_password">Senha é obrigatória</string>
+    <string name="invalid_login">E-mail ou senha estão inválidos</string>
+    <string name="login_success">Login feito com sucesso</string>
+    <string name="search_label">Procucar mecânico</string>
 </resources>
