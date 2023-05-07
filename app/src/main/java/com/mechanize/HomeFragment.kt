@@ -1,10 +1,14 @@
 package com.mechanize
 
+import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.findNavController
 import androidx.security.crypto.EncryptedSharedPreferences
 import com.mechanize.databinding.FragmentHomeBinding
@@ -19,6 +23,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed(){}
+        })
 
         return binding.root
     }
@@ -42,6 +50,14 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_HomeFragment_to_SearchFragment)
 
             return
+        }
+
+        if(
+            ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ){
+            ActivityCompat.shouldShowRequestPermissionRationale(binding.root.context as Activity, android.Manifest.permission.ACCESS_FINE_LOCATION)
+            ActivityCompat.requestPermissions(binding.root.context as Activity, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
         }
 
         binding.loginButton.setOnClickListener {

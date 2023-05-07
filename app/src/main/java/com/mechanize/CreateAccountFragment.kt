@@ -12,6 +12,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import com.google.android.material.snackbar.Snackbar
 import com.mechanize.databinding.FragmentCreateAccountBinding
 import com.mechanize.enums.RoleText
+import com.mechanize.enums.RoleValue
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -93,8 +94,8 @@ class CreateAccountFragment : Fragment() {
 
         binding.loading.visibility = View.VISIBLE
 
-        if(role == resources.getString(RoleText.DRIVER.value)) role = RoleText.DRIVER.toString().lowercase()
-        if(role == resources.getString(RoleText.MECHANIC.value)) role = RoleText.MECHANIC.toString().lowercase()
+        if(role == resources.getString(RoleText.DRIVER.value)) role = RoleValue.DRIVER.value
+        else if(role == resources.getString(RoleText.MECHANIC.value)) role = RoleValue.MECHANIC.value
 
         val body = mapOf(
             "name" to name,

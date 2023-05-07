@@ -20,4 +20,6 @@ You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
 - [ ] Study about elevation (shadow);
 - [ ] Use notifications;
 - [ ] Mock the API's;
+- [ ] Upload application in Google Play;
+- [ ] Maybe create a url for each microservice (environment variable);
 - [ ] Remove TODO comments.

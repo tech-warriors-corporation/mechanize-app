@@ -20,7 +20,7 @@
     <string name="invalid_password">Senha é obrigatória</string>
     <string name="invalid_login">E-mail ou senha estão inválidos</string>
     <string name="login_success">Login feito com sucesso</string>
-    <string name="search_label">Procucar mecânico</string>
+    <string name="search_label">Procucar</string>
     <string name="create_account_description">Preencha os dados abaixo para criar uma conta. O e-mail deve ser válido e não cadastrado, também a senha deve ter no mínimo 8 caracteres, uma letra maiúscula, uma letra minúscula e um número.</string>
     <string name="password_confirmation_label">Repetir senha</string>
     <string name="password_confirmation_placeholder">Coloque a repetição da senha</string>
@@ -37,6 +37,11 @@
     <string name="created_account_success">Conta criada com sucesso</string>
     <string name="accept_save_data">Aceito armazenar meus dados</string>
     <string name="you_need_to_accept_save_data">É necessário aceitar armazenar seus dados</string>
+    <string name="invalid_location">Localização não encontrada, tente novamente ou aceite a permissão de localização</string>
+    <string name="me">Eu</string>
+    <string name="my_location">Minha localização</string>
+    <string name="user">Usuário</string>
+    <string name="service">serviço</string>
 
     <string-array name="roles">
         <item>@string/driver</item>

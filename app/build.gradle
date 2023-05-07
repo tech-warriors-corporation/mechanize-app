@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "API_URL", "\"http://10.0.2.2:8000/api/\""
+        buildConfigField "String", "API_URL", "\"http://3.17.10.57:8000/api/\"" // TODO: use local in http://10.0.2.2:8000/api/
         buildConfigField "String", "SHARED_PREF_KEY", "\"vVGymniyPY\""
 
         Properties properties = new Properties()
@@ -54,6 +54,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.beust:klaxon:5.5'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
