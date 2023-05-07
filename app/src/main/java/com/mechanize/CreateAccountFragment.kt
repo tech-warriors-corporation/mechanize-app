@@ -104,7 +104,7 @@ class CreateAccountFragment : Fragment() {
             "password" to password,
         )
 
-        val call = RetrofitFactory().retrofitService().createAccount(body)
+        val call = RetrofitFactory().retrofitAccountsService().createAccount(body)
 
         call.enqueue(object : Callback<Payload<Int>> {
             override fun onResponse(call: Call<Payload<Int>>, response: Response<Payload<Int>>) {
@@ -135,7 +135,7 @@ class CreateAccountFragment : Fragment() {
             "password" to password,
         )
 
-        val call = RetrofitFactory().retrofitService().login(body)
+        val call = RetrofitFactory().retrofitAccountsService().login(body)
 
         call.enqueue(object : Callback<Payload<LoginPayload>> {
             override fun onResponse(call: Call<Payload<LoginPayload>>, response: Response<Payload<LoginPayload>>) {

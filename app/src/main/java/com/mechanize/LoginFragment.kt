@@ -68,7 +68,7 @@ class LoginFragment : Fragment() {
             "password" to password
         )
 
-        val call = RetrofitFactory().retrofitService().login(body)
+        val call = RetrofitFactory().retrofitAccountsService().login(body)
 
         call.enqueue(object : Callback<Payload<LoginPayload>> {
             override fun onResponse(call: Call<Payload<LoginPayload>>, response: Response<Payload<LoginPayload>>) {
