@@ -18,4 +18,6 @@ You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
 - [ ] Hide environment variables;
 - [ ] Send access token in headers request;
 - [ ] Study about elevation (shadow);
-- [ ] Use notifications.
+- [ ] Use notifications;
+- [ ] Mock the API's;
+- [ ] Remove TODO comments.
