@@ -43,10 +43,11 @@ class HomeFragment : Fragment() {
         )
 
         val accessToken = userSharedPreferences.getString("accessToken", "")
+        val id = userSharedPreferences.getInt("id", 0)
         val name = userSharedPreferences.getString("name", "")
         val role = userSharedPreferences.getString("role", "")
 
-        if(accessToken != "" && name != "" && role != ""){
+        if(accessToken != "" && id != 0 && name != "" && role != ""){
             findNavController().navigate(R.id.action_HomeFragment_to_SearchFragment)
 
             return

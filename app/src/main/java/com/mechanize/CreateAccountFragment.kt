@@ -159,6 +159,7 @@ class CreateAccountFragment : Fragment() {
 
                     with(userSharedPreferences.edit()){
                         putString("accessToken", payload.accessToken)
+                        putInt("id", payload.user.id)
                         putString("name", payload.user.name)
                         putString("role", payload.user.role)
                         apply()

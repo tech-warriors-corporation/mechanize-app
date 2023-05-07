@@ -62,5 +62,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include layout="@layout/search_mechanic"
+            android:id="@+id/search_mechanic"
+            android:visibility="invisible" />
+
+        <include layout="@layout/searching"
+            android:id="@+id/searching"
+            android:visibility="invisible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </fragment>

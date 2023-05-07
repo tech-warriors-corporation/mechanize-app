@@ -3,6 +3,7 @@ package com.mechanize
 import com.google.gson.annotations.SerializedName
 
 data class LoginUserPayload(
+    @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("role") val role: String
 )
