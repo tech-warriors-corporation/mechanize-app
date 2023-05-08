@@ -37,11 +37,28 @@
     <string name="created_account_success">Conta criada com sucesso</string>
     <string name="accept_save_data">Aceito armazenar meus dados</string>
     <string name="you_need_to_accept_save_data">É necessário aceitar armazenar seus dados</string>
-    <string name="invalid_location">Localização não encontrada, tente novamente ou aceite a permissão de localização</string>
+    <string name="invalid_location">Localização não encontrada, deslogue para aceitar a permissão de localização ou tente abrir o aplicativo novamente</string>
     <string name="me">Eu</string>
     <string name="my_location">Minha localização</string>
     <string name="user">Usuário</string>
     <string name="service">serviço</string>
+    <string name="close">Fechar</string>
+    <string name="call_mechanic">Chamar mecânico</string>
+    <string name="out_of_fuel">Acabou o combustível</string>
+    <string name="vehicle_without_battery">Veículo sem bateria</string>
+    <string name="glass_broke">Vidro quebrou</string>
+    <string name="problem_label">Problema</string>
+    <string name="problem_placeholder">Exemplo: pneu furou, motor fazendo barulho e outros</string>
+    <string name="vehicle_label">Veículo</string>
+    <string name="vehicle_placeholder">Exemplo: marca, modelo, cor, placa e outros</string>
+    <string name="describe_service">Descrever serviço</string>
+    <string name="cancel">Cancelar</string>
+    <string name="searching">Procurando</string>
+    <string name="searching_description">Estamos fazendo o possível para encontrar um</string>
+    <string name="invalid_create_ticket">Ocorreu um erro ao criar o serviço</string>
+    <string name="created_ticket">Serviço criado, iremos procurar um mecânico agora</string>
+    <string name="invalid_vehicle">Veículo é obrigatório</string>
+    <string name="invalid_problem">Problema é obrigatório</string>
 
     <string-array name="roles">
         <item>@string/driver</item>

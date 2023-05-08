@@ -37,10 +37,17 @@ import com.google.android.material.snackbar.Snackbar
 import com.mechanize.databinding.FragmentSearchBinding
 import com.mechanize.enums.RoleText
 import com.mechanize.enums.RoleValue
+import com.mechanize.enums.TicketStatusValue
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, OnMapReadyCallback {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
+    private var searchForText = ""
+    private var latLng: LatLng? = null
+    private var userId: Int? = null
     private var googleApiClient: GoogleApiClient? = null
     private var locationManager: LocationManager? = null
     private lateinit var locationRequest: LocationRequest
@@ -85,6 +92,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
             with(userSharedPreferences.edit()){
                 remove("accessToken")
+                remove("id")
                 remove("name")
                 remove("role")
                 apply()
@@ -93,20 +101,42 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             findNavController().navigate(R.id.action_SearchFragment_to_HomeFragment)
         }
 
+        binding.searchMechanic.closeButton.setOnClickListener{
+            closeSearchMechanic()
+        }
+
+        userId = userSharedPreferences.getInt("id", 0)
         val userName = userSharedPreferences.getString("name", "")
         var userRole = userSharedPreferences.getString("role", "")
-        var searchForText = ""
+        val isDriver = userRole == RoleValue.DRIVER.value
+        val isMechanic = userRole == RoleValue.MECHANIC.value
 
-        if(userRole == RoleValue.DRIVER.value) {
+        if(isDriver) {
             userRole = resources.getString(RoleText.DRIVER.value)
             searchForText = resources.getString(RoleText.MECHANIC.value).lowercase()
-        } else if(userRole == RoleValue.MECHANIC.value) {
+        } else if(isMechanic) {
             userRole = resources.getString(RoleText.MECHANIC.value)
             searchForText = resources.getString(R.string.service)
         }
 
         binding.user.text = "$userRole: $userName"
         binding.searchButton.text = "${binding.searchButton.text} $searchForText"
+        binding.searching.searchingLabel.text = "${binding.searching.searchingLabel.text} $searchForText"
+        binding.searching.searchingDescriptionLabel.text = "${binding.searching.searchingDescriptionLabel.text} $searchForText."
+
+        binding.searchButton.setOnClickListener{
+            if(isDriver) onSearchMechanic()
+            else if(isMechanic) onSearchService()
+        }
+
+        binding.searching.cancelButton.setOnClickListener{
+            showAllActions()
+            binding.searching.root.visibility = View.INVISIBLE
+        }
+
+        binding.searchMechanic.callButton.setOnClickListener{
+            createTicket()
+        }
 
         val supportMapFragment = childFragmentManager.findFragmentById(R.id.location) as SupportMapFragment
 
@@ -145,8 +175,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
         ) {
-            binding.actions.visibility = View.INVISIBLE
             Snackbar.make(binding.root, R.string.invalid_location, Snackbar.LENGTH_LONG).show()
+            binding.actions.visibility = View.INVISIBLE
         }
     }
 
@@ -182,19 +212,21 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         }
     }
 
-    private fun updateLocation(map: GoogleMap, latLng: LatLng?){
+    private fun updateLocation(map: GoogleMap, newLatLng: LatLng?){
         googleMap = map
 
-        if(latLng == null) return
+        if(newLatLng == null) return
+
+        latLng = newLatLng
 
         googleMap.addMarker(
-            MarkerOptions().position(latLng)
+            MarkerOptions().position(latLng!!)
                            .title(resources.getString(R.string.me))
                            .snippet(resources.getString(R.string.my_location))
                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
         )
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.5f))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng!!, 12.5f))
 
         googleMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
             override fun getInfoWindow(marker: Marker): View? {
@@ -222,6 +254,99 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                 info.addView(snippet)
 
                 return info
+            }
+        })
+    }
+
+    private fun onSearchMechanic(){
+        closeSearchMechanic()
+        binding.searchMechanic.root.visibility = View.VISIBLE
+        hideAllActions()
+    }
+
+    private fun closeSearchMechanic(){
+        showAllActions()
+        binding.searchMechanic.root.visibility = View.INVISIBLE
+        binding.searchMechanic.glassBroke.isChecked = false
+        binding.searchMechanic.vehicleWithoutBattery.isChecked = false
+        binding.searchMechanic.outOfFuel.isChecked = false
+        binding.searchMechanic.vehicleField.editText?.setText("")
+        binding.searchMechanic.problemField.editText?.setText("")
+    }
+
+    private fun onSearchService(){
+        binding.searching.root.visibility = View.VISIBLE
+        hideAllActions()
+    }
+
+    private fun hideAllActions(){
+        binding.actions.visibility = View.INVISIBLE
+        binding.logoutButton.visibility = View.INVISIBLE
+    }
+
+    private fun showAllActions(){
+        binding.actions.visibility = View.VISIBLE
+        binding.logoutButton.visibility = View.VISIBLE
+    }
+
+    private fun createTicket(){
+        val view = binding.searchMechanic
+        val glassBroke = view.glassBroke.isChecked
+        val vehicleWithoutBattery = view.vehicleWithoutBattery.isChecked
+        val outOfFuel = view.outOfFuel.isChecked
+        val vehicle = view.vehicleField.editText?.text.toString()
+        var problem = view.problemField.editText?.text.toString()
+
+        if(vehicle == ""){
+            Snackbar.make(binding.root, R.string.invalid_vehicle, Snackbar.LENGTH_LONG).show()
+            return
+        }
+
+        if(problem == ""){
+            Snackbar.make(binding.root, R.string.invalid_problem, Snackbar.LENGTH_LONG).show()
+            return
+        }
+
+        if(glassBroke) problem = "$problem | ${view.glassBroke.text}"
+        if(vehicleWithoutBattery) problem = "$problem | ${view.vehicleWithoutBattery.text}"
+        if(outOfFuel) problem = "$problem | ${view.outOfFuel.text}"
+
+        binding.searchMechanic.ticketLoading.visibility = View.VISIBLE
+
+        val body = mapOf(
+            "driver_id" to userId.toString(),
+            "vehicle" to vehicle,
+            "description" to problem,
+            "location" to "${latLng!!.latitude},${latLng!!.longitude}",
+            "status" to TicketStatusValue.ATTENDING.value,
+        )
+
+        val call = RetrofitFactory().retrofitHelpsService().createTicket(body)
+
+        call.enqueue(object : Callback<Payload<Int>> {
+            override fun onResponse(call: Call<Payload<Int>>, response: Response<Payload<Int>>) {
+                response.body().let{
+                    val payload = it?.payload
+
+                    if(payload == null){
+                        Snackbar.make(binding.root, R.string.invalid_create_ticket, Snackbar.LENGTH_LONG).show()
+                        binding.searchMechanic.ticketLoading.visibility = View.INVISIBLE
+
+                        return
+                    }
+
+                    Snackbar.make(binding.root, R.string.created_ticket, Snackbar.LENGTH_LONG).show()
+
+                    closeSearchMechanic()
+                    onSearchService()
+
+                    binding.searchMechanic.ticketLoading.visibility = View.INVISIBLE
+                }
+            }
+
+            override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
+                Snackbar.make(binding.root, R.string.invalid_create_ticket, Snackbar.LENGTH_LONG).show()
+                binding.searchMechanic.ticketLoading.visibility = View.INVISIBLE
             }
         })
     }

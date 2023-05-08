@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/two_spaces"
+    android:background="@color/black_opaque">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/modal_background"
+        android:padding="@dimen/space"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/header"
+            android:stretchColumns="0">
+            <TableRow tools:ignore="UselessParent">
+                <TextView
+                    android:text="@string/describe_service"
+                    android:textSize="@dimen/small_title_size"
+                    android:layout_gravity="center|start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="@dimen/icon_button_size"
+                    android:layout_height="@dimen/icon_button_size"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:rippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/close_button"
+                    android:contentDescription="@string/close"
+                    app:iconTint="@color/black"
+                    app:icon="@drawable/baseline_close_24"
+                    app:iconSize="@dimen/icon_button_size"
+                    app:iconGravity="textStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:iconPadding="0dp" />
+            </TableRow>
+        </TableLayout>
+
+        <CheckBox
+            android:id="@+id/glass_broke"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/two_spaces"
+            android:layout_marginTop="@dimen/space"
+            android:text="@string/glass_broke"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header" />
+
+        <CheckBox
+            android:id="@+id/vehicle_without_battery"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/two_spaces"
+            android:text="@string/vehicle_without_battery"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/glass_broke" />
+
+        <CheckBox
+            android:id="@+id/out_of_fuel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/two_spaces"
+            android:text="@string/out_of_fuel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vehicle_without_battery" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/vehicle_field"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space"
+            android:hint="@string/vehicle_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/out_of_fuel"
+            app:placeholderText="@string/vehicle_placeholder">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/problem_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/problem_label"
+            android:layout_marginTop="@dimen/half_space"
+            app:placeholderText="@string/problem_placeholder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vehicle_field"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:lines="4"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/call_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space"
+            android:text="@string/call_mechanic"
+            app:layout_constraintTop_toBottomOf="@id/problem_field"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/ticket_loading"
+            android:layout_width="@dimen/two_spaces"
+            android:layout_height="@dimen/two_spaces"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            android:indeterminateTint="@color/primary"
+            android:layout_marginTop="@dimen/space"
+            app:layout_constraintTop_toBottomOf="@id/call_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
