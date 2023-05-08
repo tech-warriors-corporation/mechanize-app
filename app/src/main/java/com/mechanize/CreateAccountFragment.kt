@@ -92,6 +92,7 @@ class CreateAccountFragment : Fragment() {
             return
         }
 
+        binding.loginButton.isEnabled = false
         binding.loading.visibility = View.VISIBLE
 
         if(role == resources.getString(RoleText.DRIVER.value)) role = RoleValue.DRIVER.value
@@ -113,6 +114,7 @@ class CreateAccountFragment : Fragment() {
 
                     if(id == null){
                         Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).show()
+                        binding.loginButton.isEnabled = true
                         binding.loading.visibility = View.INVISIBLE
 
                         return
@@ -124,6 +126,7 @@ class CreateAccountFragment : Fragment() {
 
             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
                 Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).show()
+                binding.loginButton.isEnabled = true
                 binding.loading.visibility = View.INVISIBLE
             }
         })
@@ -144,6 +147,7 @@ class CreateAccountFragment : Fragment() {
 
                     if(payload == null){
                         Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).show()
+                        binding.loginButton.isEnabled = true
                         binding.loading.visibility = View.INVISIBLE
 
                         return
@@ -166,6 +170,7 @@ class CreateAccountFragment : Fragment() {
                     }
 
                     Snackbar.make(binding.root, R.string.created_account_success, Snackbar.LENGTH_LONG).show()
+                    binding.loginButton.isEnabled = true
                     binding.loading.visibility = View.INVISIBLE
 
                     findNavController().navigate(R.id.action_CreateAccountFragment_to_SearchFragment)
@@ -174,6 +179,7 @@ class CreateAccountFragment : Fragment() {
 
             override fun onFailure(call: Call<Payload<LoginPayload>>, throwable: Throwable) {
                 Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).show()
+                binding.loginButton.isEnabled = true
                 binding.loading.visibility = View.INVISIBLE
             }
         })

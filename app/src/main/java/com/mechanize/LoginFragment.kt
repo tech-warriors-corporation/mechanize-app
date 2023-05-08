@@ -61,6 +61,7 @@ class LoginFragment : Fragment() {
             return
         }
 
+        binding.loginButton.isEnabled = false
         binding.loading.visibility = View.VISIBLE
 
         val body = mapOf(
@@ -77,7 +78,7 @@ class LoginFragment : Fragment() {
 
                     if(payload == null){
                         Snackbar.make(binding.root, R.string.invalid_login, Snackbar.LENGTH_LONG).show()
-
+                        binding.loginButton.isEnabled = true
                         binding.loading.visibility = View.INVISIBLE
 
                         return
@@ -100,7 +101,7 @@ class LoginFragment : Fragment() {
                     }
 
                     Snackbar.make(binding.root, R.string.login_success, Snackbar.LENGTH_LONG).show()
-
+                    binding.loginButton.isEnabled = true
                     binding.loading.visibility = View.INVISIBLE
 
                     findNavController().navigate(R.id.action_LoginFragment_to_SearchFragment)
@@ -109,7 +110,7 @@ class LoginFragment : Fragment() {
 
             override fun onFailure(call: Call<Payload<LoginPayload>>, throwable: Throwable) {
                 Snackbar.make(binding.root, R.string.invalid_login, Snackbar.LENGTH_LONG).show()
-
+                binding.loginButton.isEnabled = true
                 binding.loading.visibility = View.INVISIBLE
             }
         })

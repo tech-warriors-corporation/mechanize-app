@@ -24,4 +24,5 @@ You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
 - [ ] Maybe create a url for each microservice (environment variable);
 - [ ] Remove TODO comments;
 - [ ] Change `MAPS_API_KEY` value;
-- [ ] Disable buttons on request.
+- [ ] Close keyboard on change fragment;
+- [X] Disable buttons on request.

@@ -311,6 +311,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         if(vehicleWithoutBattery) problem = "$problem | ${view.vehicleWithoutBattery.text}"
         if(outOfFuel) problem = "$problem | ${view.outOfFuel.text}"
 
+        binding.searchMechanic.callButton.isEnabled = false
         binding.searchMechanic.ticketLoading.visibility = View.VISIBLE
 
         val body = mapOf(
@@ -330,6 +331,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
                     if(payload == null){
                         Snackbar.make(binding.root, R.string.invalid_create_ticket, Snackbar.LENGTH_LONG).show()
+                        binding.searchMechanic.callButton.isEnabled = true
                         binding.searchMechanic.ticketLoading.visibility = View.INVISIBLE
 
                         return
@@ -340,12 +342,14 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                     closeSearchMechanic()
                     onSearchService()
 
+                    binding.searchMechanic.callButton.isEnabled = true
                     binding.searchMechanic.ticketLoading.visibility = View.INVISIBLE
                 }
             }
 
             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
                 Snackbar.make(binding.root, R.string.invalid_create_ticket, Snackbar.LENGTH_LONG).show()
+                binding.searchMechanic.callButton.isEnabled = true
                 binding.searchMechanic.ticketLoading.visibility = View.INVISIBLE
             }
         })
