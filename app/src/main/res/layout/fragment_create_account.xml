@@ -63,6 +63,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/two_spaces"
             android:background="@drawable/rounded_white_background"
+            android:elevation="@dimen/elevation_space"
             android:paddingHorizontal="@dimen/space"
             android:paddingVertical="@dimen/two_spaces"
             app:layout_constraintBottom_toBottomOf="parent"

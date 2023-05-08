@@ -15,9 +15,9 @@ You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
 - [ ] Review all project files;
 - [ ] Delete unused files;
 - [ ] Customize theme;
-- [ ] Hide environment variables;
+- [ ] Hide environment variables in `app/build.gradle`;
 - [ ] Send access token in headers request;
-- [ ] Study about elevation (shadow);
+- [X] Study about elevation (shadow);
 - [ ] Use notifications;
 - [ ] Mock the API's;
 - [ ] Upload application in Google Play;

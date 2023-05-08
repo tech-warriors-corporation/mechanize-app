@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/actions"
             android:background="@drawable/rounded_white_background"
+            android:elevation="@dimen/elevation_space"
             android:padding="@dimen/space"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

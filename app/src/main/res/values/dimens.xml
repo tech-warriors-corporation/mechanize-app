@@ -1,5 +1,6 @@
 <resources>
     <dimen name="space">16dp</dimen>
+    <dimen name="elevation_space">12dp</dimen>
     <dimen name="half_space">8dp</dimen>
     <dimen name="two_spaces">32dp</dimen>
     <dimen name="four_spaces">64dp</dimen>
