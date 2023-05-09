@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -175,7 +176,10 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
         ) {
-            Snackbar.make(binding.root, R.string.invalid_location, Snackbar.LENGTH_LONG).show()
+            Handler().postDelayed({
+                Snackbar.make(binding.root, R.string.invalid_location, Snackbar.LENGTH_LONG).show()
+            }, 1000)
+
             binding.actions.visibility = View.INVISIBLE
         }
     }
@@ -322,7 +326,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             "status" to TicketStatusValue.ATTENDING.value,
         )
 
-        val call = RetrofitFactory().retrofitHelpsService().createTicket(body)
+        val call = RetrofitFactory().retrofitHelpsService(binding.root.context).createTicket(body)
 
         call.enqueue(object : Callback<Payload<Int>> {
             override fun onResponse(call: Call<Payload<Int>>, response: Response<Payload<Int>>) {
