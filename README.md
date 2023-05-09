@@ -9,20 +9,22 @@ You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
 - [Tanes](https://github.com/hotequil/tanes) and [Bridhop](https://github.com/hotequil/bridhop) examples.
 
 ## Roadmap
-- [ ] Add maps;
+- [X] Add maps;
 - [ ] Make each screen by [Figma](https://www.figma.com/proto/kl05E88sullmKzVTNxXItO/Mechanize?node-id=2-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A2);
-- [ ] Use location;
+- [X] Use location;
 - [ ] Review all project files;
 - [ ] Delete unused files;
 - [ ] Customize theme;
 - [ ] Hide environment variables in `app/build.gradle`;
-- [ ] Send access token in headers request;
+- [X] Send access token in headers request;
 - [X] Study about elevation (shadow);
 - [ ] Use notifications;
-- [ ] Mock the API's;
+- [X] Mock the API's;
 - [ ] Upload application in Google Play;
-- [ ] Maybe create a url for each microservice (environment variable);
-- [ ] Remove TODO comments;
+- [X] Test in others devices;
+- [X] Maybe create a url for each microservice (environment variable);
+- [X] Remove TODO comments;
 - [ ] Change `MAPS_API_KEY` value;
-- [ ] Close keyboard on change fragment;
+- [X] Close keyboard on change fragment;
+- [ ] Use a select instead a autocomplete;
 - [X] Disable buttons on request.

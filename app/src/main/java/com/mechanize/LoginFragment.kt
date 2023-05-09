@@ -1,9 +1,11 @@
 package com.mechanize
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -46,6 +48,9 @@ class LoginFragment : Fragment() {
 
     private fun login(){
         val email = binding.emailField.editText?.text.toString()
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        inputMethodManager.hideSoftInputFromWindow(binding.root.rootView.windowToken, 0)
 
         if(email == ""){
             Snackbar.make(binding.root, R.string.invalid_email, Snackbar.LENGTH_LONG).show()

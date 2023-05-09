@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -300,6 +301,9 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         val outOfFuel = view.outOfFuel.isChecked
         val vehicle = view.vehicleField.editText?.text.toString()
         var problem = view.problemField.editText?.text.toString()
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        inputMethodManager.hideSoftInputFromWindow(binding.root.rootView.windowToken, 0)
 
         if(vehicle == ""){
             Snackbar.make(binding.root, R.string.invalid_vehicle, Snackbar.LENGTH_LONG).show()
