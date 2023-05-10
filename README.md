@@ -2,7 +2,7 @@
 Mechanize (app) to help people fix car and reach destination.
 
 ## Necessary
-You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
+You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_KEY` and `MAPS_API_KEY` variables in `local.properties`.
 
 ## See more
 - [API's](https://github.com/tech-warriors-corporation/mechanize-api);
@@ -15,7 +15,7 @@ You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
 - [ ] Review all project files;
 - [ ] Delete unused files;
 - [ ] Customize theme;
-- [ ] Hide environment variables in `app/build.gradle`;
+- [X] Hide environment variables in `app/build.gradle`;
 - [X] Send access token in headers request;
 - [X] Study about elevation (shadow);
 - [ ] Use notifications;
@@ -27,4 +27,5 @@ You need to set `MAPS_API_KEY` variable with a key in `local.properties`.
 - [ ] Change `MAPS_API_KEY` value;
 - [X] Close keyboard on change fragment;
 - [ ] Use a select instead a autocomplete;
+- [ ] On app start, request to verify token and update id, name and role in EncryptedSharedPreferences;
 - [X] Disable buttons on request.

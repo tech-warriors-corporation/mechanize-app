@@ -19,6 +19,7 @@ class AuthInterceptor(val context: Context) : Interceptor {
         val newRequest = chain.request()
                               .newBuilder()
                               .header("Authorization", userSharedPreferences.getString("accessToken", "") as String)
+                              .header("clientId", BuildConfig.CLIENT_ID)
                               .build()
 
         return chain.proceed(newRequest)
