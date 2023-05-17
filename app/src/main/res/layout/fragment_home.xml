@@ -69,6 +69,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/half_space"
                     android:text="@string/create_account"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/white"
                     tools:ignore="ButtonStyle" />
             </TableRow>
         </TableLayout>
