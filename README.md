@@ -20,6 +20,7 @@ You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_K
 - [X] Study about elevation (shadow);
 - [ ] Use notifications;
 - [X] Mock the API's;
+- [ ] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
 - [ ] Upload application in Google Play;
 - [X] Test in others devices;
 - [X] Maybe create a url for each microservice (environment variable);
