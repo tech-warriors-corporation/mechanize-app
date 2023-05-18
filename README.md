@@ -6,7 +6,7 @@ You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_K
 
 ## See more
 - [API's](https://github.com/tech-warriors-corporation/mechanize-api);
-- [Tanes](https://github.com/hotequil/tanes) and [Bridhop](https://github.com/hotequil/bridhop) examples.
+- [Tanes](https://github.com/hotequil/tanes) and [Bridhop](https://github.com/hotequil/bridhop) examples (remove it in future).
 
 ## Roadmap
 - [X] Add maps;
