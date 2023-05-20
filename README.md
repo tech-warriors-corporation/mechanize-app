@@ -19,6 +19,7 @@ You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_K
 - [X] Send access token in headers request;
 - [X] Study about elevation (shadow);
 - [ ] Use notifications;
+- [ ] Think about product marketing;
 - [X] Mock the API's;
 - [ ] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
 - [ ] Upload application in Google Play;
