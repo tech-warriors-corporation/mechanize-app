@@ -1,6 +1,6 @@
 package com.mechanize.enums
 
 enum class TicketStatusValue(val value: String) {
-    ATTENDING("attending"),
+    UNSOLVED("unsolved"),
     SOLVED("solved"),
 }

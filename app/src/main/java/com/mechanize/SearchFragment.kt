@@ -327,7 +327,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             "vehicle" to vehicle,
             "description" to problem,
             "location" to "${latLng!!.latitude},${latLng!!.longitude}",
-            "status" to TicketStatusValue.ATTENDING.value,
+            "status" to TicketStatusValue.UNSOLVED.value,
         )
 
         val call = RetrofitFactory().retrofitHelpsService(binding.root.context).createTicket(body)
