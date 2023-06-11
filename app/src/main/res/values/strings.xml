@@ -13,7 +13,7 @@
     <string name="welcome">Bem-vindo</string>
     <string name="welcome_description">Para continuar é necessário fazer login ou criar conta.</string>
     <string name="create_account_label">Criação de conta</string>
-    <string name="login_description">Para entrar utilize seu e-mail e senha cadastrados.</string>
+    <string name="login_description">Para entrar utilize seu e-mail e senha cadastrados. Se você errar os dados do login, será necessário esperar 10 segundos para tentar novamente.</string>
     <string name="email_label">E-mail</string>
     <string name="email_placeholder">Coloque o e-mail</string>
     <string name="password_label">Senha</string>
@@ -62,6 +62,7 @@
     <string name="created_ticket">Serviço criado, iremos procurar um mecânico agora</string>
     <string name="invalid_vehicle">Veículo é obrigatório</string>
     <string name="invalid_problem">Problema é obrigatório</string>
+    <string name="time_to_retry_login_message">Espere %s segundos para tentar logar novamente.</string>
 
     <string-array name="roles">
         <item>@string/driver</item>

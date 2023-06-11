@@ -1,6 +1,7 @@
 package com.mechanize
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +15,12 @@ import com.mechanize.databinding.FragmentLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlinx.coroutines.*
 
 class LoginFragment : Fragment() {
+    private var timeToRetryLoginSharedPreferences: SharedPreferences? = null
+    private var timeToRetryLoginSharedPreferencesEditable: SharedPreferences.Editor? = null
+    private var timeToRetryLoginJob: Job? = null
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -25,6 +30,18 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        timeToRetryLoginSharedPreferences = EncryptedSharedPreferences.create(
+            "time_to_retry_login",
+            BuildConfig.SHARED_PREF_KEY,
+            binding.root.context,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
+        timeToRetryLoginSharedPreferencesEditable = timeToRetryLoginSharedPreferences!!.edit()
+
+        watchTimeToRetryLoginJob()
 
         return binding.root
     }
@@ -43,6 +60,7 @@ class LoginFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        timeToRetryLoginJob?.cancel()
         _binding = null
     }
 
@@ -83,6 +101,12 @@ class LoginFragment : Fragment() {
 
                     if(payload == null){
                         Snackbar.make(binding.root, R.string.invalid_login, Snackbar.LENGTH_LONG).show()
+
+                        with(timeToRetryLoginSharedPreferencesEditable){
+                            this?.putString("time", "10")
+                            this?.apply()
+                        }
+
                         binding.loginButton.isEnabled = true
                         binding.loading.visibility = View.INVISIBLE
 
@@ -119,5 +143,23 @@ class LoginFragment : Fragment() {
                 binding.loading.visibility = View.INVISIBLE
             }
         })
+    }
+
+    private fun watchTimeToRetryLoginJob(){
+        val resetTime = "0"
+
+        timeToRetryLoginJob = CoroutineScope(Dispatchers.Main).launch {
+            while (true) {
+                delay(1000L)
+
+                val time = timeToRetryLoginSharedPreferences?.getString("time", resetTime) as String
+                val isEnabled = time == resetTime
+
+                if(binding.loading.visibility == View.INVISIBLE)
+                    binding.loginButton.isEnabled = isEnabled
+
+                binding.timeToRetryLoginMessage.text = if(isEnabled) "" else getString(R.string.time_to_retry_login_message, time)
+            }
+        }
     }
 }

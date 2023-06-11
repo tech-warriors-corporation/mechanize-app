@@ -17,6 +17,9 @@ You must build the app before of generate a `.aab` file.
 - [X] Add Tech Warriors logo in a page;
 - [X] Use location;
 - [ ] Review all project files;
+- [ ] Improve product always;
+- [ ] See password with button on type;
+- [ ] Put a button with return to focus me in map;
 - [ ] Delete unused files;
 - [ ] Customize theme;
 - [X] Hide environment variables in `app/build.gradle`;
@@ -25,7 +28,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Use notifications;
 - [ ] Think about product marketing;
 - [X] Mock the API's;
-- [ ] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
+- [X] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
 - [ ] Upload application in Google Play;
 - [X] Test in others devices;
 - [X] Maybe create a url for each microservice (environment variable);
