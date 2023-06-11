@@ -40,7 +40,7 @@ class CreateAccountFragment : Fragment() {
         val roleAutoComplete = binding.root.findViewById<AutoCompleteTextView>(R.id.role_autocomplete)
 
         roleAutoComplete.setAdapter(adapter)
-        roleAutoComplete.setText(roleAutoComplete.adapter.getItem(0).toString())
+        roleAutoComplete.setText(roleAutoComplete.adapter.getItem(0).toString(), false)
 
         binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_CreateAccountFragment_to_HomeFragment)
@@ -69,6 +69,11 @@ class CreateAccountFragment : Fragment() {
 
         if(name == ""){
             Snackbar.make(binding.root, R.string.invalid_name, Snackbar.LENGTH_LONG).show()
+            return
+        }
+
+        if(role == ""){
+            Snackbar.make(binding.root, R.string.invalid_role, Snackbar.LENGTH_LONG).show()
             return
         }
 

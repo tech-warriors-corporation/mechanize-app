@@ -32,6 +32,6 @@ You must build the app before of generate a `.aab` file.
 - [X] Remove TODO comments;
 - [ ] Change `MAPS_API_KEY` value;
 - [X] Close keyboard on change fragment;
-- [ ] Use a select instead a autocomplete;
+- [X] Use a select instead a autocomplete;
 - [ ] On app start, request to verify token and update id, name and role in EncryptedSharedPreferences;
 - [X] Disable buttons on request.

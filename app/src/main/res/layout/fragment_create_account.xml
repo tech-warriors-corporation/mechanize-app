@@ -103,6 +103,7 @@
                 <AutoCompleteTextView
                     android:id="@+id/role_autocomplete"
                     android:layout_width="match_parent"
+                    android:inputType="none"
                     android:layout_height="wrap_content"
                     android:labelFor="@id/role_field" />
             </com.google.android.material.textfield.TextInputLayout>
