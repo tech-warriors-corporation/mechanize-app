@@ -25,7 +25,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Hide environment variables in `app/build.gradle`;
 - [X] Send access token in headers request;
 - [X] Study about elevation (shadow);
-- [ ] Use notifications;
+- [ ] Use Android notifications;
 - [ ] Think about product marketing;
 - [X] Mock the API's;
 - [X] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
