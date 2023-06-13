@@ -18,8 +18,8 @@ You must build the app before of generate a `.aab` file.
 - [X] Use location;
 - [ ] Review all project files;
 - [ ] Improve product always;
-- [ ] See password with button on type;
-- [ ] Put a button with return to focus me in map;
+- [X] See password with button on type;
+- [X] Put a button with return to focus me in map;
 - [ ] Delete unused files;
 - [ ] Customize theme;
 - [X] Hide environment variables in `app/build.gradle`;
@@ -36,5 +36,5 @@ You must build the app before of generate a `.aab` file.
 - [ ] Change `MAPS_API_KEY` value;
 - [X] Close keyboard on change fragment;
 - [X] Use a select instead a autocomplete;
-- [ ] On app start, request to verify token and update id, name and role in EncryptedSharedPreferences;
+- [X] On app start, request to verify token and update id, name and role in EncryptedSharedPreferences;
 - [X] Disable buttons on request.

@@ -87,6 +87,7 @@
             android:layout_marginTop="@dimen/space"
             android:hint="@string/password_label"
             app:placeholderText="@string/password_placeholder"
+            app:passwordToggleEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/email_field"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

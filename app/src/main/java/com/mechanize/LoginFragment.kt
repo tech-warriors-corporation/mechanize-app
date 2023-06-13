@@ -94,8 +94,8 @@ class LoginFragment : Fragment() {
 
         val call = RetrofitFactory().retrofitAccountsService(binding.root.context).login(body)
 
-        call.enqueue(object : Callback<Payload<LoginPayload>> {
-            override fun onResponse(call: Call<Payload<LoginPayload>>, response: Response<Payload<LoginPayload>>) {
+        call.enqueue(object : Callback<Payload<UserPayload>> {
+            override fun onResponse(call: Call<Payload<UserPayload>>, response: Response<Payload<UserPayload>>) {
                 response.body().let{
                     val payload = it?.payload
 
@@ -137,7 +137,7 @@ class LoginFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<Payload<LoginPayload>>, throwable: Throwable) {
+            override fun onFailure(call: Call<Payload<UserPayload>>, throwable: Throwable) {
                 Snackbar.make(binding.root, R.string.invalid_login, Snackbar.LENGTH_LONG).show()
                 binding.loginButton.isEnabled = true
                 binding.loading.visibility = View.INVISIBLE

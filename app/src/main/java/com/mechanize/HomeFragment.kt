@@ -11,7 +11,11 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.findNavController
 import androidx.security.crypto.EncryptedSharedPreferences
+import com.google.android.material.snackbar.Snackbar
 import com.mechanize.databinding.FragmentHomeBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -34,24 +38,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userSharedPreferences = EncryptedSharedPreferences.create(
-            "user",
-            BuildConfig.SHARED_PREF_KEY,
-            binding.root.context,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-
-        val accessToken = userSharedPreferences.getString("accessToken", "")
-        val id = userSharedPreferences.getInt("id", 0)
-        val name = userSharedPreferences.getString("name", "")
-        val role = userSharedPreferences.getString("role", "")
-
-        if(accessToken != "" && id != 0 && name != "" && role != ""){
-            findNavController().navigate(R.id.action_HomeFragment_to_SearchFragment)
-
-            return
-        }
+        checkAuthUser()
 
         if(
             ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -73,5 +60,70 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun checkAuthUser(){
+        val context = binding.root.context
+        val userSharedPreferences = EncryptedSharedPreferences.create(
+            "user",
+            BuildConfig.SHARED_PREF_KEY,
+            context,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
+        val accessToken = userSharedPreferences.getString("accessToken", "")
+
+        if(accessToken == "") return
+
+        binding.globalContent.visibility = View.VISIBLE
+
+        val call = RetrofitFactory().retrofitAccountsService(context).getUserByToken()
+
+        call.enqueue(object : Callback<Payload<UserPayload>> {
+            override fun onResponse(call: Call<Payload<UserPayload>>, response: Response<Payload<UserPayload>>) {
+                response.body().let{
+                    val payload = it?.payload
+
+                    if(payload == null){
+                        Snackbar.make(binding.root, R.string.invalid_auth_user, Snackbar.LENGTH_LONG).show()
+
+                        with(userSharedPreferences.edit()){
+                            remove("accessToken")
+                            remove("id")
+                            remove("name")
+                            remove("role")
+                            apply()
+                        }
+
+                        binding.globalContent.visibility = View.INVISIBLE
+
+                        return
+                    }
+
+                    with(userSharedPreferences.edit()){
+                        putString("accessToken", payload.accessToken)
+                        putInt("id", payload.user.id)
+                        putString("name", payload.user.name)
+                        putString("role", payload.user.role)
+                        apply()
+                    }
+
+                    val navController = findNavController()
+
+                    navController.addOnDestinationChangedListener { _, destination, _ ->
+                        if (destination.id == R.id.SearchFragment)
+                            binding.globalContent.visibility = View.INVISIBLE
+                    }
+
+                    navController.navigate(R.id.action_HomeFragment_to_SearchFragment)
+                }
+            }
+
+            override fun onFailure(call: Call<Payload<UserPayload>>, throwable: Throwable) {
+                Snackbar.make(binding.root, R.string.invalid_auth_user, Snackbar.LENGTH_LONG).show()
+                binding.globalContent.visibility = View.INVISIBLE
+            }
+        })
     }
 }

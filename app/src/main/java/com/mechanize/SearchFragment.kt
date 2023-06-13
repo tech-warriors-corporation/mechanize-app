@@ -103,6 +103,10 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             findNavController().navigate(R.id.action_SearchFragment_to_HomeFragment)
         }
 
+        binding.focusToMeButton.setOnClickListener {
+            focusToMe()
+        }
+
         binding.searchMechanic.closeButton.setOnClickListener{
             closeSearchMechanic()
         }
@@ -231,7 +235,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
         )
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng!!, 12.5f))
+        focusToMe()
 
         googleMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
             override fun getInfoWindow(marker: Marker): View? {
@@ -287,11 +291,13 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     private fun hideAllActions(){
         binding.actions.visibility = View.INVISIBLE
         binding.logoutButton.visibility = View.INVISIBLE
+        binding.focusToMeButton.visibility = View.INVISIBLE
     }
 
     private fun showAllActions(){
         binding.actions.visibility = View.VISIBLE
         binding.logoutButton.visibility = View.VISIBLE
+        binding.focusToMeButton.visibility = View.VISIBLE
     }
 
     private fun createTicket(){
@@ -361,5 +367,9 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                 binding.searchMechanic.ticketLoading.visibility = View.INVISIBLE
             }
         })
+    }
+
+    private fun focusToMe(){
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng!!, 12.5f))
     }
 }

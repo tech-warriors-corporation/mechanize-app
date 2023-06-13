@@ -105,4 +105,38 @@
             </TableRow>
         </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/primary"
+        android:visibility="invisible"
+        android:elevation="@dimen/elevation_space"
+        android:id="@+id/global_content"
+        android:padding="64dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:trackColor="@color/white"
+            android:id="@+id/global_loading"
+            android:indeterminate="true"
+            android:layout_marginTop="-44dp"
+            app:indicatorSize="72dp"
+            app:trackThickness="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/global_loading"
+            android:text="@string/authenticating_user"
+            android:layout_marginTop="@dimen/space"
+            android:textAlignment="center"
+            android:textSize="@dimen/small_title_size"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,6 +33,27 @@
             android:layout_marginTop="@dimen/space"
             app:iconPadding="0dp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:rippleColor="@android:color/transparent"
+            android:background="@android:color/transparent"
+            android:id="@+id/focus_to_me_button"
+            android:contentDescription="@string/focus_to_me"
+            app:icon="@drawable/outline_my_location_24"
+            app:iconSize="@dimen/icon_button_size"
+            app:iconGravity="textStart"
+            app:iconTint="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/logout_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/space"
+            android:layout_marginTop="@dimen/two_spaces"
+            app:iconPadding="0dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
