@@ -111,11 +111,6 @@ class HomeFragment : Fragment() {
 
                     val navController = findNavController()
 
-                    navController.addOnDestinationChangedListener { _, destination, _ ->
-                        if (destination.id == R.id.SearchFragment)
-                            binding.globalContent.visibility = View.INVISIBLE
-                    }
-
                     navController.navigate(R.id.action_HomeFragment_to_SearchFragment)
                 }
             }
