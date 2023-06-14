@@ -34,6 +34,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Maybe create a url for each microservice (environment variable);
 - [X] Remove TODO comments;
 - [ ] Change `MAPS_API_KEY` value;
+- [ ] Cancel ticket from driver and mechanic in attending ticket;
 - [X] Close keyboard on change fragment;
 - [X] Use a select instead a autocomplete;
 - [X] On app start, request to verify token and update id, name and role in EncryptedSharedPreferences;
