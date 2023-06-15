@@ -35,6 +35,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Remove TODO comments;
 - [ ] Change `MAPS_API_KEY` value;
 - [ ] Get current ticket after close app and open again;
+- [ ] On close modal and open again, shows a ghost of last data;
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
 - [X] Use a select instead a autocomplete;
