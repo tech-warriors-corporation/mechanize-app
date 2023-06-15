@@ -4,6 +4,8 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.GET
+import retrofit2.http.PATCH
+import retrofit2.http.Path
 
 interface RetrofitAccountsService {
     @POST("login")
@@ -19,4 +21,7 @@ interface RetrofitAccountsService {
 interface RetrofitHelpsService {
     @POST("tickets")
     fun createTicket(@Body body: Map<String, String>): Call<Payload<Int>>
+
+    @PATCH("tickets/{id}/cancel-ticket")
+    fun cancelTicket(@Path("id") id: Int): Call<Payload<Int>>
 }

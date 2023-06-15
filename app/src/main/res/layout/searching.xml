@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/two_spaces"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="@dimen/elevation_space"
     android:background="@color/black_opaque">
         <ProgressBar
             android:id="@+id/searching_loading"

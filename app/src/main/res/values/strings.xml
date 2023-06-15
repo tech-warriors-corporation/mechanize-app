@@ -66,6 +66,9 @@
     <string name="time_to_retry_login_message">Espere %s segundos para tentar logar novamente.</string>
     <string name="authenticating_user">Autenticando seu usuário</string>
     <string name="invalid_auth_user">Ocorreu um problema ao autenticar seu usuário</string>
+    <string name="cancelled_search_of_mechanic">Paramos de procurar um mecânico</string>
+    <string name="cancelled_search_of_ticket">Paramos de procurar um serviço</string>
+    <string name="error_to_cancel_ticket">Tivemos um problema ao cancelar, por favor, tente novamente</string>
 
     <string-array name="roles">
         <item>@string/driver</item>

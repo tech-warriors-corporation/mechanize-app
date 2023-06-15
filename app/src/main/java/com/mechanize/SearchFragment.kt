@@ -50,6 +50,9 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     private var searchForText = ""
     private var latLng: LatLng? = null
     private var userId: Int? = null
+    private var isDriver = false
+    private var isMechanic = false
+    private var ticketId: Int? = null
     private var googleApiClient: GoogleApiClient? = null
     private var locationManager: LocationManager? = null
     private lateinit var locationRequest: LocationRequest
@@ -114,8 +117,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         userId = userSharedPreferences.getInt("id", 0)
         val userName = userSharedPreferences.getString("name", "")
         var userRole = userSharedPreferences.getString("role", "")
-        val isDriver = userRole == RoleValue.DRIVER.value
-        val isMechanic = userRole == RoleValue.MECHANIC.value
+        isDriver = userRole == RoleValue.DRIVER.value
+        isMechanic = userRole == RoleValue.MECHANIC.value
 
         if(isDriver) {
             userRole = resources.getString(RoleText.DRIVER.value)
@@ -136,8 +139,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         }
 
         binding.searching.cancelButton.setOnClickListener{
-            showAllActions()
-            binding.searching.root.visibility = View.INVISIBLE
+            cancelTicket()
         }
 
         binding.searchMechanic.callButton.setOnClickListener{
@@ -186,6 +188,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             }, 1000)
 
             binding.actions.visibility = View.INVISIBLE
+            binding.focusToMeButton.visibility = View.INVISIBLE
         }
     }
 
@@ -270,11 +273,9 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     private fun onSearchMechanic(){
         closeSearchMechanic()
         binding.searchMechanic.root.visibility = View.VISIBLE
-        hideAllActions()
     }
 
     private fun closeSearchMechanic(){
-        showAllActions()
         binding.searchMechanic.root.visibility = View.INVISIBLE
         binding.searchMechanic.glassBroke.isChecked = false
         binding.searchMechanic.vehicleWithoutBattery.isChecked = false
@@ -285,19 +286,6 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
     private fun onSearchService(){
         binding.searching.root.visibility = View.VISIBLE
-        hideAllActions()
-    }
-
-    private fun hideAllActions(){
-        binding.actions.visibility = View.INVISIBLE
-        binding.logoutButton.visibility = View.INVISIBLE
-        binding.focusToMeButton.visibility = View.INVISIBLE
-    }
-
-    private fun showAllActions(){
-        binding.actions.visibility = View.VISIBLE
-        binding.logoutButton.visibility = View.VISIBLE
-        binding.focusToMeButton.visibility = View.VISIBLE
     }
 
     private fun createTicket(){
@@ -351,6 +339,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                         return
                     }
 
+                    ticketId = payload
+
                     Snackbar.make(binding.root, R.string.created_ticket, Snackbar.LENGTH_LONG).show()
 
                     closeSearchMechanic()
@@ -372,4 +362,36 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     private fun focusToMe(){
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng!!, 12.5f))
     }
+
+     private fun cancelTicket(){
+         if(isMechanic && ticketId == null){
+             binding.searching.root.visibility = View.INVISIBLE
+             Snackbar.make(binding.root, R.string.cancelled_search_of_ticket, Snackbar.LENGTH_LONG).show()
+             return
+         }
+
+         val call = RetrofitFactory().retrofitHelpsService(binding.root.context).cancelTicket(ticketId as Int)
+
+         call.enqueue(object : Callback<Payload<Int>> {
+             override fun onResponse(call: Call<Payload<Int>>, response: Response<Payload<Int>>) {
+                 response.body().let{
+                     val payload = it?.payload
+
+                     if(payload == null){
+                         Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).show()
+                         return
+                     }
+
+                     ticketId = null
+                     binding.searching.root.visibility = View.INVISIBLE
+
+                     Snackbar.make(binding.root, R.string.cancelled_search_of_mechanic, Snackbar.LENGTH_LONG).show()
+                 }
+             }
+
+             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
+                 Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).show()
+             }
+         })
+     }
 }
