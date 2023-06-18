@@ -68,6 +68,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/user"
+                android:textStyle="bold"
                 android:id="@+id/user"
                 android:textAlignment="center"
                 android:layout_width="match_parent"

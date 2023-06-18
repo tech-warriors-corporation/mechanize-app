@@ -30,6 +30,7 @@
                 <TextView
                     android:text="@string/describe_service"
                     android:textSize="@dimen/small_title_size"
+                    android:textStyle="bold"
                     android:layout_gravity="center|start"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -93,6 +94,7 @@
             app:placeholderText="@string/vehicle_placeholder">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
