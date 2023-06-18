@@ -11,8 +11,8 @@
     android:background="@color/black_opaque">
         <ProgressBar
             android:id="@+id/searching_loading"
-            android:layout_width="@dimen/ten_spaces"
-            android:layout_height="@dimen/ten_spaces"
+            android:layout_width="@dimen/eight_spaces"
+            android:layout_height="@dimen/eight_spaces"
             android:indeterminate="true"
             android:visibility="visible"
             android:indeterminateTint="@color/primary"
