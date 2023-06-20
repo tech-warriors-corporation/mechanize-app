@@ -4,7 +4,6 @@
     <dimen name="half_space">8dp</dimen>
     <dimen name="two_spaces">32dp</dimen>
     <dimen name="eight_spaces">128dp</dimen>
-    <dimen name="icon_button_size">32dp</dimen>
     <dimen name="title_size">32sp</dimen>
     <dimen name="small_title_size">24sp</dimen>
 </resources>

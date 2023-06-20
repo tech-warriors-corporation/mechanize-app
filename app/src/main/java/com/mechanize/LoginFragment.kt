@@ -129,7 +129,6 @@ class LoginFragment : Fragment() {
                         apply()
                     }
 
-                    Snackbar.make(binding.root, R.string.login_success, Snackbar.LENGTH_LONG).show()
                     binding.loginButton.isEnabled = true
                     binding.loading.visibility = View.INVISIBLE
 

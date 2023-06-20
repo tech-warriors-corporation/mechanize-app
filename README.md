@@ -30,6 +30,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Mock the API's;
 - [X] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
 - [ ] Upload application in Google Play;
+- [ ] Customize application in Google Play when uploaded;
 - [X] Test in others devices;
 - [X] Maybe create a url for each microservice (environment variable);
 - [X] Remove TODO comments;
@@ -37,6 +38,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Get current ticket after close app and open again;
 - [ ] On close modal and open again, shows a ghost of last data;
 - [ ] Show in map who mechanic is helping when attending;
+- [X] Set link of Google Maps in a button on right when mechanic is attending a driver;
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
 - [X] Use a select instead a autocomplete;

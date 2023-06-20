@@ -20,8 +20,8 @@
             android:stretchColumns="1">
             <TableRow tools:ignore="UselessParent">
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="@dimen/icon_button_size"
-                    android:layout_height="@dimen/icon_button_size"
+                    android:layout_width="@dimen/two_spaces"
+                    android:layout_height="@dimen/two_spaces"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
@@ -31,7 +31,7 @@
                     android:id="@+id/home_button"
                     android:contentDescription="@string/back"
                     app:icon="@drawable/baseline_arrow_back_48"
-                    app:iconSize="@dimen/icon_button_size"
+                    app:iconSize="@dimen/two_spaces"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp" />
 
@@ -64,6 +64,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/two_spaces"
             android:background="@drawable/rounded_white_background"
+            android:clickable="true"
+            android:focusable="true"
             android:elevation="@dimen/elevation_space"
             android:paddingHorizontal="@dimen/space"
             android:paddingVertical="@dimen/two_spaces"

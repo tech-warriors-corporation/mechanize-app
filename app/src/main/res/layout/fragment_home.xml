@@ -51,6 +51,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/welcome"
         android:background="@drawable/rounded_black_background"
+        android:clickable="true"
+        android:focusable="true"
         android:elevation="@dimen/elevation_space"
         android:padding="@dimen/space"
         app:layout_constraintBottom_toBottomOf="parent"

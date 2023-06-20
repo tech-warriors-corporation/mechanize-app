@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/modal_background"
+        android:clickable="true"
+        android:focusable="true"
         android:elevation="@dimen/elevation_space"
         android:padding="@dimen/space"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,8 +39,8 @@
                     android:layout_height="wrap_content"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="@dimen/icon_button_size"
-                    android:layout_height="@dimen/icon_button_size"
+                    android:layout_width="@dimen/two_spaces"
+                    android:layout_height="@dimen/two_spaces"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
@@ -49,7 +51,7 @@
                     android:contentDescription="@string/close"
                     app:iconTint="@color/black"
                     app:icon="@drawable/baseline_close_24"
-                    app:iconSize="@dimen/icon_button_size"
+                    app:iconSize="@dimen/two_spaces"
                     app:iconGravity="textStart"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

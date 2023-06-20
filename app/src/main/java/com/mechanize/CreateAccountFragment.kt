@@ -179,7 +179,6 @@ class CreateAccountFragment : Fragment() {
                         apply()
                     }
 
-                    Snackbar.make(binding.root, R.string.created_account_success, Snackbar.LENGTH_LONG).show()
                     binding.loginButton.isEnabled = true
                     binding.loading.visibility = View.INVISIBLE
 
