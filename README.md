@@ -17,6 +17,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Add Tech Warriors logo in a page;
 - [X] Use location;
 - [ ] Review all project files;
+- [ ] Review application with team;
 - [ ] Improve product always;
 - [X] See password with button on type;
 - [X] Put a button with return to focus me in map;
