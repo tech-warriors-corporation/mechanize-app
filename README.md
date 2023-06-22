@@ -14,6 +14,8 @@ You must build the app before of generate a `.aab` file.
 ## Roadmap
 - [X] Add maps;
 - [ ] Make each screen by [Figma](https://www.figma.com/proto/kl05E88sullmKzVTNxXItO/Mechanize?node-id=2-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A2);
+- [ ] Set the Mechanize project as a case;
+- [ ] Remove all delays in source code;
 - [X] Add Tech Warriors logo in a page;
 - [X] Use location;
 - [ ] Review all project files;
