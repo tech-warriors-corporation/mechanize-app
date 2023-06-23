@@ -17,6 +17,9 @@ You must build the app before of generate a `.aab` file.
 - [ ] Set the Mechanize project as a case;
 - [ ] Remove all delays in source code;
 - [ ] Show mechanic name to driver when accepted the service;
+- [ ] Add a message to comment about service on rating;
+- [ ] Get pending rating or attendance unfinished on entering in application;
+- [ ] Show modal in the system informing that we are not responsible for payments, this is something directly between driver and mechanic;
 - [X] Add Tech Warriors logo in a page;
 - [X] Use location;
 - [ ] Review all project files;
