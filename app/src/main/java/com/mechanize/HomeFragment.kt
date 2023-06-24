@@ -40,6 +40,8 @@ class HomeFragment : Fragment() {
 
         checkAuthUser()
 
+        Notifications.init(binding.root.context)
+
         if(
             ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
