@@ -13,6 +13,23 @@ data class UserPayload(
     @SerializedName("user") val user: UserAccountPayload
 )
 
+data class TicketPayload(
+    @SerializedName("id") val id: Int,
+    @SerializedName("driver_name") val driverName: String,
+    @SerializedName("vehicle") val vehicle: String,
+    @SerializedName("location") val location: String,
+    @SerializedName("lat") val lat: Double,
+    @SerializedName("lon") val lon: Double,
+    @SerializedName("google_maps_link") val googleMapsLink: String,
+    @SerializedName("description") val description: String,
+    @SerializedName("created_date") val createdDate: String,
+)
+
+data class TicketStatusPayload(
+    @SerializedName("status") val status: String,
+    @SerializedName("mechanic_id") val mechanicId: Int?,
+)
+
 data class Payload<T>(
     @SerializedName("payload") val payload: T? = null
 )

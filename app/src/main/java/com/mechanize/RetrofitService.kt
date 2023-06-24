@@ -24,4 +24,19 @@ interface RetrofitHelpsService {
 
     @PATCH("tickets/{id}/cancel-ticket")
     fun cancelTicket(@Path("id") id: Int): Call<Payload<Int>>
+
+    @PATCH("tickets/{id}/accept-ticket")
+    fun acceptTicket(@Path("id") id: Int): Call<Payload<Int>>
+
+    @PATCH("tickets/{id}/conclude-ticket")
+    fun concludeTicket(@Path("id") id: Int): Call<Payload<Int>>
+
+    @PATCH("tickets/{id}/rating")
+    fun ratingTicket(@Path("id") id: Int, @Body body: Map<String, Int>): Call<Payload<Int>>
+
+    @GET("tickets/{id}/status")
+    fun getTicketStatus(@Path("id") id: Int): Call<Payload<TicketStatusPayload>>
+
+    @GET("tickets/available")
+    fun getAvailableTickets(): Call<Payload<List<TicketPayload>>>
 }
