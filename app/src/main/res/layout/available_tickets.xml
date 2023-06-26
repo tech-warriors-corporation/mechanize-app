@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/space"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="@dimen/elevation_space"
+    android:background="@color/black_opaque">
+        <TextView app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="@dimen/small_title_size"
+            android:id="@+id/available_tickets_title"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/service_card"
+            android:background="@drawable/card_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:elevation="@dimen/elevation_space"
+            android:padding="@dimen/space"
+            android:layout_marginTop="@dimen/space"
+            app:layout_constraintTop_toBottomOf="@id/available_tickets_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <TextView android:id="@+id/available_tickets_driver_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView android:id="@+id/available_tickets_vehicle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/available_tickets_driver_name"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView android:id="@+id/available_tickets_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/available_tickets_vehicle"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView android:id="@+id/available_tickets_created_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/available_tickets_description"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView android:id="@+id/available_tickets_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/available_tickets_created_date"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/google_maps_link"
+                android:layout_marginTop="@dimen/half_space"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/available_tickets_location"
+                android:layout_width="@dimen/two_spaces"
+                android:layout_height="@dimen/two_spaces"
+                android:contentDescription="@string/google_maps_link"
+                android:src="@drawable/logo_google_maps" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/accepting_ticket_loading"
+            android:layout_width="@dimen/two_spaces"
+            android:layout_height="@dimen/two_spaces"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            android:indeterminateTint="@color/primary"
+            android:layout_marginTop="@dimen/space"
+            app:layout_constraintTop_toBottomOf="@id/service_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/attend_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space"
+            android:text="@string/attend_service"
+            app:layout_constraintTop_toBottomOf="@id/service_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:visibility="invisible"
+            android:id="@+id/next_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half_space"
+            android:text="@string/next_service"
+            android:textColor="@color/primary"
+            android:backgroundTint="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/attend_service"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <Button android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_space"
+        android:backgroundTint="@color/black"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
