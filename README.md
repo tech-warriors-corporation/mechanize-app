@@ -36,6 +36,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Think about product marketing;
 - [X] Mock the API's;
 - [X] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
+- [ ] Use singular and plural in seconds of retry login, and not disabled in first time;
 - [ ] Upload application in Google Play;
 - [ ] Customize application in Google Play when uploaded;
 - [X] Test in others devices;
