@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/space"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="@dimen/elevation_space"
+    android:background="@color/black_opaque">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modal_background"
+        android:elevation="@dimen/elevation_space"
+        android:padding="@dimen/space"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:text="@string/rating_title"
+            android:textSize="@dimen/small_title_size"
+            android:textStyle="bold"
+            android:id="@+id/rating_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rating_title"
+            android:text="@string/rating_text"
+            android:textAlignment="center"
+            android:id="@+id/rating_text"
+            android:layout_marginTop="@dimen/space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TableLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rating_text"
+            android:layout_marginTop="@dimen/two_spaces"
+            android:id="@+id/stars_content">
+            <TableRow tools:ignore="UselessParent">
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="@dimen/three_spaces"
+                    android:layout_height="@dimen/three_spaces"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:rippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/star_one"
+                    android:contentDescription="@string/close"
+                    app:iconTint="@color/yellow"
+                    app:icon="@drawable/baseline_star_rate_24"
+                    app:iconSize="@dimen/three_spaces"
+                    app:iconGravity="textStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:iconPadding="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="@dimen/three_spaces"
+                    android:layout_height="@dimen/three_spaces"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:rippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/star_two"
+                    android:contentDescription="@string/close"
+                    app:iconTint="@color/yellow"
+                    app:icon="@drawable/baseline_star_rate_24"
+                    app:iconSize="@dimen/three_spaces"
+                    app:iconGravity="textStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:iconPadding="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="@dimen/three_spaces"
+                    android:layout_height="@dimen/three_spaces"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:rippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/star_three"
+                    android:contentDescription="@string/close"
+                    app:iconTint="@color/yellow"
+                    app:icon="@drawable/baseline_star_rate_24"
+                    app:iconSize="@dimen/three_spaces"
+                    app:iconGravity="textStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:iconPadding="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="@dimen/three_spaces"
+                    android:layout_height="@dimen/three_spaces"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:rippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/star_four"
+                    android:contentDescription="@string/close"
+                    app:iconTint="@color/yellow"
+                    app:icon="@drawable/baseline_star_rate_24"
+                    app:iconSize="@dimen/three_spaces"
+                    app:iconGravity="textStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:iconPadding="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="@dimen/three_spaces"
+                    android:layout_height="@dimen/three_spaces"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:rippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/star_five"
+                    android:contentDescription="@string/close"
+                    app:iconTint="@color/yellow"
+                    app:icon="@drawable/baseline_star_rate_24"
+                    app:iconSize="@dimen/three_spaces"
+                    app:iconGravity="textStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:iconPadding="0dp" />
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/rating_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/two_spaces"
+            android:text="@string/rating_button"
+            app:layout_constraintTop_toBottomOf="@id/stars_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/rating_loading"
+            android:layout_width="@dimen/two_spaces"
+            android:layout_height="@dimen/two_spaces"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            android:indeterminateTint="@color/primary"
+            android:layout_marginTop="@dimen/space"
+            app:layout_constraintTop_toBottomOf="@id/rating_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
