@@ -1,6 +1,7 @@
 package com.mechanize
 
 import android.app.Activity
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -88,18 +89,7 @@ class HomeFragment : Fragment() {
                     val payload = it?.payload
 
                     if(payload == null){
-                        Snackbar.make(binding.root, R.string.invalid_auth_user, Snackbar.LENGTH_LONG).show()
-
-                        with(userSharedPreferences.edit()){
-                            remove("accessToken")
-                            remove("id")
-                            remove("name")
-                            remove("role")
-                            apply()
-                        }
-
-                        binding.globalContent.visibility = View.INVISIBLE
-
+                        removeUserData(userSharedPreferences)
                         return
                     }
 
@@ -118,9 +108,22 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<Payload<UserPayload>>, throwable: Throwable) {
-                Snackbar.make(binding.root, R.string.invalid_auth_user, Snackbar.LENGTH_LONG).show()
-                binding.globalContent.visibility = View.INVISIBLE
+                removeUserData(userSharedPreferences)
             }
         })
+    }
+
+    private fun removeUserData(userSharedPreferences: SharedPreferences){
+        Snackbar.make(binding.root, R.string.invalid_auth_user, Snackbar.LENGTH_LONG).show()
+
+        with(userSharedPreferences.edit()){
+            remove("accessToken")
+            remove("id")
+            remove("name")
+            remove("role")
+            apply()
+        }
+
+        binding.globalContent.visibility = View.INVISIBLE
     }
 }

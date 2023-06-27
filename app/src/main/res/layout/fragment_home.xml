@@ -115,6 +115,8 @@
         android:elevation="@dimen/elevation_space"
         android:id="@+id/global_content"
         android:padding="64dp"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.google.android.material.progressindicator.CircularProgressIndicator
