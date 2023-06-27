@@ -87,6 +87,42 @@
                 app:layout_constraintTop_toBottomOf="@id/user"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <TableLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="invisible"
+                android:id="@+id/ticket_actions"
+                android:layout_marginTop="@dimen/half_space"
+                android:stretchColumns="0, 1">
+                <TableRow tools:ignore="UselessParent">
+                    <Button
+                        android:id="@+id/cancel_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:paddingVertical="@dimen/space"
+                        android:layout_marginEnd="@dimen/half_space"
+                        android:text="@string/cancel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="ButtonStyle" />
+
+                    <Button
+                        android:id="@+id/conclude_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/primary"
+                        android:paddingVertical="@dimen/space"
+                        android:layout_marginStart="@dimen/half_space"
+                        android:text="@string/conclude"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="ButtonStyle" />
+                </TableRow>
+            </TableLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include layout="@layout/search_mechanic"
@@ -95,6 +131,26 @@
 
         <include layout="@layout/searching"
             android:id="@+id/searching"
+            android:visibility="invisible" />
+
+        <include layout="@layout/available_tickets"
+            android:id="@+id/available_tickets"
+            android:visibility="invisible" />
+
+        <include layout="@layout/current_ticket"
+            android:id="@+id/current_ticket"
+            android:visibility="invisible" />
+
+        <include layout="@layout/waiting_mechanic"
+            android:id="@+id/waiting_mechanic"
+            android:visibility="invisible" />
+
+        <include layout="@layout/finishing"
+            android:id="@+id/finishing"
+            android:visibility="invisible" />
+
+        <include layout="@layout/rating_ticket"
+            android:id="@+id/rating_ticket"
             android:visibility="invisible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </fragment>
