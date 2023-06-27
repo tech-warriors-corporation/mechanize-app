@@ -1,10 +1,12 @@
 package com.mechanize
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.location.Location
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,6 +19,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -40,6 +43,11 @@ import com.mechanize.databinding.FragmentSearchBinding
 import com.mechanize.enums.RoleText
 import com.mechanize.enums.RoleValue
 import com.mechanize.enums.TicketStatusValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,12 +55,21 @@ import retrofit2.Response
 class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, OnMapReadyCallback {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
+    private val availableTickets = ArrayList<TicketPayload>()
+    private var currentTicket: TicketPayload? = null
+    private var indexAvailableTickets = 0
     private var searchForText = ""
     private var latLng: LatLng? = null
+    private var driverLatLng: LatLng? = null
     private var userId: Int? = null
     private var isDriver = false
     private var isMechanic = false
     private var ticketId: Int? = null
+    private var cachedTicketId: Int? = null
+    private var mechanicId: Int? = null
+    private var rating = 5
+    private var searchingJob: Job? = null
+    private var ticketStatusJob: Job? = null
     private var googleApiClient: GoogleApiClient? = null
     private var locationManager: LocationManager? = null
     private lateinit var locationRequest: LocationRequest
@@ -93,8 +110,6 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         )
 
         binding.logoutButton.setOnClickListener {
-            Snackbar.make(binding.root, R.string.logout_success, Snackbar.LENGTH_SHORT).show()
-
             with(userSharedPreferences.edit()){
                 remove("accessToken")
                 remove("id")
@@ -107,7 +122,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         }
 
         binding.focusToMeButton.setOnClickListener {
-            focusToMe()
+            if(isMechanic && ticketId != null) focus(driverLatLng!!)
+            else focus()
         }
 
         binding.searchMechanic.closeButton.setOnClickListener{
@@ -138,12 +154,70 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             else if(isMechanic) onSearchService()
         }
 
+        binding.cancelButton.setOnClickListener{
+            cancelTicket()
+        }
+
         binding.searching.cancelButton.setOnClickListener{
             cancelTicket()
         }
 
+        binding.availableTickets.cancelButton.setOnClickListener{
+            cancelChooseOfTicket()
+        }
+
         binding.searchMechanic.callButton.setOnClickListener{
             createTicket()
+        }
+
+        binding.availableTickets.attendService.setOnClickListener{
+            acceptTicket()
+        }
+
+        binding.availableTickets.nextService.setOnClickListener{
+            indexAvailableTickets++
+            setAvailableTicketsLayout()
+        }
+
+        binding.availableTickets.googleMapsLink.setOnClickListener{
+            openGoogleMapsLink()
+        }
+
+        binding.currentTicket.googleMapsLink.setOnClickListener{
+            openGoogleMapsLink()
+        }
+
+        binding.concludeButton.setOnClickListener{
+            concludeTicket()
+        }
+
+        binding.ratingTicket.starOne.setOnClickListener{
+            rating = 1
+            setRatingColors()
+        }
+
+        binding.ratingTicket.starTwo.setOnClickListener{
+            rating = 2
+            setRatingColors()
+        }
+
+        binding.ratingTicket.starThree.setOnClickListener{
+            rating = 3
+            setRatingColors()
+        }
+
+        binding.ratingTicket.starFour.setOnClickListener{
+            rating = 4
+            setRatingColors()
+        }
+
+        binding.ratingTicket.starFive.setOnClickListener{
+            rating = 5
+            setRatingColors()
+        }
+
+        binding.ratingTicket.ratingButton.setOnClickListener{
+            sendRating()
         }
 
         val supportMapFragment = childFragmentManager.findFragmentById(R.id.location) as SupportMapFragment
@@ -165,6 +239,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
     override fun onDestroyView() {
         super.onDestroyView()
+        cancelTicketStatus()
+        cancelSearching()
         _binding = null
     }
 
@@ -219,26 +295,35 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
         fusedLocationClient.lastLocation.addOnSuccessListener{ location: Location? ->
             location?.let{
-                updateLocation(googleMap, LatLng(location.latitude, location.longitude))
+                latLng = LatLng(location.latitude, location.longitude)
+
+                updateLocation(googleMap, latLng)
             }
         }
     }
 
-    private fun updateLocation(map: GoogleMap, newLatLng: LatLng?){
+    private fun updateLocation(
+        map: GoogleMap,
+        newLatLng: LatLng?,
+        markerTitle: String? = resources.getString(R.string.me),
+        markerSnippet: String? = resources.getString(R.string.my_location),
+    ){
         googleMap = map
 
         if(newLatLng == null) return
 
-        latLng = newLatLng
+        googleMap.clear()
 
         googleMap.addMarker(
-            MarkerOptions().position(latLng!!)
-                           .title(resources.getString(R.string.me))
-                           .snippet(resources.getString(R.string.my_location))
+            MarkerOptions().position(newLatLng)
+                           .title(markerTitle)
+                           .snippet(markerSnippet)
                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
         )
 
-        focusToMe()
+        focus(newLatLng)
+
+        googleMap.uiSettings.isRotateGesturesEnabled = false
 
         googleMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
             override fun getInfoWindow(marker: Marker): View? {
@@ -282,10 +367,15 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         binding.searchMechanic.outOfFuel.isChecked = false
         binding.searchMechanic.vehicleField.editText?.setText("")
         binding.searchMechanic.problemField.editText?.setText("")
+
+        closeKeyboard()
     }
 
     private fun onSearchService(){
         binding.searching.root.visibility = View.VISIBLE
+
+        if(isDriver) watchTicketStatus()
+        else if(isMechanic) getAvailableTickets()
     }
 
     private fun createTicket(){
@@ -295,9 +385,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         val outOfFuel = view.outOfFuel.isChecked
         val vehicle = view.vehicleField.editText?.text.toString()
         var problem = view.problemField.editText?.text.toString()
-        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-        inputMethodManager.hideSoftInputFromWindow(binding.root.rootView.windowToken, 0)
+        closeKeyboard()
 
         if(vehicle == ""){
             Snackbar.make(binding.root, R.string.invalid_vehicle, Snackbar.LENGTH_LONG).show()
@@ -359,39 +448,386 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         })
     }
 
-    private fun focusToMe(){
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng!!, 12.5f))
+    private fun focus(latLon: LatLng = latLng!!){
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLon, 15f))
     }
 
-     private fun cancelTicket(){
-         if(isMechanic && ticketId == null){
-             binding.searching.root.visibility = View.INVISIBLE
-             Snackbar.make(binding.root, R.string.cancelled_search_of_ticket, Snackbar.LENGTH_LONG).show()
-             return
-         }
+    private fun cancelTicket(){
+        if(isMechanic && isNotRunning()){
+            cancelSearching()
+            cancelChooseOfTicket()
 
-         val call = RetrofitFactory().retrofitHelpsService(binding.root.context).cancelTicket(ticketId as Int)
+            return
+        }
 
-         call.enqueue(object : Callback<Payload<Int>> {
-             override fun onResponse(call: Call<Payload<Int>>, response: Response<Payload<Int>>) {
-                 response.body().let{
-                     val payload = it?.payload
+        val canShowFinishingScreen = !isNotRunning() && binding.ticketActions.visibility == View.VISIBLE
 
-                     if(payload == null){
-                         Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).show()
-                         return
-                     }
+        if(canShowFinishingScreen) showFinishingScreen(R.string.cancelling_title, R.string.cancelling_text)
+        else binding.searching.cancelButton.visibility = View.INVISIBLE
 
-                     ticketId = null
-                     binding.searching.root.visibility = View.INVISIBLE
+        val call = RetrofitFactory().retrofitHelpsService(binding.root.context).cancelTicket(ticketId as Int)
 
-                     Snackbar.make(binding.root, R.string.cancelled_search_of_mechanic, Snackbar.LENGTH_LONG).show()
-                 }
-             }
+        call.enqueue(object : Callback<Payload<Int>> {
+            override fun onResponse(call: Call<Payload<Int>>, response: Response<Payload<Int>>) {
+                response.body().let{
+                    val payload = it?.payload
 
-             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
-                 Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).show()
-             }
-         })
-     }
+                    hideFinishingScreen()
+                    binding.searching.cancelButton.visibility = View.VISIBLE
+
+                    if(payload == null){
+                        Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).show()
+                        return
+                    }
+
+                    if(canShowFinishingScreen) Snackbar.make(binding.root, R.string.cancelled_ticket, Snackbar.LENGTH_LONG).show()
+
+                    rollbackToYourVision()
+                }
+            }
+
+            override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
+                hideFinishingScreen()
+                binding.searching.cancelButton.visibility = View.VISIBLE
+                Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun cancelSearching(){
+        binding.searching.root.visibility = View.INVISIBLE
+
+        hideTicketContents()
+
+        searchingJob?.cancel()
+    }
+
+    private fun hideTicketContents(){
+        binding.currentTicket.root.visibility = View.INVISIBLE
+        binding.ticketActions.visibility = View.INVISIBLE
+        binding.searchButton.visibility = View.VISIBLE
+    }
+
+    private fun cancelChooseOfTicket(){
+        hideAvailableTickets()
+        currentTicket = null
+        ticketId = null
+    }
+
+    private fun hideAvailableTickets(){
+        binding.availableTickets.root.visibility = View.INVISIBLE
+        availableTickets.clear()
+        indexAvailableTickets = 0
+    }
+
+    private fun isNotSearching(): Boolean {
+        return binding.searching.root.visibility == View.INVISIBLE
+    }
+
+    private fun isNotRunning(): Boolean {
+        return ticketId == null
+    }
+
+    private fun watchTicketStatus(){
+         if(isNotRunning()) return
+
+        ticketStatusJob = CoroutineScope(Dispatchers.Main).launch {
+            delay(2000L)
+
+            val call = RetrofitFactory().retrofitHelpsService(binding.root.context).getTicketStatus(ticketId!!)
+
+            call.enqueue(object : Callback<Payload<TicketStatusPayload>> {
+                override fun onResponse(call: Call<Payload<TicketStatusPayload>>, response: Response<Payload<TicketStatusPayload>>) {
+                    response.body().let{
+                        if(isNotRunning()) return
+
+                        val payload = it?.payload
+
+                        if(payload != null){
+                            val status = payload.status
+                            val isCancelled = status == TicketStatusValue.CANCELLED.value
+                            val isConcluded = status == TicketStatusValue.SOLVED.value
+                            val newMechanicId = payload.mechanicId
+
+                            if(isCancelled || isConcluded){
+                                if(isCancelled) Snackbar.make(binding.root, R.string.service_was_cancelled, Snackbar.LENGTH_LONG).show()
+                                else Snackbar.make(binding.root, R.string.service_was_concluded, Snackbar.LENGTH_LONG).show()
+
+                                rollbackToYourVision()
+                            } else if(isDriver && newMechanicId != null && newMechanicId != mechanicId){
+                                mechanicId = newMechanicId
+
+                                cancelSearching()
+                                showRunningContents()
+
+                                binding.waitingMechanic.root.visibility = View.VISIBLE
+
+                                Notifications.create(binding.root.context, getString(R.string.notification_mechanic_found_title), getString(R.string.notification_mechanic_found_message))
+                                Snackbar.make(binding.root, R.string.mechanic_was_found, Snackbar.LENGTH_LONG).show()
+                            }
+                        }
+
+                        watchTicketStatus()
+                    }
+                }
+
+                override fun onFailure(call: Call<Payload<TicketStatusPayload>>, throwable: Throwable) {
+                    if(isNotRunning()) return
+
+                    watchTicketStatus()
+                }
+            })
+        }
+    }
+
+    private fun showRunningContents(){
+        binding.ticketActions.visibility = View.VISIBLE
+        binding.searchButton.visibility = View.INVISIBLE
+    }
+
+    private fun cancelTicketStatus(){
+        ticketStatusJob?.cancel()
+    }
+
+    private fun setAvailableTicketsLayout(){
+        currentTicket = availableTickets[indexAvailableTickets]
+        ticketId = currentTicket!!.id
+
+        val position = indexAvailableTickets + 1
+        val size = availableTickets.size
+
+        setCurrentTicketTexts()
+
+        binding.availableTickets.availableTicketsTitle.text = getString(R.string.ticket_title).format(position, size)
+        binding.availableTickets.availableTicketsLocation.text = getString(R.string.ticket_location).format(currentTicket!!.location)
+        binding.availableTickets.nextService.visibility = if(size > position) View.VISIBLE else View.INVISIBLE
+        binding.availableTickets.root.visibility = View.VISIBLE
+    }
+
+    private fun setCurrentTicketTexts(){
+        val driverName = getString(R.string.ticket_driver_name).format(currentTicket!!.driverName)
+        val vehicle = getString(R.string.ticket_vehicle).format(currentTicket!!.vehicle)
+        val description = getString(R.string.ticket_description).format(currentTicket!!.description)
+        val createdDate = getString(R.string.ticket_created_date).format(currentTicket!!.createdDate)
+
+        binding.availableTickets.availableTicketsDriverName.text = driverName
+        binding.availableTickets.availableTicketsVehicle.text = vehicle
+        binding.availableTickets.availableTicketsDescription.text = description
+        binding.availableTickets.availableTicketsCreatedDate.text = createdDate
+        binding.currentTicket.driverName.text = driverName
+        binding.currentTicket.vehicle.text = vehicle
+        binding.currentTicket.description.text = description
+        binding.currentTicket.createdDate.text = createdDate
+    }
+
+    private fun getAvailableTickets(){
+        if(isNotSearching()) return
+
+        searchingJob = CoroutineScope(Dispatchers.Main).launch {
+            delay(4000L)
+
+            val call = RetrofitFactory().retrofitHelpsService(binding.root.context).getAvailableTickets()
+
+            call.enqueue(object : Callback<Payload<List<TicketPayload>>> {
+                override fun onResponse(call: Call<Payload<List<TicketPayload>>>, response: Response<Payload<List<TicketPayload>>>) {
+                    response.body().let{
+                        if(isNotSearching()) return
+
+                        val payload = it?.payload
+
+                        if(payload.isNullOrEmpty()){
+                            getAvailableTickets()
+                            return
+                        }
+
+                        availableTickets.clear()
+                        availableTickets.addAll(payload)
+
+                        cancelSearching()
+                        setAvailableTicketsLayout()
+                    }
+                }
+
+                override fun onFailure(call: Call<Payload<List<TicketPayload>>>, throwable: Throwable) {
+                    if(isNotSearching()) return
+
+                    getAvailableTickets()
+                }
+            })
+        }
+    }
+
+    private fun closeKeyboard(){
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        inputMethodManager.hideSoftInputFromWindow(binding.root.rootView.windowToken, 0)
+    }
+
+    private fun resetAvailableTicketsActions(){
+        binding.availableTickets.attendService.visibility = View.VISIBLE
+        binding.availableTickets.nextService.visibility = View.VISIBLE
+        binding.availableTickets.cancelButton.visibility = View.VISIBLE
+        binding.availableTickets.acceptingTicketLoading.visibility = View.INVISIBLE
+    }
+
+    private fun acceptTicket(){
+        binding.availableTickets.attendService.visibility = View.INVISIBLE
+        binding.availableTickets.nextService.visibility = View.INVISIBLE
+        binding.availableTickets.cancelButton.visibility = View.INVISIBLE
+        binding.availableTickets.acceptingTicketLoading.visibility = View.VISIBLE
+
+        val call = RetrofitFactory().retrofitHelpsService(binding.root.context).acceptTicket(ticketId as Int)
+
+        call.enqueue(object : Callback<Payload<Int>> {
+            override fun onResponse(call: Call<Payload<Int>>, response: Response<Payload<Int>>) {
+                response.body().let{
+                    val payload = it?.payload
+
+                    resetAvailableTicketsActions()
+
+                    if(payload == null){
+                        Snackbar.make(binding.root, R.string.error_to_accept_ticket, Snackbar.LENGTH_LONG).show()
+                        return
+                    }
+
+                    setCurrentTicketTexts()
+                    showRunningContents()
+
+                    binding.currentTicket.root.visibility = View.VISIBLE
+                    driverLatLng = LatLng(currentTicket!!.lat, currentTicket!!.lon)
+
+                    updateLocation(googleMap, driverLatLng, currentTicket!!.driverName, resources.getString(R.string.driver_location))
+                    hideAvailableTickets()
+                    watchTicketStatus()
+
+                    Snackbar.make(binding.root, R.string.success_to_accept_ticket, Snackbar.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
+                Snackbar.make(binding.root, R.string.error_to_accept_ticket, Snackbar.LENGTH_LONG).show()
+                resetAvailableTicketsActions()
+            }
+        })
+    }
+
+    private fun openGoogleMapsLink(){
+        val intent = Intent(Intent.ACTION_VIEW)
+
+        intent.data = Uri.parse(currentTicket!!.googleMapsLink)
+
+        startActivity(intent)
+    }
+
+    private fun rollbackToYourVision(){
+        showRatingScreen()
+        updateLocation(googleMap, latLng)
+        hideTicketContents()
+
+        binding.waitingMechanic.root.visibility = View.INVISIBLE
+        driverLatLng = null
+        mechanicId = null
+
+        cancelTicketStatus()
+        cancelSearching()
+        cancelChooseOfTicket()
+    }
+
+    private fun concludeTicket(){
+        showFinishingScreen(R.string.concluding_title, R.string.concluding_text)
+
+        val call = RetrofitFactory().retrofitHelpsService(binding.root.context).concludeTicket(ticketId as Int)
+
+        call.enqueue(object : Callback<Payload<Int>> {
+            override fun onResponse(call: Call<Payload<Int>>, response: Response<Payload<Int>>) {
+                response.body().let{
+                    val payload = it?.payload
+
+                    hideFinishingScreen()
+
+                    if(payload == null){
+                        Snackbar.make(binding.root, R.string.error_to_conclude_ticket, Snackbar.LENGTH_LONG).show()
+                        return
+                    }
+
+                    rollbackToYourVision()
+
+                    Snackbar.make(binding.root, R.string.concluded_ticket, Snackbar.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
+                hideFinishingScreen()
+
+                Snackbar.make(binding.root, R.string.error_to_conclude_ticket, Snackbar.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun showFinishingScreen(title: Int, text: Int){
+        binding.finishing.title.text = getString(title)
+        binding.finishing.text.text = getString(text)
+        binding.finishing.root.visibility = View.VISIBLE
+    }
+
+    private fun hideFinishingScreen(){
+        binding.finishing.root.visibility = View.INVISIBLE
+    }
+
+    private fun showRatingScreen(){
+        if(!isDriver || mechanicId == null) return
+
+        cachedTicketId = ticketId
+        rating = 5
+
+        setRatingColors()
+
+        binding.ratingTicket.root.visibility = View.VISIBLE
+    }
+
+    private fun setRatingColors(){
+        val yellowColor = ContextCompat.getColorStateList(binding.root.context, R.color.yellow)
+        val lightGrayColor = ContextCompat.getColorStateList(binding.root.context, R.color.light_gray)
+
+        binding.ratingTicket.starOne.iconTint = if (rating >= 1) yellowColor else lightGrayColor
+        binding.ratingTicket.starTwo.iconTint = if (rating >= 2) yellowColor else lightGrayColor
+        binding.ratingTicket.starThree.iconTint = if (rating >= 3) yellowColor else lightGrayColor
+        binding.ratingTicket.starFour.iconTint = if (rating >= 4) yellowColor else lightGrayColor
+        binding.ratingTicket.starFive.iconTint = if (rating >= 5) yellowColor else lightGrayColor
+    }
+
+    private fun sendRating(){
+        binding.ratingTicket.ratingButton.isEnabled = false
+        binding.ratingTicket.ratingLoading.visibility = View.VISIBLE
+
+        val body = mapOf("rating" to rating)
+        val call = RetrofitFactory().retrofitHelpsService(binding.root.context).ratingTicket(cachedTicketId as Int, body)
+
+        call.enqueue(object : Callback<Payload<Int>> {
+            override fun onResponse(call: Call<Payload<Int>>, response: Response<Payload<Int>>) {
+                response.body().let{
+                    val payload = it?.payload
+
+                    binding.ratingTicket.ratingButton.isEnabled = true
+                    binding.ratingTicket.ratingLoading.visibility = View.INVISIBLE
+
+                    if(payload == null){
+                        Snackbar.make(binding.root, R.string.error_on_rating, Snackbar.LENGTH_LONG).show()
+                        return
+                    }
+
+                    cachedTicketId = null
+                    binding.ratingTicket.ratingButton.isEnabled = true
+                    binding.ratingTicket.root.visibility = View.INVISIBLE
+
+                    Snackbar.make(binding.root, R.string.success_on_rating, Snackbar.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
+                binding.ratingTicket.ratingLoading.visibility = View.INVISIBLE
+                Snackbar.make(binding.root, R.string.error_on_rating, Snackbar.LENGTH_LONG).show()
+            }
+        })
+    }
 }
