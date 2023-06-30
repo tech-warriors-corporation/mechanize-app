@@ -49,6 +49,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Add back button in choose ticket to get previous ticket;
 - [ ] Set details of ticket in rating modal too (more precision for user);
 - [ ] Update location in runtime for driver and mechanic;
+- [ ] Set URL of app in GitHub repository;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver;
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
