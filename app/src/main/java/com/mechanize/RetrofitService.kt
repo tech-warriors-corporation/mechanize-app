@@ -39,4 +39,7 @@ interface RetrofitHelpsService {
 
     @GET("tickets/available")
     fun getAvailableTickets(): Call<Payload<List<TicketPayload>>>
+
+    @GET("tickets/current-ticket")
+    fun getCurrentTicket(): Call<Payload<CurrentTicketPayload>>
 }

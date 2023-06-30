@@ -152,5 +152,9 @@
         <include layout="@layout/rating_ticket"
             android:id="@+id/rating_ticket"
             android:visibility="invisible" />
+
+        <include layout="@layout/getting_current_ticket"
+            android:id="@+id/getting_current_ticket"
+            android:visibility="invisible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </fragment>

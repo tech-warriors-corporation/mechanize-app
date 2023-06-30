@@ -2,6 +2,7 @@ package com.mechanize
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.location.Location
@@ -72,6 +73,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     private var ticketStatusJob: Job? = null
     private var googleApiClient: GoogleApiClient? = null
     private var locationManager: LocationManager? = null
+    private var userSharedPreferences: SharedPreferences? = null
+    private var hasLocation = true
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -101,7 +104,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userSharedPreferences = EncryptedSharedPreferences.create(
+        userSharedPreferences = EncryptedSharedPreferences.create(
             "user",
             BuildConfig.SHARED_PREF_KEY,
             binding.root.context,
@@ -110,15 +113,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         )
 
         binding.logoutButton.setOnClickListener {
-            with(userSharedPreferences.edit()){
-                remove("accessToken")
-                remove("id")
-                remove("name")
-                remove("role")
-                apply()
-            }
-
-            findNavController().navigate(R.id.action_SearchFragment_to_HomeFragment)
+            logout()
         }
 
         binding.focusToMeButton.setOnClickListener {
@@ -130,9 +125,9 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             closeSearchMechanic()
         }
 
-        userId = userSharedPreferences.getInt("id", 0)
-        val userName = userSharedPreferences.getString("name", "")
-        var userRole = userSharedPreferences.getString("role", "")
+        userId = userSharedPreferences!!.getInt("id", 0)
+        val userName = userSharedPreferences!!.getString("name", "")
+        var userRole = userSharedPreferences!!.getString("role", "")
         isDriver = userRole == RoleValue.DRIVER.value
         isMechanic = userRole == RoleValue.MECHANIC.value
 
@@ -220,6 +215,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             sendRating()
         }
 
+        gettingCurrentTicket()
+
         val supportMapFragment = childFragmentManager.findFragmentById(R.id.location) as SupportMapFragment
 
         supportMapFragment.getMapAsync(this)
@@ -259,12 +256,15 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
         ) {
+            hasLocation = false
+
             Handler().postDelayed({
                 Snackbar.make(binding.root, R.string.invalid_location, Snackbar.LENGTH_LONG).show()
             }, 1000)
 
             binding.actions.visibility = View.INVISIBLE
             binding.focusToMeButton.visibility = View.INVISIBLE
+            binding.currentTicket.root.visibility = View.INVISIBLE
         }
     }
 
@@ -520,6 +520,66 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         indexAvailableTickets = 0
     }
 
+    private fun gettingCurrentTicket(){
+        binding.gettingCurrentTicket.root.visibility = View.VISIBLE
+
+        val call = RetrofitFactory().retrofitHelpsService(binding.root.context).getCurrentTicket()
+
+        call.enqueue(object : Callback<Payload<CurrentTicketPayload>> {
+            override fun onResponse(call: Call<Payload<CurrentTicketPayload>>, response: Response<Payload<CurrentTicketPayload>>) {
+                response.body().let{
+                    val payload = it?.payload
+
+                    binding.gettingCurrentTicket.root.visibility = View.INVISIBLE
+
+                    if(payload == null) return
+
+                    ticketId = payload.id
+
+                    if(isDriver) {
+                        val status = payload.status
+                        val isCancelled = status == TicketStatusValue.CANCELLED.value
+                        val isConcluded = status == TicketStatusValue.SOLVED.value
+
+                        initMechanicId(payload.mechanicId)
+
+                        if(isCancelled || isConcluded) {
+                            rollbackToYourVision()
+
+                            return
+                        }
+                    } else {
+                        currentTicket = TicketPayload(
+                            id = ticketId!!,
+                            driverName = payload.driverName,
+                            vehicle = payload.vehicle,
+                            location = payload.location,
+                            lat = payload.lat,
+                            lon = payload.lon,
+                            googleMapsLink = payload.googleMapsLink,
+                            description = payload.description,
+                            createdDate = payload.createdDate
+                        )
+
+                        setCurrentTicketLayout()
+                    }
+
+                    watchTicketStatus()
+                }
+            }
+
+            override fun onFailure(call: Call<Payload<CurrentTicketPayload>>, throwable: Throwable) {
+                binding.gettingCurrentTicket.root.visibility = View.INVISIBLE
+
+                Handler().postDelayed({
+                    logout()
+
+                    Snackbar.make(binding.root, R.string.error_on_get_current_ticket, Snackbar.LENGTH_LONG).show()
+                }, 100)
+            }
+        })
+    }
+
     private fun isNotSearching(): Boolean {
         return binding.searching.root.visibility == View.INVISIBLE
     }
@@ -555,12 +615,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
                                 rollbackToYourVision()
                             } else if(isDriver && newMechanicId != null && newMechanicId != mechanicId){
-                                mechanicId = newMechanicId
-
                                 cancelSearching()
-                                showRunningContents()
-
-                                binding.waitingMechanic.root.visibility = View.VISIBLE
+                                initMechanicId(newMechanicId)
 
                                 Notifications.create(binding.root.context, getString(R.string.notification_mechanic_found_title), getString(R.string.notification_mechanic_found_message))
                                 Snackbar.make(binding.root, R.string.mechanic_was_found, Snackbar.LENGTH_LONG).show()
@@ -578,6 +634,16 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                 }
             })
         }
+    }
+
+    private fun initMechanicId(newMechanicId: Int){
+        mechanicId = newMechanicId
+
+        if(!hasLocation) return
+
+        showRunningContents()
+
+        binding.waitingMechanic.root.visibility = View.VISIBLE
     }
 
     private fun showRunningContents(){
@@ -690,13 +756,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                         return
                     }
 
-                    setCurrentTicketTexts()
-                    showRunningContents()
-
-                    binding.currentTicket.root.visibility = View.VISIBLE
-                    driverLatLng = LatLng(currentTicket!!.lat, currentTicket!!.lon)
-
-                    updateLocation(googleMap, driverLatLng, currentTicket!!.driverName, resources.getString(R.string.driver_location))
+                    setCurrentTicketLayout()
                     hideAvailableTickets()
                     watchTicketStatus()
 
@@ -709,6 +769,18 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                 resetAvailableTicketsActions()
             }
         })
+    }
+
+    private fun setCurrentTicketLayout(){
+        if(!hasLocation) return
+
+        setCurrentTicketTexts()
+        showRunningContents()
+
+        binding.currentTicket.root.visibility = View.VISIBLE
+        driverLatLng = LatLng(currentTicket!!.lat, currentTicket!!.lon)
+
+        updateLocation(googleMap, driverLatLng, currentTicket!!.driverName, resources.getString(R.string.driver_location))
     }
 
     private fun openGoogleMapsLink(){
@@ -775,7 +847,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     }
 
     private fun showRatingScreen(){
-        if(!isDriver || mechanicId == null) return
+        if(!isDriver || mechanicId == null || !hasLocation) return
 
         cachedTicketId = ticketId
         rating = 5
@@ -829,5 +901,17 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                 Snackbar.make(binding.root, R.string.error_on_rating, Snackbar.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun logout(){
+        with(userSharedPreferences!!.edit()){
+            remove("accessToken")
+            remove("id")
+            remove("name")
+            remove("role")
+            apply()
+        }
+
+        findNavController().navigate(R.id.action_SearchFragment_to_HomeFragment)
     }
 }
