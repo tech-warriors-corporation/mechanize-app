@@ -47,6 +47,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] On close modal and open again, shows a ghost of last data;
 - [ ] Show in map who mechanic is helping when attending;
 - [ ] Add back button in choose ticket to get previous ticket;
+- [ ] Set details of ticket in rating modal too (more precision for user);
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver;
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
