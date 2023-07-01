@@ -100,9 +100,9 @@ class LoginFragment : Fragment() {
 
         loginCall?.enqueue(object : Callback<Payload<UserPayload>> {
             override fun onResponse(call: Call<Payload<UserPayload>>, response: Response<Payload<UserPayload>>) {
-                response.body().let{
-                    if(isLoginCallCancelled) return
+                if(isLoginCallCancelled) return
 
+                response.body().let{
                     val payload = it?.payload
 
                     if(payload == null){
