@@ -22,6 +22,8 @@ import retrofit2.Response
 class CreateAccountFragment : Fragment() {
     private var isCreateAccountCallCancelled = false
     private var createAccountCall: Call<Payload<Int>>? = null
+    private var isLoginCallCancelled = false
+    private var loginCall: Call<Payload<UserPayload>>? = null
     private var _binding: FragmentCreateAccountBinding? = null
     private val binding get() = _binding!!
 
@@ -57,6 +59,8 @@ class CreateAccountFragment : Fragment() {
         super.onDestroyView()
         isCreateAccountCallCancelled = true
         createAccountCall?.cancel()
+        isLoginCallCancelled = true
+        loginCall?.cancel()
         _binding = null
     }
 
@@ -156,10 +160,12 @@ class CreateAccountFragment : Fragment() {
             "password" to password,
         )
 
-        val call = RetrofitFactory().retrofitAccountsService(binding.root.context).login(body)
+        loginCall = RetrofitFactory().retrofitAccountsService(binding.root.context).login(body)
 
-        call.enqueue(object : Callback<Payload<UserPayload>> {
+        loginCall?.enqueue(object : Callback<Payload<UserPayload>> {
             override fun onResponse(call: Call<Payload<UserPayload>>, response: Response<Payload<UserPayload>>) {
+                if(isLoginCallCancelled) return
+
                 response.body().let{
                     val payload = it?.payload
 
@@ -195,6 +201,8 @@ class CreateAccountFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<Payload<UserPayload>>, throwable: Throwable) {
+                if(isLoginCallCancelled) return
+
                 Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).show()
                 binding.loginButton.isEnabled = true
                 binding.loading.visibility = View.INVISIBLE
