@@ -21,6 +21,8 @@ class LoginFragment : Fragment() {
     private var timeToRetryLoginSharedPreferences: SharedPreferences? = null
     private var timeToRetryLoginSharedPreferencesEditable: SharedPreferences.Editor? = null
     private var timeToRetryLoginJob: Job? = null
+    private var isLoginCallCancelled = false
+    private var loginCall: Call<Payload<UserPayload>>? = null
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -61,6 +63,8 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         timeToRetryLoginJob?.cancel()
+        isLoginCallCancelled = true
+        loginCall?.cancel()
         _binding = null
     }
 
@@ -92,11 +96,13 @@ class LoginFragment : Fragment() {
             "password" to password
         )
 
-        val call = RetrofitFactory().retrofitAccountsService(binding.root.context).login(body)
+        loginCall = RetrofitFactory().retrofitAccountsService(binding.root.context).login(body)
 
-        call.enqueue(object : Callback<Payload<UserPayload>> {
+        loginCall?.enqueue(object : Callback<Payload<UserPayload>> {
             override fun onResponse(call: Call<Payload<UserPayload>>, response: Response<Payload<UserPayload>>) {
                 response.body().let{
+                    if(isLoginCallCancelled) return
+
                     val payload = it?.payload
 
                     if(payload == null){
@@ -137,6 +143,8 @@ class LoginFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<Payload<UserPayload>>, throwable: Throwable) {
+                if(isLoginCallCancelled) return
+
                 Snackbar.make(binding.root, R.string.invalid_login, Snackbar.LENGTH_LONG).show()
                 binding.loginButton.isEnabled = true
                 binding.loading.visibility = View.INVISIBLE
