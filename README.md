@@ -51,7 +51,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Update location in runtime for driver and mechanic;
 - [ ] Set URL of app in GitHub repository;
 - [ ] Remove dark theme mode;
-- [ ] Add padding in images at `mipmap` directory to smaller app icon;
+- [X] Add padding in images at `mipmap` directory to smaller app icon;
 - [ ] Remove -3 hours when show a full date in app or change time in Neon database;
 - [ ] Analyze crashes and bugs;
 - [ ] Set login fields on home;
