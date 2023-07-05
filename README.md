@@ -5,8 +5,7 @@ Mechanize (app) to help people fix car and reach destination.
 You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_KEY` and `MAPS_API_KEY` variables in `local.properties`.
 
 ## See more
-- [API's](https://github.com/tech-warriors-corporation/mechanize-api);
-- [Tanes](https://github.com/hotequil/tanes) and [Bridhop](https://github.com/hotequil/bridhop) examples (remove it in future).
+- [API's](https://github.com/tech-warriors-corporation/mechanize-api).
 
 ## Deploy
 You must build the app before of generate a `.aab` file.
@@ -55,7 +54,12 @@ You must build the app before of generate a `.aab` file.
 - [ ] Remove -3 hours when show a full date in app or change time in Neon database;
 - [ ] Analyze crashes and bugs;
 - [ ] Set login fields on home;
-- [ ] On start app, request our microservices to init them;
+- [ ] On start app, request our microservices to init them (15 inactive minutes);
+- [ ] Toggle button to show or hide password on create account;
+- [ ] Create a confirm modal before logout;
+- [ ] Focus me and logout button should have a shadow or something to show better (bring up the map);
+- [ ] Set a sanitize to remove emoji and dangerous strings in some fields for not save in database;
+- [ ] Add text that go to creator website and Tech Warriors GitHub organization link;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver;
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
