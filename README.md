@@ -55,6 +55,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Remove -3 hours when show a full date in app or change time in Neon database;
 - [ ] Analyze crashes and bugs;
 - [ ] Set login fields on home;
+- [ ] On start app, request our microservices to init them;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver;
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
