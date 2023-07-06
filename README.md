@@ -46,7 +46,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] On close modal and open again, shows a ghost of last data;
 - [ ] Show in map who mechanic is helping when attending;
 - [ ] Add back button in choose ticket to get previous ticket;
-- [ ] Set details of ticket in rating modal too (more precision for user);
+- [ ] Set details of ticket in rating modal too (more precision for user with description, vehicle, mechanic name and more);
 - [ ] Update location in runtime for driver and mechanic;
 - [ ] Set URL of app in GitHub repository;
 - [ ] Remove dark theme mode;
@@ -66,6 +66,9 @@ You must build the app before of generate a `.aab` file.
 - [ ] Show remaining chars text;
 - [ ] Online mechanics alert;
 - [ ] Change password configuration;
+- [ ] Set text in info of app about keep the app open to work normally;
+- [ ] Test app with location changed in other country (emulate);
+- [ ] When mechanic recuse (cancel button name should be recuse) the ticket, should be unsolved and without mechanic_id, and not with cancelled;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver;
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
