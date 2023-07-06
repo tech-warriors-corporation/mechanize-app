@@ -34,7 +34,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Use Android notifications;
 - [ ] Think about product marketing;
 - [X] Mock the API's;
-- [X] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
+- [ ] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
 - [ ] Use singular and plural in seconds of retry login, and not disabled in first time;
 - [ ] Upload application in Google Play;
 - [ ] Customize application in Google Play when uploaded;
@@ -60,6 +60,12 @@ You must build the app before of generate a `.aab` file.
 - [ ] Focus me and logout button should have a shadow or something to show better (bring up the map);
 - [ ] Set a sanitize to remove emoji and dangerous strings in some fields for not save in database;
 - [ ] Add text that go to creator website and Tech Warriors GitHub organization link;
+- [ ] Use select to vehicle;
+- [ ] Forget password screen;
+- [ ] Remember session checkbox;
+- [ ] Show remaining chars text;
+- [ ] Online mechanics alert;
+- [ ] Change password configuration;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver;
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
