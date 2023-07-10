@@ -87,6 +87,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Show current position of mechanic to driver and others relevant things;
 - [ ] Update location of users when them leave the place, and show two points in map (driver and mechanic) in different colors;
 - [ ] Improve message errors in app;
+- [ ] Use trim in strings to validate fields in ifs;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver (something better to understand and beautiful);
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
