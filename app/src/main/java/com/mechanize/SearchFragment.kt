@@ -356,12 +356,11 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     }
 
     private fun onSearchMechanic(){
-        closeSearchMechanic()
+        closeFieldsSearchMechanic()
         binding.searchMechanic.root.visibility = View.VISIBLE
     }
 
-    private fun closeSearchMechanic(){
-        binding.searchMechanic.root.visibility = View.INVISIBLE
+    private fun closeFieldsSearchMechanic(){
         binding.searchMechanic.glassBroke.isChecked = false
         binding.searchMechanic.vehicleWithoutBattery.isChecked = false
         binding.searchMechanic.outOfFuel.isChecked = false
@@ -369,6 +368,14 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         binding.searchMechanic.problemField.editText?.setText("")
 
         closeKeyboard()
+    }
+
+    private fun closeSearchMechanic(){
+        closeFieldsSearchMechanic()
+
+        Handler().postDelayed({
+            binding.searchMechanic.root.visibility = View.INVISIBLE
+        }, 0)
     }
 
     private fun onSearchService(){
@@ -690,7 +697,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         if(isNotSearching()) return
 
         searchingJob = CoroutineScope(Dispatchers.Main).launch {
-            delay(4000L)
+            delay(2000L)
 
             val call = RetrofitFactory().retrofitHelpsService(binding.root.context).getAvailableTickets()
 
