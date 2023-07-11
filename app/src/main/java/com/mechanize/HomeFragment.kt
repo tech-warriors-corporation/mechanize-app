@@ -1,8 +1,10 @@
 package com.mechanize
 
 import android.app.Activity
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -57,6 +59,14 @@ class HomeFragment : Fragment() {
 
         binding.createAccountButton.setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_CreateAccountFragment)
+        }
+
+        binding.techWarriorsLink.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW)
+
+            intent.setData(Uri.parse(BuildConfig.GITHUB_ORG_LINK))
+
+            startActivity(intent)
         }
     }
 

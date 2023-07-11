@@ -8,7 +8,8 @@
     <string name="focus_to_me">Focar em mim</string>
     <string name="logo">Logo do Mechanize</string>
     <string name="logo_tech_warriors">Logo do Tech Warriors</string>
-    <string name="developed_by_tech_warriors">Desenvolvido por Tech Warriors</string>
+    <string name="developed_by_tech_warriors">Desenvolvido por</string>
+    <string name="tech_warriors">Tech Warriors</string>
     <string name="create_account">Criar conta</string>
     <string name="welcome">Bem-vindo</string>
     <string name="welcome_description">Para continuar é necessário fazer login ou criar conta.</string>
