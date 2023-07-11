@@ -76,37 +76,37 @@ class CreateAccountFragment : Fragment() {
         inputMethodManager.hideSoftInputFromWindow(binding.root.rootView.windowToken, 0)
 
         if(name == ""){
-            Snackbar.make(binding.root, R.string.invalid_name, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_name, Snackbar.LENGTH_LONG).top()
             return
         }
 
         if(role == ""){
-            Snackbar.make(binding.root, R.string.invalid_role, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_role, Snackbar.LENGTH_LONG).top()
             return
         }
 
         if(email == ""){
-            Snackbar.make(binding.root, R.string.invalid_email, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_email, Snackbar.LENGTH_LONG).top()
             return
         }
 
         if(password == ""){
-            Snackbar.make(binding.root, R.string.invalid_password, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_password, Snackbar.LENGTH_LONG).top()
             return
         }
 
         if(passwordConfirmation == ""){
-            Snackbar.make(binding.root, R.string.invalid_password_confirmation, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_password_confirmation, Snackbar.LENGTH_LONG).top()
             return
         }
 
         if(password != passwordConfirmation){
-            Snackbar.make(binding.root, R.string.invalid_passwords, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_passwords, Snackbar.LENGTH_LONG).top()
             return
         }
 
         if(!acceptSaveData){
-            Snackbar.make(binding.root, R.string.you_need_to_accept_save_data, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.you_need_to_accept_save_data, Snackbar.LENGTH_LONG).top()
             return
         }
 
@@ -133,7 +133,7 @@ class CreateAccountFragment : Fragment() {
                     val id = it?.payload
 
                     if(id == null){
-                        Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).top()
                         binding.loginButton.isEnabled = true
                         binding.loading.visibility = View.INVISIBLE
 
@@ -147,7 +147,7 @@ class CreateAccountFragment : Fragment() {
             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
                 if (isCreateAccountCallCancelled) return
 
-                Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).top()
                 binding.loginButton.isEnabled = true
                 binding.loading.visibility = View.INVISIBLE
             }
@@ -170,7 +170,7 @@ class CreateAccountFragment : Fragment() {
                     val payload = it?.payload
 
                     if(payload == null){
-                        Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).top()
                         binding.loginButton.isEnabled = true
                         binding.loading.visibility = View.INVISIBLE
 
@@ -203,7 +203,7 @@ class CreateAccountFragment : Fragment() {
             override fun onFailure(call: Call<Payload<UserPayload>>, throwable: Throwable) {
                 if(isLoginCallCancelled) return
 
-                Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, R.string.invalid_create_account, Snackbar.LENGTH_LONG).top()
                 binding.loginButton.isEnabled = true
                 binding.loading.visibility = View.INVISIBLE
             }

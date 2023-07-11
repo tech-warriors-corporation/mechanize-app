@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
         inputMethodManager.hideSoftInputFromWindow(binding.root.rootView.windowToken, 0)
 
         if(email == ""){
-            Snackbar.make(binding.root, R.string.invalid_email, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_email, Snackbar.LENGTH_LONG).top()
 
             return
         }
@@ -83,7 +83,7 @@ class LoginFragment : Fragment() {
         val password = binding.passwordField.editText?.text.toString()
 
         if(password == ""){
-            Snackbar.make(binding.root, R.string.invalid_password, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_password, Snackbar.LENGTH_LONG).top()
 
             return
         }
@@ -106,7 +106,7 @@ class LoginFragment : Fragment() {
                     val payload = it?.payload
 
                     if(payload == null){
-                        Snackbar.make(binding.root, R.string.invalid_login, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, R.string.invalid_login, Snackbar.LENGTH_LONG).top()
 
                         with(timeToRetryLoginSharedPreferencesEditable){
                             this?.putString("time", "10")
@@ -145,7 +145,7 @@ class LoginFragment : Fragment() {
             override fun onFailure(call: Call<Payload<UserPayload>>, throwable: Throwable) {
                 if(isLoginCallCancelled) return
 
-                Snackbar.make(binding.root, R.string.invalid_login, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, R.string.invalid_login, Snackbar.LENGTH_LONG).top()
                 binding.loginButton.isEnabled = true
                 binding.loading.visibility = View.INVISIBLE
             }

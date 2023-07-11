@@ -114,7 +114,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun removeUserData(userSharedPreferences: SharedPreferences){
-        Snackbar.make(binding.root, R.string.invalid_auth_user, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(binding.root, R.string.invalid_auth_user, Snackbar.LENGTH_LONG).top()
 
         with(userSharedPreferences.edit()){
             remove("accessToken")

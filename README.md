@@ -76,7 +76,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Rating modal to optional and can close to users;
 - [ ] Rating modal for the mechanic too;
 - [ ] Text that showing vision of other user;
-- [ ] Toast time should be bigger and the toast should be at top of app. The toast should have a bigger height for large messages;
+- [X] Toast time should be bigger and the toast should be at top of app. The toast should have a bigger height for large messages;
 - [ ] Double confirmation in actions (principally in cancel and conclude);
 - [ ] Show the services to mechanic that is closer than mechanic and not let services appear that are more than 300km from him;
 - [ ] Add list of done services to users with status and other information;

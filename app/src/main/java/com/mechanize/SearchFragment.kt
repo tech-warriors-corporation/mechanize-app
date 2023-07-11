@@ -259,7 +259,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             hasLocation = false
 
             Handler().postDelayed({
-                Snackbar.make(binding.root, R.string.invalid_location, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, R.string.invalid_location, Snackbar.LENGTH_LONG).top()
             }, 1000)
 
             binding.actions.visibility = View.INVISIBLE
@@ -389,12 +389,12 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         closeKeyboard()
 
         if(vehicle == ""){
-            Snackbar.make(binding.root, R.string.invalid_vehicle, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_vehicle, Snackbar.LENGTH_LONG).top()
             return
         }
 
         if(problem == ""){
-            Snackbar.make(binding.root, R.string.invalid_problem, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, R.string.invalid_problem, Snackbar.LENGTH_LONG).top()
             return
         }
 
@@ -421,7 +421,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                     val payload = it?.payload
 
                     if(payload == null){
-                        Snackbar.make(binding.root, R.string.invalid_create_ticket, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, R.string.invalid_create_ticket, Snackbar.LENGTH_LONG).top()
                         binding.searchMechanic.callButton.isEnabled = true
                         binding.searchMechanic.ticketLoading.visibility = View.INVISIBLE
 
@@ -430,7 +430,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
                     ticketId = payload
 
-                    Snackbar.make(binding.root, R.string.created_ticket, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root, R.string.created_ticket, Snackbar.LENGTH_LONG).top()
 
                     closeSearchMechanic()
                     onSearchService()
@@ -441,7 +441,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             }
 
             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
-                Snackbar.make(binding.root, R.string.invalid_create_ticket, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, R.string.invalid_create_ticket, Snackbar.LENGTH_LONG).top()
                 binding.searchMechanic.callButton.isEnabled = true
                 binding.searchMechanic.ticketLoading.visibility = View.INVISIBLE
             }
@@ -476,11 +476,11 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                     binding.searching.cancelButton.visibility = View.VISIBLE
 
                     if(payload == null){
-                        Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).top()
                         return
                     }
 
-                    if(canShowFinishingScreen) Snackbar.make(binding.root, R.string.cancelled_ticket, Snackbar.LENGTH_LONG).show()
+                    if(canShowFinishingScreen) Snackbar.make(binding.root, R.string.cancelled_ticket, Snackbar.LENGTH_LONG).top()
 
                     rollbackToYourVision()
                 }
@@ -489,7 +489,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
                 hideFinishingScreen()
                 binding.searching.cancelButton.visibility = View.VISIBLE
-                Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).top()
             }
         })
     }
@@ -574,7 +574,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                 Handler().postDelayed({
                     logout()
 
-                    Snackbar.make(binding.root, R.string.error_on_get_current_ticket, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root, R.string.error_on_get_current_ticket, Snackbar.LENGTH_LONG).top()
                 }, 100)
             }
         })
@@ -610,8 +610,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                             val newMechanicId = payload.mechanicId
 
                             if(isCancelled || isConcluded){
-                                if(isCancelled) Snackbar.make(binding.root, R.string.service_was_cancelled, Snackbar.LENGTH_LONG).show()
-                                else Snackbar.make(binding.root, R.string.service_was_concluded, Snackbar.LENGTH_LONG).show()
+                                if(isCancelled) Snackbar.make(binding.root, R.string.service_was_cancelled, Snackbar.LENGTH_LONG).top()
+                                else Snackbar.make(binding.root, R.string.service_was_concluded, Snackbar.LENGTH_LONG).top()
 
                                 rollbackToYourVision()
                             } else if(isDriver && newMechanicId != null && newMechanicId != mechanicId){
@@ -619,7 +619,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                                 initMechanicId(newMechanicId)
 
                                 Notifications.create(binding.root.context, getString(R.string.notification_mechanic_found_title), getString(R.string.notification_mechanic_found_message))
-                                Snackbar.make(binding.root, R.string.mechanic_was_found, Snackbar.LENGTH_LONG).show()
+                                Snackbar.make(binding.root, R.string.mechanic_was_found, Snackbar.LENGTH_LONG).top()
                             }
                         }
 
@@ -752,7 +752,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                     resetAvailableTicketsActions()
 
                     if(payload == null){
-                        Snackbar.make(binding.root, R.string.error_to_accept_ticket, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, R.string.error_to_accept_ticket, Snackbar.LENGTH_LONG).top()
                         return
                     }
 
@@ -760,12 +760,12 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                     hideAvailableTickets()
                     watchTicketStatus()
 
-                    Snackbar.make(binding.root, R.string.success_to_accept_ticket, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root, R.string.success_to_accept_ticket, Snackbar.LENGTH_LONG).top()
                 }
             }
 
             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
-                Snackbar.make(binding.root, R.string.error_to_accept_ticket, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, R.string.error_to_accept_ticket, Snackbar.LENGTH_LONG).top()
                 resetAvailableTicketsActions()
             }
         })
@@ -818,20 +818,20 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                     hideFinishingScreen()
 
                     if(payload == null){
-                        Snackbar.make(binding.root, R.string.error_to_conclude_ticket, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, R.string.error_to_conclude_ticket, Snackbar.LENGTH_LONG).top()
                         return
                     }
 
                     rollbackToYourVision()
 
-                    Snackbar.make(binding.root, R.string.concluded_ticket, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root, R.string.concluded_ticket, Snackbar.LENGTH_LONG).top()
                 }
             }
 
             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
                 hideFinishingScreen()
 
-                Snackbar.make(binding.root, R.string.error_to_conclude_ticket, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, R.string.error_to_conclude_ticket, Snackbar.LENGTH_LONG).top()
             }
         })
     }
@@ -884,7 +884,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                     binding.ratingTicket.ratingLoading.visibility = View.INVISIBLE
 
                     if(payload == null){
-                        Snackbar.make(binding.root, R.string.error_on_rating, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, R.string.error_on_rating, Snackbar.LENGTH_LONG).top()
                         return
                     }
 
@@ -892,13 +892,13 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                     binding.ratingTicket.ratingButton.isEnabled = true
                     binding.ratingTicket.root.visibility = View.INVISIBLE
 
-                    Snackbar.make(binding.root, R.string.success_on_rating, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root, R.string.success_on_rating, Snackbar.LENGTH_LONG).top()
                 }
             }
 
             override fun onFailure(call: Call<Payload<Int>>, throwable: Throwable) {
                 binding.ratingTicket.ratingLoading.visibility = View.INVISIBLE
-                Snackbar.make(binding.root, R.string.error_on_rating, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, R.string.error_on_rating, Snackbar.LENGTH_LONG).top()
             }
         })
     }
