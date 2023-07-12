@@ -571,7 +571,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                         setCurrentTicketLayout()
                     }
 
-                    watchTicketStatus()
+                    watchTicketStatus(0L)
                 }
             }
 
@@ -595,11 +595,11 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         return ticketId == null
     }
 
-    private fun watchTicketStatus(){
-         if(isNotRunning()) return
+    private fun watchTicketStatus(ms: Long = 2000L){
+        if(isNotRunning()) return
 
         ticketStatusJob = CoroutineScope(Dispatchers.Main).launch {
-            delay(2000L)
+            delay(ms)
 
             val call = RetrofitFactory().retrofitHelpsService(binding.root.context).getTicketStatus(ticketId!!)
 
@@ -621,12 +621,24 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                                 else Snackbar.make(binding.root, R.string.service_was_concluded, Snackbar.LENGTH_LONG).top()
 
                                 rollbackToYourVision()
-                            } else if(isDriver && newMechanicId != null && newMechanicId != mechanicId){
-                                cancelSearching()
-                                initMechanicId(newMechanicId)
+                            } else if(isDriver){
+                                if(newMechanicId != mechanicId && newMechanicId != null){
+                                    cancelSearching()
+                                    initMechanicId(newMechanicId)
 
-                                Notifications.create(binding.root.context, getString(R.string.notification_mechanic_found_title), getString(R.string.notification_mechanic_found_message))
-                                Snackbar.make(binding.root, R.string.mechanic_was_found, Snackbar.LENGTH_LONG).top()
+                                    Notifications.create(binding.root.context, getString(R.string.notification_mechanic_found_title), getString(R.string.notification_mechanic_found_message))
+                                    Snackbar.make(binding.root, R.string.mechanic_was_found, Snackbar.LENGTH_LONG).top()
+                                } else if(newMechanicId == null && isNotSearching()) {
+                                    if(mechanicId != null) {
+                                        Notifications.create(binding.root.context, getString(R.string.notification_mechanic_cancelled_title), getString(R.string.notification_mechanic_cancelled_message))
+                                        Snackbar.make(binding.root, R.string.back_search_because_mechanic_cancelled, Snackbar.LENGTH_LONG).top()
+                                    } else Snackbar.make(binding.root, R.string.back_to_search_mechanic, Snackbar.LENGTH_LONG).top()
+
+                                    rollbackToYourVision(true)
+                                    onSearchService()
+
+                                    return
+                                }
                             }
                         }
 
@@ -643,10 +655,10 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         }
     }
 
-    private fun initMechanicId(newMechanicId: Int){
+    private fun initMechanicId(newMechanicId: Int?){
         mechanicId = newMechanicId
 
-        if(!hasLocation) return
+        if(!hasLocation || mechanicId == null) return
 
         showRunningContents()
 
@@ -798,8 +810,9 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         startActivity(intent)
     }
 
-    private fun rollbackToYourVision(){
-        showRatingScreen()
+    private fun rollbackToYourVision(canBackSearchMechanic: Boolean = false){
+        if(!canBackSearchMechanic) showRatingScreen()
+
         updateLocation(googleMap, latLng)
         hideTicketContents()
 
@@ -809,7 +822,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
         cancelTicketStatus()
         cancelSearching()
-        cancelChooseOfTicket()
+
+        if(!canBackSearchMechanic) cancelChooseOfTicket()
     }
 
     private fun concludeTicket(){

@@ -100,6 +100,10 @@
     <string name="notifications_channel_description">Através das notificações podemos informar diversas ações que acontecem no aplicativo para você.</string>
     <string name="getting_current_ticket_text">Obtendo serviço atual</string>
     <string name="error_on_get_current_ticket">Erro ao obter serviço atual, você foi deslogado</string>
+    <string name="back_to_search_mechanic">Voltamos a procurar um mecânico para lhe ajudar</string>
+    <string name="back_search_because_mechanic_cancelled">O mecânico cancelou o atendimento, estamos procurando outro nesse momento</string>
+    <string name="notification_mechanic_cancelled_title">Mecânico cancelou o atendimento</string>
+    <string name="notification_mechanic_cancelled_message">Voltamos a procurar um mecânico, aguarde, por favor.</string>
 
     <string-array name="roles">
         <item>@string/driver</item>

@@ -35,8 +35,8 @@ data class CurrentTicketPayload(
     @SerializedName("google_maps_link") val googleMapsLink: String,
     @SerializedName("description") val description: String,
     @SerializedName("created_date") val createdDate: String,
-    @SerializedName("mechanic_id") val mechanicId: Int,
     @SerializedName("status") val status: String,
+    @SerializedName("mechanic_id") val mechanicId: Int?,
 )
 
 data class TicketStatusPayload(
