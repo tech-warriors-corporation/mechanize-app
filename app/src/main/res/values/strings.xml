@@ -73,7 +73,8 @@
     <string name="ticket_created_date">Criado em: %s</string>
     <string name="ticket_location">Localização: %s</string>
     <string name="attend_service">Atender esse serviço</string>
-    <string name="next_service">Mostrar próximo serviço</string>
+    <string name="next">Próximo</string>
+    <string name="previous">Anterior</string>
     <string name="google_maps_link">Link do Google Maps</string>
     <string name="error_to_accept_ticket">Ocorreu um problema ao iniciar o atendimento do serviço, tente novamente</string>
     <string name="success_to_accept_ticket">Atendimento iniciado, vá até o motorista e ajude-o</string>

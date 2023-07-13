@@ -174,6 +174,11 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             setAvailableTicketsLayout()
         }
 
+        binding.availableTickets.previousService.setOnClickListener{
+            indexAvailableTickets--
+            setAvailableTicketsLayout()
+        }
+
         binding.availableTickets.googleMapsLink.setOnClickListener{
             openGoogleMapsLink()
         }
@@ -685,7 +690,24 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
         binding.availableTickets.availableTicketsTitle.text = getString(R.string.ticket_title).format(position, size)
         binding.availableTickets.availableTicketsLocation.text = getString(R.string.ticket_location).format(currentTicket!!.location)
-        binding.availableTickets.nextService.visibility = if(size > position) View.VISIBLE else View.INVISIBLE
+
+        if(position != size){
+            binding.availableTickets.nextService.isEnabled = true
+            binding.availableTickets.nextService.alpha = 1F
+        } else{
+            binding.availableTickets.nextService.isEnabled = false
+            binding.availableTickets.nextService.alpha = 0.5F
+        }
+
+        if(position != 1){
+            binding.availableTickets.previousService.isEnabled = true
+            binding.availableTickets.previousService.alpha = 1F
+        } else{
+            binding.availableTickets.previousService.isEnabled = false
+            binding.availableTickets.previousService.alpha = 0.5F
+        }
+
+        binding.availableTickets.changeServiceActions.visibility = if(size > 1) View.VISIBLE else View.INVISIBLE
         binding.availableTickets.root.visibility = View.VISIBLE
     }
 
@@ -750,14 +772,14 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
     private fun resetAvailableTicketsActions(){
         binding.availableTickets.attendService.visibility = View.VISIBLE
-        binding.availableTickets.nextService.visibility = View.VISIBLE
+        binding.availableTickets.changeServiceActions.visibility = View.VISIBLE
         binding.availableTickets.cancelButton.visibility = View.VISIBLE
         binding.availableTickets.acceptingTicketLoading.visibility = View.INVISIBLE
     }
 
     private fun acceptTicket(){
         binding.availableTickets.attendService.visibility = View.INVISIBLE
-        binding.availableTickets.nextService.visibility = View.INVISIBLE
+        binding.availableTickets.changeServiceActions.visibility = View.INVISIBLE
         binding.availableTickets.cancelButton.visibility = View.INVISIBLE
         binding.availableTickets.acceptingTicketLoading.visibility = View.VISIBLE
 

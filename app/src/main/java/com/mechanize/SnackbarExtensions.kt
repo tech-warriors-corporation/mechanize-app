@@ -13,12 +13,13 @@ fun Snackbar.top() {
 
     params.setMargins(0, getStatusBarHeight(), 0, 0)
 
-    params.gravity = Gravity.TOP
+    params.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
     view.layoutParams = params
 
     view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)?.apply {
         maxLines = 4
         ellipsize = TextUtils.TruncateAt.END
+        gravity = Gravity.CENTER_HORIZONTAL
     }
 
     setAction(R.string.close) { dismiss() }
