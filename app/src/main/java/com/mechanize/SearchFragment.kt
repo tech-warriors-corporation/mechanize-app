@@ -68,6 +68,9 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     private var ticketId: Int? = null
     private var cachedTicketId: Int? = null
     private var mechanicId: Int? = null
+    private var mechanicName: String? = null
+    private var description: String? = null
+    private var createdDate: String? = null
     private var rating = 5
     private var searchingJob: Job? = null
     private var ticketStatusJob: Job? = null
@@ -123,6 +126,10 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
         binding.searchMechanic.closeButton.setOnClickListener{
             closeSearchMechanic()
+        }
+
+        binding.ratingTicket.closeButton.setOnClickListener{
+            closeRatingTicket()
         }
 
         userId = userSharedPreferences!!.getInt("id", 0)
@@ -494,7 +501,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
                     if(canShowFinishingScreen) Snackbar.make(binding.root, R.string.cancelled_ticket, Snackbar.LENGTH_LONG).top()
 
-                    rollbackToYourVision()
+                    rollbackToYourVision(true)
                 }
             }
 
@@ -553,10 +560,15 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                         val isCancelled = status == TicketStatusValue.CANCELLED.value
                         val isConcluded = status == TicketStatusValue.SOLVED.value
 
-                        initMechanicId(payload.mechanicId)
+                        initMechanic(
+                            payload.mechanicId,
+                            payload.mechanicName,
+                            payload.description,
+                            payload.createdDate
+                        )
 
                         if(isCancelled || isConcluded) {
-                            rollbackToYourVision()
+                            rollbackToYourVision(true)
 
                             return
                         }
@@ -622,14 +634,25 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                             val newMechanicId = payload.mechanicId
 
                             if(isCancelled || isConcluded){
-                                if(isCancelled) Snackbar.make(binding.root, R.string.service_was_cancelled, Snackbar.LENGTH_LONG).top()
-                                else Snackbar.make(binding.root, R.string.service_was_concluded, Snackbar.LENGTH_LONG).top()
+                                if(isCancelled) {
+                                    Notifications.create(binding.root.context, getString(R.string.notification_service_cancelled_title), getString(R.string.notification_service_cancelled_message))
+                                    Snackbar.make(binding.root, R.string.service_was_cancelled, Snackbar.LENGTH_LONG).top()
+                                } else {
+                                    Notifications.create(binding.root.context, getString(R.string.notification_service_concluded_title), getString(R.string.notification_service_concluded_message))
+                                    Snackbar.make(binding.root, R.string.service_was_concluded, Snackbar.LENGTH_LONG).top()
+                                }
 
-                                rollbackToYourVision()
+                                rollbackToYourVision(isCancelled)
                             } else if(isDriver){
                                 if(newMechanicId != mechanicId && newMechanicId != null){
                                     cancelSearching()
-                                    initMechanicId(newMechanicId)
+
+                                    initMechanic(
+                                        newMechanicId,
+                                        payload.mechanicName,
+                                        payload.description,
+                                        payload.createdDate
+                                    )
 
                                     Notifications.create(binding.root.context, getString(R.string.notification_mechanic_found_title), getString(R.string.notification_mechanic_found_message))
                                     Snackbar.make(binding.root, R.string.mechanic_was_found, Snackbar.LENGTH_LONG).top()
@@ -639,7 +662,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                                         Snackbar.make(binding.root, R.string.back_search_because_mechanic_cancelled, Snackbar.LENGTH_LONG).top()
                                     } else Snackbar.make(binding.root, R.string.back_to_search_mechanic, Snackbar.LENGTH_LONG).top()
 
-                                    rollbackToYourVision(true)
+                                    rollbackToYourVision(true, true)
                                     onSearchService()
 
                                     return
@@ -660,13 +683,19 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         }
     }
 
-    private fun initMechanicId(newMechanicId: Int?){
+    private fun initMechanic(newMechanicId: Int?, newMechanicName: String?, newDescription: String?, newCreatedDate: String?){
         mechanicId = newMechanicId
+        mechanicName = newMechanicName
+        description = newDescription
+        createdDate = newCreatedDate
 
         if(!hasLocation || mechanicId == null) return
 
         showRunningContents()
 
+        binding.waitingMechanic.mechanicMessage.text = getString(R.string.waiting_mechanic).format(mechanicName)
+        binding.waitingMechanic.description.text = getString(R.string.ticket_description).format(description)
+        binding.waitingMechanic.createdDate.text = getString(R.string.ticket_created_date).format(createdDate)
         binding.waitingMechanic.root.visibility = View.VISIBLE
     }
 
@@ -832,8 +861,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         startActivity(intent)
     }
 
-    private fun rollbackToYourVision(canBackSearchMechanic: Boolean = false){
-        if(!canBackSearchMechanic) showRatingScreen()
+    private fun rollbackToYourVision(skipShowRatingScreen: Boolean = false, skipCancelChooseOfTicket: Boolean = false){
+        if(!skipShowRatingScreen) showRatingScreen()
 
         updateLocation(googleMap, latLng)
         hideTicketContents()
@@ -841,11 +870,14 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         binding.waitingMechanic.root.visibility = View.INVISIBLE
         driverLatLng = null
         mechanicId = null
+        mechanicName = null
+        description = null
+        createdDate = null
 
         cancelTicketStatus()
         cancelSearching()
 
-        if(!canBackSearchMechanic) cancelChooseOfTicket()
+        if(!skipCancelChooseOfTicket) cancelChooseOfTicket()
     }
 
     private fun concludeTicket(){
@@ -897,6 +929,9 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
         setRatingColors()
 
+        binding.ratingTicket.mechanic.text = getString(R.string.ticket_mechanic).format(mechanicName)
+        binding.ratingTicket.description.text = getString(R.string.ticket_description).format(description)
+        binding.ratingTicket.createdDate.text = getString(R.string.ticket_created_date).format(createdDate)
         binding.ratingTicket.root.visibility = View.VISIBLE
     }
 
@@ -931,9 +966,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                         return
                     }
 
-                    cachedTicketId = null
-                    binding.ratingTicket.ratingButton.isEnabled = true
-                    binding.ratingTicket.root.visibility = View.INVISIBLE
+                    closeRatingTicket()
 
                     Snackbar.make(binding.root, R.string.success_on_rating, Snackbar.LENGTH_LONG).top()
                 }
@@ -944,6 +977,11 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                 Snackbar.make(binding.root, R.string.error_on_rating, Snackbar.LENGTH_LONG).top()
             }
         })
+    }
+
+    private fun closeRatingTicket(){
+        cachedTicketId = null
+        binding.ratingTicket.root.visibility = View.INVISIBLE
     }
 
     private fun logout(){

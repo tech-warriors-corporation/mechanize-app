@@ -37,11 +37,15 @@ data class CurrentTicketPayload(
     @SerializedName("created_date") val createdDate: String,
     @SerializedName("status") val status: String,
     @SerializedName("mechanic_id") val mechanicId: Int?,
+    @SerializedName("mechanic_name") val mechanicName: String?,
 )
 
 data class TicketStatusPayload(
     @SerializedName("status") val status: String,
+    @SerializedName("description") val description: String,
+    @SerializedName("created_date") val createdDate: String,
     @SerializedName("mechanic_id") val mechanicId: Int?,
+    @SerializedName("mechanic_name") val mechanicName: String?,
 )
 
 data class Payload<T>(

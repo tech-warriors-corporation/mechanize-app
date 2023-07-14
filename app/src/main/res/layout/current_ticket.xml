@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="@dimen/space"
-        android:layout_marginBottom="144dp"
+        android:layout_marginBottom="@dimen/bottom_space"
         android:clickable="true"
         android:focusable="true"
         android:layout_width="@dimen/two_spaces"

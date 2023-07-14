@@ -69,6 +69,7 @@
     <string name="ticket_title">Encontramos alguns serviços para você escolher (%s/%s):</string>
     <string name="ticket_driver_name">Motorista: %s</string>
     <string name="ticket_vehicle">Veículo: %s</string>
+    <string name="ticket_mechanic">Mecânico: %s</string>
     <string name="ticket_description">Descrição: %s</string>
     <string name="ticket_created_date">Criado em: %s</string>
     <string name="ticket_location">Localização: %s</string>
@@ -88,7 +89,11 @@
     <string name="error_to_conclude_ticket">Ocorreu um erro ao concluir o serviço, tente novamente</string>
     <string name="service_was_cancelled">Serviço cancelado pelo outro usuário, voltamos sua visão</string>
     <string name="service_was_concluded">Serviço marcado como concluído (resolvido) pelo outro usuário, voltamos sua visão</string>
-    <string name="waiting_mechanic">Mecânico chegando para o atendimento</string>
+    <string name="notification_service_concluded_title">Serviço concluído</string>
+    <string name="notification_service_concluded_message">O serviço foi concluído (resolvido).</string>
+    <string name="notification_service_cancelled_title">Serviço cancelado</string>
+    <string name="notification_service_cancelled_message">O serviço foi cancelado.</string>
+    <string name="waiting_mechanic">%s (mecânico) está chegando para o atendimento</string>
     <string name="mechanic_was_found">Mecânico foi encontrado, iniciamos o atendimento, aguarde, por favor</string>
     <string name="rating_button">Enviar avaliação</string>
     <string name="rating_title">Avalie o serviço</string>

@@ -19,19 +19,80 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-        <TextView
-            android:text="@string/rating_title"
-            android:textSize="@dimen/small_title_size"
-            android:textStyle="bold"
-            android:id="@+id/rating_title"
+        <TableLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/rating_head"
+            android:stretchColumns="0">
+            <TableRow tools:ignore="UselessParent">
+                <TextView
+                    android:text="@string/rating_title"
+                    android:textSize="@dimen/small_title_size"
+                    android:textStyle="bold"
+                    android:layout_gravity="center|start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rating_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="@dimen/two_spaces"
+                    android:layout_height="@dimen/two_spaces"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:rippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/close_button"
+                    android:contentDescription="@string/close"
+                    app:iconTint="@color/black"
+                    app:icon="@drawable/baseline_close_24"
+                    app:iconSize="@dimen/two_spaces"
+                    app:iconGravity="textStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:iconPadding="0dp" />
+            </TableRow>
+        </TableLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/alert_transparent_background"
+            android:padding="@dimen/half_space"
+            android:layout_marginTop="@dimen/space"
+            android:id="@+id/rating_body"
+            app:layout_constraintTop_toBottomOf="@id/rating_head"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <TextView android:id="@+id/mechanic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView android:id="@+id/description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mechanic"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView android:id="@+id/created_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rating_title"
+            app:layout_constraintTop_toBottomOf="@id/rating_body"
             android:text="@string/rating_text"
             android:textAlignment="center"
             android:id="@+id/rating_text"
