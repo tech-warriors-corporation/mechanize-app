@@ -62,7 +62,7 @@
     <string name="created_ticket">Serviço criado, iremos procurar um mecânico agora</string>
     <string name="invalid_vehicle">Veículo é obrigatório</string>
     <string name="invalid_problem">Problema é obrigatório</string>
-    <string name="time_to_retry_login_message">Espere %s segundos para tentar logar novamente.</string>
+    <string name="time_to_retry_login_message">Espere %s segundos para tentar logar novamente</string>
     <string name="authenticating_user">Autenticando seu usuário</string>
     <string name="invalid_auth_user">Ocorreu um problema ao autenticar seu usuário</string>
     <string name="error_to_cancel_ticket">Ocorreu um erro ao cancelar, por favor, tente novamente</string>
