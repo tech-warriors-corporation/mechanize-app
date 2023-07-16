@@ -78,7 +78,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Show the path traced of mechanic between driver;
 - [X] Rating modal to optional and can close to users;
 - [ ] Rating modal for the mechanic too (add field in database);
-- [ ] Text that showing vision of other user;
+- [X] Text that showing vision of other user;
 - [X] Toast time should be bigger and the toast should be at top of app. The toast should have a bigger height for large messages;
 - [ ] Double confirmation in actions (principally in cancel, conclude, logout and others);
 - [ ] Show the services to mechanic that is closer than mechanic and not let services appear that are more than 300km from him;
@@ -91,6 +91,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Update location of users when them leave the place, and show two points in map (driver and mechanic) in different colors;
 - [ ] Improve message errors in app;
 - [ ] Use trim in strings to validate fields in ifs;
+- [ ] Remove spaces in start and end of textarea fields;
 - [ ] Verify if is logged in a device, logout at new device if yes;
 - [X] Remove rotate, set as portrait;
 - [ ] Use pronous male and female to better user experience;

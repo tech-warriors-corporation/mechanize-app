@@ -110,6 +110,7 @@
     <string name="back_search_because_mechanic_cancelled">O mecânico cancelou o atendimento, estamos procurando outro nesse momento</string>
     <string name="notification_mechanic_cancelled_title">Mecânico cancelou o atendimento</string>
     <string name="notification_mechanic_cancelled_message">Voltamos a procurar um mecânico, aguarde, por favor.</string>
+    <string name="seeing_driver_location">Você está vendo a localização do motorista</string>
 
     <string-array name="roles">
         <item>@string/driver</item>

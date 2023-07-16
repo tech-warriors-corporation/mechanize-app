@@ -47,6 +47,28 @@
             android:layout_height="wrap_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/alert_black_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="@dimen/elevation_space"
+        android:padding="@dimen/half_space"
+        android:layout_marginStart="@dimen/space"
+        android:layout_marginBottom="@dimen/bottom_space"
+        android:layout_marginEnd="@dimen/four_spaces"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/seeing_driver_location"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/google_maps_link"
         app:layout_constraintEnd_toEndOf="parent"
