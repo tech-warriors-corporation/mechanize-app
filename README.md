@@ -2,7 +2,7 @@
 Mechanize (app) to help people fix car and reach destination.
 
 ## Necessary
-You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_KEY`, `GITHUB_ORG_LINK` and `MAPS_API_KEY` variables in `local.properties`.
+You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_KEY`, `GITHUB_ORG_LINK`, `MAPS_API_KEY` and `USES_CLEARTEXT_TRAFFIC` variables in `local.properties`.
 
 ## See more
 - [API's](https://github.com/tech-warriors-corporation/mechanize-api).

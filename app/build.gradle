@@ -11,8 +11,8 @@ android {
         applicationId "com.mechanize"
         minSdk 24
         targetSdk 33
-        versionCode 10
-        versionName "10.0"
+        versionCode 11
+        versionName "11.0"
 
         Properties properties = new Properties()
 
@@ -24,7 +24,7 @@ android {
         buildConfigField "String", "SHARED_PREF_KEY", "\"${properties.getProperty('SHARED_PREF_KEY')}\""
         buildConfigField "String", "GITHUB_ORG_LINK", "\"${properties.getProperty('GITHUB_ORG_LINK')}\""
 
-        manifestPlaceholders = [MAPS_API_KEY: "${properties.getProperty('MAPS_API_KEY')}"]
+        manifestPlaceholders = [MAPS_API_KEY: "${properties.getProperty('MAPS_API_KEY')}", USES_CLEARTEXT_TRAFFIC: "${properties.getProperty('USES_CLEARTEXT_TRAFFIC')}"]
     }
 
     buildTypes {
