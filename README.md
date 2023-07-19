@@ -96,7 +96,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Remove rotate, set as portrait;
 - [ ] Use pronous male and female to better user experience;
 - [ ] Set notification when mechanic arrive in driver;
-- [ ] Update Google Play prints of app;
+- [X] Update Google Play prints of app;
 - [ ] Put the user name who cancel or conclude the service in the toast;
 - [ ] Create an "other" checkbox on create ticket;
 - [ ] Use MasterKeys instead `SHARED_PREF_KEY`;
