@@ -60,7 +60,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Toggle button to show or hide password on create account;
 - [ ] Create a confirm modal before logout;
 - [ ] Focus me and logout button should have a shadow or something to show better (bring up the map). The icon button should be like a button and not only icon shape;
-- [ ] Set a sanitize to remove emoji and dangerous strings in some fields for not save in database;
+- [X] Set a sanitize to remove emoji and dangerous strings in some fields for not save in database;
 - [X] Add text that go to Tech Warriors GitHub organization link in home;
 - [ ] Add text that go to creator website in infos;
 - [ ] Use select to vehicle;
