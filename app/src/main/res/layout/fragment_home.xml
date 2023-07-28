@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".HomeFragment">
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="@dimen/two_spaces"
+        android:layout_height="@dimen/two_spaces"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        app:rippleColor="@android:color/transparent"
+        android:background="@android:color/transparent"
+        android:id="@+id/open_privacy_policy_modal"
+        android:contentDescription="@string/privacy_policy"
+        app:icon="@drawable/baseline_policy_24"
+        app:iconSize="@dimen/two_spaces"
+        app:iconGravity="textStart"
+        app:iconTint="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/space"
+        android:layout_marginTop="@dimen/space"
+        app:iconPadding="0dp" />
 
     <ImageView
         android:layout_width="324dp"
@@ -157,4 +177,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include layout="@layout/privacy_policy_modal"
+        android:id="@+id/privacy_policy_modal"
+        android:visibility="invisible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

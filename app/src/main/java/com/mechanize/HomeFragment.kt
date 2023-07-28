@@ -68,6 +68,22 @@ class HomeFragment : Fragment() {
 
             startActivity(intent)
         }
+
+        binding.openPrivacyPolicyModal.setOnClickListener{
+            binding.privacyPolicyModal.root.visibility = View.VISIBLE
+        }
+
+        binding.privacyPolicyModal.closeButton.setOnClickListener{
+            binding.privacyPolicyModal.root.visibility = View.INVISIBLE
+        }
+
+        binding.privacyPolicyModal.openDeveloperLink.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.DEVELOPER_LINK)))
+        }
+
+        binding.privacyPolicyModal.openManualPdf.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.MANUAL_PDF)))
+        }
     }
 
     override fun onDestroyView() {

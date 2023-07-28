@@ -23,6 +23,8 @@ android {
         buildConfigField "String", "CLIENT_ID", "\"${properties.getProperty('CLIENT_ID')}\""
         buildConfigField "String", "SHARED_PREF_KEY", "\"${properties.getProperty('SHARED_PREF_KEY')}\""
         buildConfigField "String", "GITHUB_ORG_LINK", "\"${properties.getProperty('GITHUB_ORG_LINK')}\""
+        buildConfigField "String", "DEVELOPER_LINK", "\"${properties.getProperty('DEVELOPER_LINK')}\""
+        buildConfigField "String", "MANUAL_PDF", "\"${properties.getProperty('MANUAL_PDF')}\""
 
         manifestPlaceholders = [MAPS_API_KEY: "${properties.getProperty('MAPS_API_KEY')}", USES_CLEARTEXT_TRAFFIC: "${properties.getProperty('USES_CLEARTEXT_TRAFFIC')}"]
     }
