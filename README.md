@@ -2,10 +2,10 @@
 Mechanize (app) to help people fix car and reach destination.
 
 ## Necessary
-You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_KEY`, `GITHUB_ORG_LINK`, `MAPS_API_KEY` and `USES_CLEARTEXT_TRAFFIC` variables in `local.properties`.
+You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_KEY`, `GITHUB_ORG_LINK`, `DEVELOPER_LINK`, `MANUAL_PDF`, `MAPS_API_KEY` and `USES_CLEARTEXT_TRAFFIC` variables in `local.properties`.
 
 ## See more
-- [API's](https://github.com/tech-warriors-corporation/mechanize-api).
+- [APIs](https://github.com/tech-warriors-corporation/mechanize-api).
 
 ## Deploy
 You must build the app before of generate a `.aab` file.
@@ -19,7 +19,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Show mechanic name to driver when accepted the service;
 - [ ] Add a message to comment about service on rating;
 - [X] Get pending rating or attendance unfinished on entering in application;
-- [ ] Show modal in the system informing that we are not responsible for payments, this is something directly between driver and mechanic (show this message on create account too);
+- [X] Show modal in the system informing that we are not responsible for payments, this is something directly between driver and mechanic (show this message on create account too);
 - [X] Add Tech Warriors logo in a page;
 - [X] Use location;
 - [X] Review all project files;
@@ -34,7 +34,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Study about elevation (shadow);
 - [X] Use Android notifications;
 - [ ] Think about product marketing;
-- [X] Mock the API's;
+- [X] Mock the APIs;
 - [ ] If user tries to enter the password 5 times and fails, then it must wait 15 seconds to try again;
 - [ ] Use singular and plural in seconds of retry login, and not disabled in first time;
 - [X] Upload application in Google Play;
@@ -42,7 +42,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Test in others devices;
 - [X] Maybe create an url for each microservice (environment variable);
 - [X] Remove TODO comments;
-- [ ] Change `MAPS_API_KEY` value;
+- [ ] Change `MAPS_API_KEY` value to a new valid key;
 - [ ] Close modal on click in backdrop;
 - [X] Get current ticket after close app and open again;
 - [X] On close modal and open again, shows a ghost of last data;
@@ -62,14 +62,14 @@ You must build the app before of generate a `.aab` file.
 - [ ] Focus me and logout button should have a shadow or something to show better (bring up the map). The icon button should be like a button and not only icon shape;
 - [X] Set a sanitize to remove emoji and dangerous strings in some fields for not save in database;
 - [X] Add text that go to Tech Warriors GitHub organization link in home;
-- [ ] Add text that go to creator website in infos;
+- [X] Add text that go to creator website in info;
 - [ ] Use select to vehicle;
 - [ ] Forget password screen;
 - [ ] Remember session checkbox on login and create account;
 - [ ] Show remaining chars text;
 - [ ] Online mechanics alert as at Figma;
 - [ ] Change password at configurations;
-- [ ] Set text in info of app about keep the app open to work normally;
+- [X] Set text in info of app about keep the app open to work normally;
 - [ ] Test app with location changed in other country (emulate);
 - [X] When mechanic recuse (cancel button name should be recuse) the ticket, should be unsolved and without mechanic_id, and not with cancelled;
 - [ ] Delete account option;
@@ -94,13 +94,13 @@ You must build the app before of generate a `.aab` file.
 - [ ] Remove spaces in start and end of textarea fields;
 - [ ] Verify if is logged in a device, logout at new device if yes;
 - [X] Remove rotate, set as portrait;
-- [ ] Use pronous male and female to better user experience;
+- [ ] Use pronouns male, female and others to better user experience;
 - [ ] Set notification when mechanic arrive in driver;
 - [X] Update Google Play prints of app;
 - [ ] Put the user name who cancel or conclude the service in the toast;
 - [ ] Create an "other" checkbox on create ticket;
 - [ ] Use MasterKeys instead `SHARED_PREF_KEY`;
-- [ ] Set [manual link](https://docs.google.com/presentation/d/1MjQlUzd4hBRZ4NESxoi-SRhNRBrXQa_fl91iRVG7BLA/edit) in home;
+- [X] Set [manual link](https://docs.google.com/presentation/d/1MjQlUzd4hBRZ4NESxoi-SRhNRBrXQa_fl91iRVG7BLA/edit?usp=sharing) in home;
 - [ ] Set same spaces in borders of alerts, modals and others;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver (something better to understand and beautiful);
 - [X] Stop map pinch on opened modal;
