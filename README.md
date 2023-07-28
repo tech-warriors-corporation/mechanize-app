@@ -90,8 +90,8 @@ You must build the app before of generate a `.aab` file.
 - [ ] Show current position of mechanic to driver and others relevant things;
 - [ ] Update location of users when them leave the place, and show two points in map (driver and mechanic) in different colors;
 - [ ] Improve message errors in app;
-- [ ] Use trim in strings to validate fields in ifs;
-- [ ] Remove spaces in start and end of textarea fields;
+- [X] Use trim in strings to validate fields in ifs;
+- [X] Remove spaces in start and end of textarea fields;
 - [ ] Verify if is logged in a device, logout at new device if yes;
 - [X] Remove rotate, set as portrait;
 - [ ] Use pronouns male, female and others to better user experience;
@@ -101,7 +101,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Create an "other" checkbox on create ticket;
 - [ ] Use MasterKeys instead `SHARED_PREF_KEY`;
 - [X] Set [manual link](https://docs.google.com/presentation/d/1MjQlUzd4hBRZ4NESxoi-SRhNRBrXQa_fl91iRVG7BLA/edit?usp=sharing) in home;
-- [ ] Set same spaces in borders of alerts, modals and others;
+- [X] Set same spaces in borders of alerts, modals and others;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver (something better to understand and beautiful);
 - [X] Stop map pinch on opened modal;
 - [X] Close keyboard on change fragment;
