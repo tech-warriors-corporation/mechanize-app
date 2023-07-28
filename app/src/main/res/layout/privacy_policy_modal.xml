@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/space"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="@dimen/elevation_space"
+    android:background="@color/black_opaque">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modal_background"
+        android:elevation="@dimen/elevation_space"
+        android:padding="@dimen/space"
+        android:layout_marginVertical="@dimen/space"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <TableLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/header"
+            android:stretchColumns="0">
+            <TableRow tools:ignore="UselessParent">
+                <TextView
+                    android:text="@string/privacy_policy"
+                    android:textSize="@dimen/small_title_size"
+                    android:textStyle="bold"
+                    android:layout_gravity="center|start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="@dimen/two_spaces"
+                    android:layout_height="@dimen/two_spaces"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:rippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/close_button"
+                    android:contentDescription="@string/close"
+                    app:iconTint="@color/black"
+                    app:icon="@drawable/baseline_close_24"
+                    app:iconSize="@dimen/two_spaces"
+                    app:iconGravity="textStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:iconPadding="0dp" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            android:text="@string/privacy_policy_text"
+            android:id="@+id/privacy_policy_text"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/half_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/manual_content"
+            android:layout_marginTop="@dimen/half_space"
+            app:layout_constraintTop_toBottomOf="@id/privacy_policy_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/manual_pdf_text"
+                android:id="@+id/manual_pdf_text"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/manual_pdf_text"
+                android:layout_marginStart="@dimen/word_space"
+                android:text="@string/manual_pdf_link"
+                android:id="@+id/open_manual_pdf"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/word_space"
+            app:layout_constraintTop_toBottomOf="@id/manual_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/updated_by"
+                android:id="@+id/updated_by"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/updated_by"
+                android:layout_marginStart="@dimen/word_space"
+                android:text="@string/developer_name"
+                android:id="@+id/open_developer_link"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
