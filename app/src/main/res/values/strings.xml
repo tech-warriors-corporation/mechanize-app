@@ -37,7 +37,7 @@
     <string name="invalid_password_confirmation">Repetição da senha é obrigatória</string>
     <string name="invalid_passwords">As senhas devem ser iguais</string>
     <string name="invalid_create_account">Ocorreu um problema ao criar conta</string>
-    <string name="accept_save_data">Aceito armazenar meus dados</string>
+    <string name="accept_save_data">Aceito armazenar meus dados (leia a política de privacidade na home)</string>
     <string name="you_need_to_accept_save_data">É necessário aceitar armazenar seus dados</string>
     <string name="invalid_location">Localização não encontrada, deslogue para aceitar a permissão de localização ou tente abrir o aplicativo novamente</string>
     <string name="me">Eu</string>
