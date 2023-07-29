@@ -817,7 +817,9 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
     private fun resetAvailableTicketsActions(){
         binding.availableTickets.attendService.visibility = View.VISIBLE
-        binding.availableTickets.changeServiceActions.visibility = View.VISIBLE
+
+        setAvailableTicketsLayout()
+
         binding.availableTickets.cancelButton.visibility = View.VISIBLE
         binding.availableTickets.acceptingTicketLoading.visibility = View.INVISIBLE
     }
