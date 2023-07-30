@@ -100,6 +100,8 @@ You must build the app before of generate a `.aab` file.
 - [ ] Put the user name who cancel or conclude the service in the toast;
 - [ ] Create an "other" checkbox on create ticket;
 - [ ] Use MasterKeys instead `SHARED_PREF_KEY`;
+- [ ] The modal close doesn't is showing on small screens of devices;
+- [ ] The login screen cut the texts on small devices;
 - [X] Set [manual link](https://docs.google.com/presentation/d/1MjQlUzd4hBRZ4NESxoi-SRhNRBrXQa_fl91iRVG7BLA/edit?usp=sharing) in home;
 - [X] Set same spaces in borders of alerts, modals and others;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver (something better to understand and beautiful);
