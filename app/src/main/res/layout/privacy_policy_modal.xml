@@ -31,11 +31,15 @@
                     android:text="@string/privacy_policy"
                     android:textSize="@dimen/small_title_size"
                     android:textStyle="bold"
+                    android:paddingEnd="@dimen/two_spaces"
                     android:layout_gravity="center|start"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    tools:ignore="RtlSymmetry" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:layout_marginStart="@dimen/two_spaces_negative"
                     android:layout_width="@dimen/two_spaces"
                     android:layout_height="@dimen/two_spaces"
                     android:insetLeft="0dp"

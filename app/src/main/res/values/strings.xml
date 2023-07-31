@@ -117,6 +117,7 @@
     <string name="developer_name">João Paulo Hotequil</string>
     <string name="manual_pdf_text">Nosso manual está neste</string>
     <string name="manual_pdf_link">PDF (link)</string>
+    <string name="star">Estrela</string>
 
     <string-array name="roles">
         <item>@string/driver</item>

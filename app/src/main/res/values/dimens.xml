@@ -5,6 +5,7 @@
     <dimen name="word_space">4dp</dimen>
     <dimen name="half_space">8dp</dimen>
     <dimen name="two_spaces">32dp</dimen>
+    <dimen name="two_spaces_negative">-32dp</dimen>
     <dimen name="three_spaces">48dp</dimen>
     <dimen name="four_spaces">64dp</dimen>
     <dimen name="five_spaces">80dp</dimen>
