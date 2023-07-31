@@ -59,7 +59,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] On start app, request our microservices to init them (15 inactive minutes), use interval in microservices or pay for better server;
 - [X] Toggle button to show or hide password on create account;
 - [ ] Create a confirm modal before logout;
-- [ ] Focus me and logout button should have a shadow or something to show better (bring up the map). The icon button should be like a button and not only icon shape;
+- [X] Focus me and logout button should have a shadow or something to show better (bring up the map). The icon button should be like a button and not only icon shape;
 - [X] Set a sanitize to remove emoji and dangerous strings in some fields for not save in database;
 - [X] Add text that go to Tech Warriors GitHub organization link in home;
 - [X] Add text that go to creator website in info;
@@ -100,7 +100,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Put the user name who cancel or conclude the service in the toast;
 - [ ] Create an "other" checkbox on create ticket;
 - [ ] Use MasterKeys instead `SHARED_PREF_KEY`;
-- [ ] The modal close doesn't is showing on small screens of devices;
+- [X] The modal close doesn't is showing on small screens of devices;
 - [ ] The login screen cut the texts on small devices;
 - [X] Set [manual link](https://docs.google.com/presentation/d/1MjQlUzd4hBRZ4NESxoi-SRhNRBrXQa_fl91iRVG7BLA/edit?usp=sharing) in home;
 - [X] Set same spaces in borders of alerts, modals and others;
