@@ -11,8 +11,8 @@ android {
         applicationId "com.mechanize"
         minSdk 24
         targetSdk 33
-        versionCode 14
-        versionName "14.0"
+        versionCode 15
+        versionName "15.0"
 
         Properties properties = new Properties()
 
