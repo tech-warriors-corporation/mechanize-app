@@ -71,18 +71,19 @@
             android:layout_height="wrap_content"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/manual_content"
             android:layout_marginTop="@dimen/half_space"
+            android:singleLine="false"
             app:layout_constraintTop_toBottomOf="@id/privacy_policy_text"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
             <TextView
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/manual_pdf_text"
+                android:singleLine="false"
                 android:id="@+id/manual_pdf_text"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -95,6 +96,7 @@
                 app:layout_constraintStart_toEndOf="@id/manual_pdf_text"
                 android:layout_marginStart="@dimen/word_space"
                 android:text="@string/manual_pdf_link"
+                android:singleLine="false"
                 android:id="@+id/open_manual_pdf"
                 android:textStyle="bold"
                 android:textColor="@color/primary"
@@ -103,11 +105,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/word_space"
+            android:singleLine="false"
             app:layout_constraintTop_toBottomOf="@id/manual_content"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
             <TextView
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -115,6 +117,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/updated_by"
                 android:id="@+id/updated_by"
+                android:singleLine="false"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
@@ -127,6 +130,7 @@
                 android:layout_marginStart="@dimen/word_space"
                 android:text="@string/developer_name"
                 android:id="@+id/open_developer_link"
+                android:singleLine="false"
                 android:textStyle="bold"
                 android:textColor="@color/primary"
                 android:layout_width="wrap_content"
