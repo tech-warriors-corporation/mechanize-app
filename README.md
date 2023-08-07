@@ -85,7 +85,7 @@ You must build the app before of generate a `.aab` file.
 - [ ] Add list of done services to users with status and other information;
 - [ ] Allow mechanic be driver and and vice versa;
 - [X] Remove rating modal on cancel;
-- [ ] App should work in background when closed and logged in;
+- [ ] App should work in background when closed and logged in (second plan, it's in first plan now);
 - [ ] Improve texts and labels to better descriptions;
 - [ ] Show current position of mechanic to driver and others relevant things;
 - [ ] Update location of users when them leave the place, and show two points in map (driver and mechanic) in different colors;
