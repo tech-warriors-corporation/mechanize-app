@@ -103,6 +103,7 @@ You must build the app before of generate a `.aab` file.
 - [X] The modal close doesn't is showing on small screens of devices;
 - [ ] The login screen cut the texts on small devices;
 - [ ] Some texts are cut in small devices;
+- [ ] Show mechanic quantities that is closer than user; 
 - [ ] Maybe update the Android minimum version (it's 7.0 now) to a good version (example: 10.0) for improve security;
 - [X] Set [manual link](https://docs.google.com/presentation/d/1MjQlUzd4hBRZ4NESxoi-SRhNRBrXQa_fl91iRVG7BLA/edit?usp=sharing) in home;
 - [X] Set same spaces in borders of alerts, modals and others;
