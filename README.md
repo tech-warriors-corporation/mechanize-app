@@ -72,7 +72,7 @@ You must build the app before of generate a `.aab` file.
 - [X] Set text in info of app about keep the app open to work normally;
 - [ ] Test app with location changed in other country (emulate);
 - [X] When mechanic recuse (cancel button name should be recuse) the ticket, should be unsolved and without mechanic_id, and not with cancelled;
-- [ ] Delete account option;
+- [ ] Delete account option (verify if use soft or hard delete);
 - [ ] Change snippet of location in map for an engine, person or car;
 - [ ] More options to configure, historic and others;
 - [ ] Show the path traced of mechanic between driver;
