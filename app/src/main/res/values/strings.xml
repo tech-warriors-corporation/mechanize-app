@@ -118,6 +118,29 @@
     <string name="manual_pdf_text">Nosso manual:</string>
     <string name="manual_pdf_link">PDF (link)</string>
     <string name="star">Estrela</string>
+    <string name="open_settings_screen">Abrir tela de configurações</string>
+    <string name="settings_title">Configurações</string>
+    <string name="change_password">Alterar senha</string>
+    <string name="password_icon">Ícone de senha</string>
+    <string name="delete_account">Excluir conta</string>
+    <string name="we_are_working_in_this_feature">Nós estamos trabalhando nessa funcionalidade, aguarde, por favor</string>
+    <string name="save_new_password">Salvar nova senha</string>
+    <string name="current_password_label">Senha atual</string>
+    <string name="current_password_placeholder">Coloque a senha atual</string>
+    <string name="invalid_current_password">Senha atual é obrigatória</string>
+    <string name="new_password_label">Nova senha</string>
+    <string name="new_password_placeholder">Coloque a nova senha</string>
+    <string name="invalid_new_password">Nova senha é obrigatória</string>
+    <string name="new_password_confirmation_label">Repetir nova senha</string>
+    <string name="new_password_confirmation_placeholder">Coloque a repetição da nova senha</string>
+    <string name="invalid_new_password_confirmation">Repetição da nova senha é obrigatória</string>
+    <string name="invalid_new_passwords">As novas senhas devem ser iguais</string>
+    <string name="new_password_saved">A nova senha foi salva</string>
+    <string name="error_change_password">Ocorreu um problema ao salvar a nova senha</string>
+    <string name="change_password_rule">As senhas devem ter no mínimo 8 caracteres, uma letra maiúscula, uma letra minúscula e um número. Recomendamos não usar espaços.</string>
+    <string name="current_password_invalid">Senha atual é inválida</string>
+    <string name="new_password_invalid">Nova senha é inválida</string>
+    <string name="new_password_confirmation_invalid">Repetição da nova senha é inválida</string>
 
     <string-array name="roles">
         <item>@string/driver</item>
