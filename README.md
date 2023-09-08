@@ -68,11 +68,11 @@ You must build the app before of generate a `.aab` file.
 - [ ] Remember session checkbox on login and create account;
 - [ ] Show remaining chars text;
 - [ ] Online mechanics alert as at Figma;
-- [ ] Change password at configurations;
+- [X] Change password at configurations;
 - [X] Set text in info of app about keep the app open to work normally;
 - [ ] Test app with location changed in other country (emulate);
 - [X] When mechanic recuse (cancel button name should be recuse) the ticket, should be unsolved and without mechanic_id, and not with cancelled;
-- [ ] Delete account option (verify if use soft or hard delete);
+- [ ] Delete account option (verify if use soft or hard delete, see places where is used user to not break the application too);
 - [ ] Change snippet of location in map for an engine, person or car;
 - [ ] More options to configure, historic and others;
 - [ ] Show the path traced of mechanic between driver;
@@ -105,6 +105,9 @@ You must build the app before of generate a `.aab` file.
 - [ ] Some texts are cut in small devices;
 - [ ] Show mechanic quantities that is closer than user; 
 - [ ] Maybe update the Android minimum version (it's 7.0 now) to a good version (example: 10.0) for improve security;
+- [ ] Send password confirmation in all requests (example: create account);
+- [ ] Use the rating value to choose better mechanics for drivers;
+- [ ] Learn as reset input of passwords;
 - [X] Set [manual link](https://docs.google.com/presentation/d/1MjQlUzd4hBRZ4NESxoi-SRhNRBrXQa_fl91iRVG7BLA/edit?usp=sharing) in home;
 - [X] Set same spaces in borders of alerts, modals and others;
 - [X] Set link of Google Maps in a button on right when mechanic is attending a driver (something better to understand and beautiful);
