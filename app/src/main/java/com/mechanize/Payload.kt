@@ -48,6 +48,12 @@ data class TicketStatusPayload(
     @SerializedName("mechanic_name") val mechanicName: String?,
 )
 
+data class ChangePasswordPayload(
+    @SerializedName("changed") val changed: Boolean,
+    @SerializedName("data") val data: UserPayload?,
+    @SerializedName("error_type") val errorType: String?,
+)
+
 data class Payload<T>(
     @SerializedName("payload") val payload: T? = null
 )

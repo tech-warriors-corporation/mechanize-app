@@ -16,6 +16,9 @@ interface RetrofitAccountsService {
 
     @POST("users")
     fun createAccount(@Body body: Map<String, String>): Call<Payload<Int>>
+
+    @PATCH("change-password")
+    fun changePassword(@Body body: Map<String, String>): Call<Payload<ChangePasswordPayload>>
 }
 
 interface RetrofitHelpsService {
