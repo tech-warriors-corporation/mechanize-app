@@ -41,6 +41,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import com.mechanize.databinding.FragmentSearchBinding
+import com.mechanize.enums.ErrorType
 import com.mechanize.enums.RoleText
 import com.mechanize.enums.RoleValue
 import com.mechanize.enums.TicketStatusValue
@@ -72,6 +73,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
     private var description: String? = null
     private var createdDate: String? = null
     private var rating = 5
+    private var isChangePasswordCallCancelled = false
+    private var changePasswordCall: Call<Payload<ChangePasswordPayload>>? = null
     private var searchingJob: Job? = null
     private var ticketStatusJob: Job? = null
     private var googleApiClient: GoogleApiClient? = null
@@ -231,6 +234,35 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
             binding.privacyPolicyModal.root.visibility = View.VISIBLE
         }
 
+        binding.openSettingsScreen.setOnClickListener{
+            openSettingsScreen()
+        }
+
+        binding.settingsScreen.backButton.setOnClickListener{
+            binding.settingsScreen.root.visibility = View.INVISIBLE
+        }
+
+        binding.settingsScreen.itemChangePassword.setOnClickListener{
+            binding.settingsScreen.header.visibility = View.INVISIBLE
+            binding.settingsScreen.itemChangePassword.visibility = View.INVISIBLE
+            binding.settingsScreen.deleteAccountButton.visibility = View.INVISIBLE
+            binding.settingsScreen.changePasswordScreen.root.visibility = View.VISIBLE
+        }
+
+        binding.settingsScreen.changePasswordScreen.backButton.setOnClickListener{
+            openSettingsScreen()
+
+            binding.settingsScreen.changePasswordScreen.root.visibility = View.INVISIBLE
+        }
+
+        binding.settingsScreen.changePasswordScreen.save.setOnClickListener{
+            saveNewPassword()
+        }
+
+        binding.settingsScreen.deleteAccountButton.setOnClickListener{
+            Snackbar.make(binding.root, R.string.we_are_working_in_this_feature, Snackbar.LENGTH_LONG).top()
+        }
+
         binding.privacyPolicyModal.closeButton.setOnClickListener{
             binding.privacyPolicyModal.root.visibility = View.INVISIBLE
         }
@@ -266,6 +298,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         super.onDestroyView()
         cancelTicketStatus()
         cancelSearching()
+        isChangePasswordCallCancelled = true
+        changePasswordCall?.cancel()
         _binding = null
     }
 
@@ -1012,5 +1046,111 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         }
 
         findNavController().navigate(R.id.action_SearchFragment_to_HomeFragment)
+    }
+
+    private fun openSettingsScreen(){
+        closeKeyboard()
+
+        binding.settingsScreen.header.visibility = View.VISIBLE
+        binding.settingsScreen.itemChangePassword.visibility = View.VISIBLE
+        binding.settingsScreen.deleteAccountButton.visibility = View.VISIBLE
+        binding.settingsScreen.root.visibility = View.VISIBLE
+        binding.settingsScreen.changePasswordScreen.currentPasswordField.editText?.setText("")
+        binding.settingsScreen.changePasswordScreen.newPasswordField.editText?.setText("")
+        binding.settingsScreen.changePasswordScreen.newPasswordConfirmationField.editText?.setText("")
+    }
+
+    private fun saveNewPassword(){
+        val screen = binding.settingsScreen.changePasswordScreen
+        val currentPassword = screen.currentPasswordField.editText?.text.toString()
+        val newPassword = screen.newPasswordField.editText?.text.toString()
+        val newPasswordConfirmation = screen.newPasswordConfirmationField.editText?.text.toString()
+
+        closeKeyboard()
+
+        if(currentPassword == ""){
+            Snackbar.make(binding.root, R.string.invalid_current_password, Snackbar.LENGTH_LONG).top()
+            return
+        }
+
+        if(newPassword == ""){
+            Snackbar.make(binding.root, R.string.invalid_new_password, Snackbar.LENGTH_LONG).top()
+            return
+        }
+
+        if(newPasswordConfirmation == ""){
+            Snackbar.make(binding.root, R.string.invalid_new_password_confirmation, Snackbar.LENGTH_LONG).top()
+            return
+        }
+
+        if(newPassword != newPasswordConfirmation){
+            Snackbar.make(binding.root, R.string.invalid_new_passwords, Snackbar.LENGTH_LONG).top()
+            return
+        }
+
+        screen.save.isEnabled = false
+        screen.loading.visibility = View.VISIBLE
+
+        val body = mapOf(
+            "current_password" to currentPassword,
+            "new_password" to newPassword,
+            "new_password_confirmation" to newPasswordConfirmation,
+        )
+
+        changePasswordCall = RetrofitFactory().retrofitAccountsService(binding.root.context).changePassword(body)
+
+        changePasswordCall?.enqueue(object : Callback<Payload<ChangePasswordPayload>> {
+            override fun onResponse(call: Call<Payload<ChangePasswordPayload>>, response: Response<Payload<ChangePasswordPayload>>) {
+                if (isChangePasswordCallCancelled) return
+
+                response.body().let{
+                    val payload = it?.payload
+                    val changed = payload?.changed!!
+                    val data = payload.data
+                    val errorType = payload.errorType
+
+                    screen.save.isEnabled = true
+                    screen.loading.visibility = View.INVISIBLE
+
+                    if(!changed){
+                        var message = R.string.error_change_password
+
+                        when (errorType) {
+                            ErrorType.INVALID_CURRENT_PASSWORD.value -> message = R.string.current_password_invalid
+                            ErrorType.INVALID_NEW_PASSWORD.value -> message = R.string.new_password_invalid
+                            ErrorType.INVALID_NEW_PASSWORD_CONFIRMATION.value -> message = R.string.new_password_confirmation_invalid
+                        }
+
+                        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).top()
+                    } else if(data != null){
+                        val userSharedPreferences = EncryptedSharedPreferences.create(
+                            "user",
+                            BuildConfig.SHARED_PREF_KEY,
+                            binding.root.context,
+                            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                        )
+
+                        with(userSharedPreferences.edit()){
+                            putString("accessToken", data.accessToken)
+                            putInt("id", data.user.id)
+                            putString("name", data.user.name)
+                            putString("role", data.user.role)
+                            apply()
+                        }
+
+                        Snackbar.make(binding.root, R.string.new_password_saved, Snackbar.LENGTH_LONG).top()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Payload<ChangePasswordPayload>>, throwable: Throwable) {
+                if (isChangePasswordCallCancelled) return
+
+                Snackbar.make(binding.root, R.string.error_change_password, Snackbar.LENGTH_LONG).top()
+                screen.save.isEnabled = true
+                screen.loading.visibility = View.INVISIBLE
+            }
+        })
     }
 }
