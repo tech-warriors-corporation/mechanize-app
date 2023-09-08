@@ -4,6 +4,7 @@
     <dimen name="elevation_space">12dp</dimen>
     <dimen name="word_space">4dp</dimen>
     <dimen name="half_space">8dp</dimen>
+    <dimen name="two_half_spaces">24dp</dimen>
     <dimen name="two_spaces">32dp</dimen>
     <dimen name="two_spaces_negative">-32dp</dimen>
     <dimen name="three_spaces">48dp</dimen>
