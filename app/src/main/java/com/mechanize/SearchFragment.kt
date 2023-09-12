@@ -250,9 +250,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         }
 
         binding.settingsScreen.changePasswordScreen.backButton.setOnClickListener{
-            openSettingsScreen()
-
-            binding.settingsScreen.changePasswordScreen.root.visibility = View.INVISIBLE
+            backToConfigurations()
         }
 
         binding.settingsScreen.changePasswordScreen.save.setOnClickListener{
@@ -1140,6 +1138,8 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                         }
 
                         Snackbar.make(binding.root, R.string.new_password_saved, Snackbar.LENGTH_LONG).top()
+
+                        backToConfigurations()
                     }
                 }
             }
@@ -1152,5 +1152,11 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                 screen.loading.visibility = View.INVISIBLE
             }
         })
+    }
+
+    private fun backToConfigurations(){
+        openSettingsScreen()
+
+        binding.settingsScreen.changePasswordScreen.root.visibility = View.INVISIBLE
     }
 }
