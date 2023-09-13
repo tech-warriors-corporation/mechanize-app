@@ -1,8 +1,14 @@
+<a href="https://play.google.com/store/apps/details?id=com.mechanize" target="_blank" aria-label="Mechanize in Google Play"><img src="./app/src/main/res/drawable/logo_icon.png" alt="Mechanize logo" width="160"></a>
+
 # mechanize-app
 Mechanize (app) to help people fix car and reach destination.
 
 ## We use:
-<img src="http://jwt.io/img/logo-asset.svg" alt="JWT logo" width="100">
+<div>
+  <a href="https://jwt.io" target="_blank" aria-label="JWT website"><img src="http://jwt.io/img/logo-asset.svg" alt="JWT logo" width="120"></a>
+  <a href="https://m3.material.io" target="_blank" aria-label="Material Design website"><img src="https://m3.material.io/static/assets/m3-favicon.svg" alt="Material Design logo" width="60"></a>
+  <a href="https://maps.google.com" target="_blank" aria-label="Google Maps website"><img src="https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA" alt="Google Maps logo" width="60"></a>
+</div>
 
 ## Necessary
 You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_KEY`, `GITHUB_ORG_LINK`, `DEVELOPER_LINK`, `MANUAL_PDF`, `MAPS_API_KEY` and `USES_CLEARTEXT_TRAFFIC` variables in `local.properties`.
@@ -120,3 +126,10 @@ You must build the app before of generate a `.aab` or `.apk` file. The extension
 - [X] Use a select instead a autocomplete;
 - [X] On app start, request to verify token and update id, name and role in EncryptedSharedPreferences;
 - [X] Disable buttons on request.
+
+## Team
+The Mechanize is made with care and affection by [Tech Warriors](https://github.com/tech-warriors-corporation).
+
+<a href="https://github.com/tech-warriors-corporation" target="_blank" aria-label="Mechanize in GitHub">
+  <img src="./app/src/main/res/drawable/logo_tech_warriors.jpeg" alt="Tech Warriors logo" width="40">
+</a>
