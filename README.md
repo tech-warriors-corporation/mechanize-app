@@ -1,6 +1,4 @@
-<div align="center">
-  <a href="https://play.google.com/store/apps/details?id=com.mechanize" target="_blank" aria-label="Mechanize in Google Play"><img src="./app/src/main/res/drawable/logo.png" alt="Mechanize logo" width="120"></a>
-</div>
+<a href="https://play.google.com/store/apps/details?id=com.mechanize" target="_blank" aria-label="Mechanize in Google Play"><img src="./app/src/main/res/drawable/logo.png" alt="Mechanize logo" width="120"></a>
 
 # mechanize-app
 Mechanize (app) to help people fix car and reach destination.
