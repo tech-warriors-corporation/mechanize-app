@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://play.google.com/store/apps/details?id=com.mechanize" target="_blank" aria-label="Mechanize in Google Play"><img src="./app/src/main/res/drawable/logo_icon.png" alt="Mechanize logo" width="140"></a>
+  <a href="https://play.google.com/store/apps/details?id=com.mechanize" target="_blank" aria-label="Mechanize in Google Play"><img src="./app/src/main/res/drawable/logo_icon.png" alt="Mechanize logo" width="120"></a>
 </div>
 
 # mechanize-app
@@ -133,5 +133,5 @@ You must build the app before of generate a `.aab` or `.apk` file. The extension
 The Mechanize is made with care and affection by [Tech Warriors](https://github.com/tech-warriors-corporation).
 
 <a href="https://github.com/tech-warriors-corporation" target="_blank" aria-label="Mechanize in GitHub">
-  <img src="./app/src/main/res/drawable/logo_tech_warriors.jpeg" alt="Tech Warriors logo" width="40">
+  <img src="./app/src/main/res/drawable/logo_tech_warriors.jpeg" alt="Tech Warriors logo" width="60">
 </a>
