@@ -1,6 +1,9 @@
 # mechanize-app
 Mechanize (app) to help people fix car and reach destination.
 
+## We use:
+<img src="http://jwt.io/img/logo-asset.svg" alt="JWT logo" width="100">
+
 ## Necessary
 You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_KEY`, `GITHUB_ORG_LINK`, `DEVELOPER_LINK`, `MANUAL_PDF`, `MAPS_API_KEY` and `USES_CLEARTEXT_TRAFFIC` variables in `local.properties`.
 
@@ -8,7 +11,7 @@ You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_K
 - [APIs](https://github.com/tech-warriors-corporation/mechanize-api).
 
 ## Deploy
-You must build the app before of generate a `.aab` file.
+You must build the app before of generate a `.aab` or `.apk` file. The extension `.aab` is more modern.
 
 ## Roadmap
 - [ ] Review all topics;
