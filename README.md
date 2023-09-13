@@ -19,6 +19,9 @@ You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_K
 ## Deploy
 You must build the app before of generate a `.aab` or `.apk` file. The extension `.aab` is more modern.
 
+## License
+Read our [LICENSE](https://github.com/tech-warriors-corporation/mechanize-app/blob/main/LICENSE). This is a open-source project. Fell free for share.
+
 ## Roadmap
 - [ ] Review all topics;
 - [X] Add maps;
