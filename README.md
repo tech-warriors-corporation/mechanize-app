@@ -1,6 +1,6 @@
 <a href="https://play.google.com/store/apps/details?id=com.mechanize" target="_blank" aria-label="Mechanize in Google Play"><img src="./app/src/main/res/drawable/logo.png" alt="Mechanize logo" width="120"></a>
 
-# mechanize-app
+# mechanize-app (documentation)
 Mechanize (app) to help people fix car and reach destination.
 
 ## We use:
@@ -28,7 +28,7 @@ USES_CLEARTEXT_TRAFFIC=true # Production is false
 - [APIs](https://github.com/tech-warriors-corporation/mechanize-api).
 
 ## Deploy
-You must build the app before of generate a `.aab` or `.apk` file. The extension `.aab` is more modern.
+You must build the app before of generate a `.aab` or `.apk` file. The extension `.aab` is more modern. You can find these files in `app/release` directory.
 
 ## License
 Read our [LICENSE](https://github.com/tech-warriors-corporation/mechanize-app/blob/main/LICENSE). This is a open-source project. Fell free for share.
