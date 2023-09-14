@@ -37,6 +37,10 @@ The security is one of the pillars of our application, below we talk a little ab
 On our back-end ([Accounts microservice](https://github.com/tech-warriors-corporation/mechanize-accounts-api) and [Helps microservice](https://github.com/tech-warriors-corporation/mechanize-helps-api)), we are processing user input with sanitize, it removing dangerous code. See the next example.
 ![Sanitize script](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/4281ea91-fbbb-49f2-ab9d-a438a4d1fc79)
 
+## Case types 
+- The classes should be in _PascalCase_, example: `SnackbarExtensions.kt`;
+- The layouts should be in _snake_case_, example: `search_mechanic.xml`.
+
 ## See more
 - [APIs](https://github.com/tech-warriors-corporation/mechanize-api).
 
