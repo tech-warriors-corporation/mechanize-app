@@ -17,7 +17,7 @@ MAPS_API_KEY=<set the mapsApiKey here 🔑> # The key to access the Google Maps 
 USES_CLEARTEXT_TRAFFIC=true # Production is false
 ```
 
-## We use:
+## We use
 The technologies are used for better usability and security.
 <div>
   <a href="https://jwt.io" target="_blank" aria-label="JWT website"><img src="http://jwt.io/img/logo-asset.svg" alt="JWT logo" height="60"></a>
@@ -29,6 +29,13 @@ The technologies are used for better usability and security.
   <a href="https://neon.tech" target="_blank" aria-label="Neon website"><img src="https://neon.tech/favicon/favicon.png" alt="Neon logo" height="60"></a>
   <a href="https://owasp.org" target="_blank" aria-label="OWASP website"><img src="https://cdn.icon-icons.com/icons2/3913/PNG/512/owasp_logo_icon_248268.png" alt="OWASP logo" height="60"></a>
 </div>
+
+## Security
+The security is one of the pillars of our application, below we talk a little about the features we have implemented.
+
+### Sanitize
+On our back-end ([Accounts microservice](https://github.com/tech-warriors-corporation/mechanize-accounts-api) and [Helps microservice](https://github.com/tech-warriors-corporation/mechanize-helps-api)), we are processing user input with sanitize, it removing dangerous code. See the next example.
+![Sanitize script](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/4281ea91-fbbb-49f2-ab9d-a438a4d1fc79)
 
 ## See more
 - [APIs](https://github.com/tech-warriors-corporation/mechanize-api).
