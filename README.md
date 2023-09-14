@@ -39,7 +39,7 @@ On our back-end ([Accounts microservice](https://github.com/tech-warriors-corpor
 ![Sanitize script](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/4281ea91-fbbb-49f2-ab9d-a438a4d1fc79)
 
 ### Protected endpoints
-All requests in back-end are validated with _clientId_ and _Authorization_ (user token), the mechanics can access only mechanic routes and the drivers can access only driver routes. See the files.
+All requests in back-end are validated with _clientId_ and _Authorization_ (user token), the mechanics can access only mechanic routes and the drivers can access only driver routes. When the user enter in app, the token is revalidate and we check the token in every request. See the files.
 - [request.py (Helps)](https://github.com/tech-warriors-corporation/mechanize-helps-api/blob/main/request.py);
 - [tickets_controller.py](https://github.com/tech-warriors-corporation/mechanize-helps-api/blob/main/controllers/tickets_controller.py);
 - [request.py (Accounts)](https://github.com/tech-warriors-corporation/mechanize-accounts-api/blob/main/request.py);
