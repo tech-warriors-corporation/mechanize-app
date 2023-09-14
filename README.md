@@ -27,6 +27,7 @@ The technologies are used for better usability and security.
   <a href="https://mobsf.live" target="_blank" aria-label="MobSF website"><img src="https://repository-images.githubusercontent.com/30102273/ec45ab80-b46b-11e9-9f7f-6db13d2e8507" alt="MobSF logo" height="60"></a>
   <a href="https://render.com" target="_blank" aria-label="Render website"><img src="https://media.licdn.com/dms/image/C4E0BAQEMqMDZaWQ8OA/company-logo_200_200/0/1651777963859?e=2147483647&v=beta&t=kp0-pAtoPzJLdFfZGJDB_YuvBpRqa0PgMGngE3rZgsk" alt="Render logo" height="60"></a>
   <a href="https://neon.tech" target="_blank" aria-label="Neon website"><img src="https://neon.tech/favicon/favicon.png" alt="Neon logo" height="60"></a>
+  <a href="https://owasp.org" target="_blank" aria-label="OWASP website"><img src="https://cdn.icon-icons.com/icons2/3913/PNG/512/owasp_logo_icon_248268.png" alt="OWASP logo" height="60"></a>
 </div>
 
 ## See more
