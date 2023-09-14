@@ -35,7 +35,17 @@ The security is one of the pillars of our application, below we talk a little ab
 
 ### Sanitize
 On our back-end ([Accounts microservice](https://github.com/tech-warriors-corporation/mechanize-accounts-api) and [Helps microservice](https://github.com/tech-warriors-corporation/mechanize-helps-api)), we are processing user input with sanitize, it removing dangerous code. See the next example.
+
 ![Sanitize script](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/4281ea91-fbbb-49f2-ab9d-a438a4d1fc79)
+
+### Protected endpoints
+All requests in back-end are validated with _clientId_ and _Authorization_ (user token), the mechanics can access only mechanic routes and the drivers can access only driver routes. See the files.
+- [request.py (Helps)](https://github.com/tech-warriors-corporation/mechanize-helps-api/blob/main/request.py);
+- [tickets_controller.py](https://github.com/tech-warriors-corporation/mechanize-helps-api/blob/main/controllers/tickets_controller.py);
+- [request.py (Accounts)](https://github.com/tech-warriors-corporation/mechanize-accounts-api/blob/main/request.py);
+- [users_controller.py](https://github.com/tech-warriors-corporation/mechanize-accounts-api/blob/main/controllers/users_controller.py).
+
+![Technological padlock](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/cc551013-90dc-4a64-84e4-9bb474de61dc)
 
 ## Case types 
 - The classes should be in _PascalCase_, example: `SnackbarExtensions.kt`;
