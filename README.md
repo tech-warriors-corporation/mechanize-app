@@ -47,6 +47,11 @@ All requests in back-end are validated with _clientId_ and _Authorization_ (user
 
 ![Technological padlock](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/cc551013-90dc-4a64-84e4-9bb474de61dc)
 
+### Encrypted passwords
+Passwords are encrypted and saved with Bcrypt, which uses an adaptive salt.
+
+![Bcrypt explanation](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/bfb699bc-6af9-431c-b8be-7b05b628a477)
+
 ## Case types 
 - The classes should be in _PascalCase_, example: `SnackbarExtensions.kt`;
 - The layouts should be in _snake_case_, example: `search_mechanic.xml`.
