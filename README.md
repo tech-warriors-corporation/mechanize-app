@@ -10,8 +10,19 @@ Mechanize (app) to help people fix car and reach destination.
   <a href="https://maps.google.com" target="_blank" aria-label="Google Maps website"><img src="https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA" alt="Google Maps logo" width="60"></a>
 </div>
 
-## Necessary
-You need to set `API_URL_ACCOUNTS`, `API_URL_HELPS`, `CLIENT_ID`, `SHARED_PREF_KEY`, `GITHUB_ORG_LINK`, `DEVELOPER_LINK`, `MANUAL_PDF`, `MAPS_API_KEY` and `USES_CLEARTEXT_TRAFFIC` variables in `local.properties`.
+## Necessary setup the environment variables
+You need to set the variables below in `local.properties`.
+```
+API_URL_ACCOUNTS=http://10.0.2.2:8000/api/accounts/ # Production is https://mechanize-accounts-api.onrender.com/api/accounts/
+API_URL_HELPS=http://10.0.2.2:8001/api/helps/ # Production is https://mechanize-helps-api.onrender.com/api/helps/
+CLIENT_ID=<set the clientId here 🔑> # The id to access the endpoints
+SHARED_PREF_KEY=<set the sharedPrefKey here 🔑> # The key to access the local data
+GITHUB_ORG_LINK=https://github.com/tech-warriors-corporation # Group organization link
+DEVELOPER_LINK=https://hotequil.tech # Link of developer that updated the privacy policy
+MANUAL_PDF=https://raw.githubusercontent.com/tech-warriors-corporation/mechanize-api/main/docs/manual.pdf # Application manual
+MAPS_API_KEY=<set the mapsApiKey here 🔑> # The key to access the Google Maps API
+USES_CLEARTEXT_TRAFFIC=true # Production is false
+```
 
 ## See more
 - [APIs](https://github.com/tech-warriors-corporation/mechanize-api).
