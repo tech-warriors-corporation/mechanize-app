@@ -3,13 +3,6 @@
 # mechanize-app (documentation)
 Mechanize (app) to help people fix car and reach destination.
 
-## We use:
-<div>
-  <a href="https://jwt.io" target="_blank" aria-label="JWT website"><img src="http://jwt.io/img/logo-asset.svg" alt="JWT logo" width="120"></a>
-  <a href="https://m3.material.io" target="_blank" aria-label="Material Design website"><img src="https://m3.material.io/static/assets/m3-favicon.svg" alt="Material Design logo" width="60"></a>
-  <a href="https://maps.google.com" target="_blank" aria-label="Google Maps website"><img src="https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA" alt="Google Maps logo" width="60"></a>
-</div>
-
 ## Necessary setup the environment variables
 You need to set the variables below in `local.properties`.
 ```
@@ -23,6 +16,14 @@ MANUAL_PDF=https://raw.githubusercontent.com/tech-warriors-corporation/mechanize
 MAPS_API_KEY=<set the mapsApiKey here 🔑> # The key to access the Google Maps API
 USES_CLEARTEXT_TRAFFIC=true # Production is false
 ```
+
+## We use:
+The technologies are used for better usability and security.
+<div>
+  <a href="https://jwt.io" target="_blank" aria-label="JWT website"><img src="http://jwt.io/img/logo-asset.svg" alt="JWT logo" width="120"></a>
+  <a href="https://m3.material.io" target="_blank" aria-label="Material Design website"><img src="https://m3.material.io/static/assets/m3-favicon.svg" alt="Material Design logo" width="60"></a>
+  <a href="https://maps.google.com" target="_blank" aria-label="Google Maps website"><img src="https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA" alt="Google Maps logo" width="60"></a>
+</div>
 
 ## See more
 - [APIs](https://github.com/tech-warriors-corporation/mechanize-api).
