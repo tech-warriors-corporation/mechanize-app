@@ -1,4 +1,4 @@
-<a href="https://play.google.com/store/apps/details?id=com.mechanize" target="_blank" aria-label="Mechanize in Google Play"><img src="./app/src/main/res/drawable/logo.png" alt="Mechanize logo" width="120"></a>
+<a href="https://play.google.com/store/apps/details?id=com.mechanize" target="_blank" aria-label="Mechanize in Google Play"><img src="./app/src/main/res/drawable/logo.png" alt="Mechanize logo" height="120"></a>
 
 # mechanize-app (documentation)
 Mechanize (app) to help people fix car and reach destination.
@@ -20,10 +20,11 @@ USES_CLEARTEXT_TRAFFIC=true # Production is false
 ## We use:
 The technologies are used for better usability and security.
 <div>
-  <a href="https://jwt.io" target="_blank" aria-label="JWT website"><img src="http://jwt.io/img/logo-asset.svg" alt="JWT logo" width="120"></a>
-  <a href="https://m3.material.io" target="_blank" aria-label="Material Design website"><img src="https://m3.material.io/static/assets/m3-favicon.svg" alt="Material Design logo" width="60"></a>
-  <a href="https://maps.google.com" target="_blank" aria-label="Google Maps website"><img src="https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA" alt="Google Maps logo" width="60"></a>
-  <a href="https://kotlinlang.org" target="_blank" aria-label="Kotlin website"><img src="https://kotlinlang.org/assets/images/favicon.svg" alt="Kotlin logo" width="60"></a>
+  <a href="https://jwt.io" target="_blank" aria-label="JWT website"><img src="http://jwt.io/img/logo-asset.svg" alt="JWT logo" height="60"></a>
+  <a href="https://m3.material.io" target="_blank" aria-label="Material Design website"><img src="https://m3.material.io/static/assets/m3-favicon.svg" alt="Material Design logo" height="60"></a>
+  <a href="https://maps.google.com" target="_blank" aria-label="Google Maps website"><img src="https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA" alt="Google Maps logo" height="60"></a>
+  <a href="https://kotlinlang.org" target="_blank" aria-label="Kotlin website"><img src="https://kotlinlang.org/assets/images/favicon.svg" alt="Kotlin logo" height="60"></a>
+  <a href="https://mobsf.live" target="_blank" aria-label="MobSF website"><img src="https://repository-images.githubusercontent.com/30102273/ec45ab80-b46b-11e9-9f7f-6db13d2e8507" alt="MobSF logo" height="60"></a>
 </div>
 
 ## See more
@@ -148,5 +149,5 @@ Read our [LICENSE](https://github.com/tech-warriors-corporation/mechanize-app/bl
 The Mechanize is made with care and affection by [Tech Warriors](https://github.com/tech-warriors-corporation).
 
 <a href="https://github.com/tech-warriors-corporation" target="_blank" aria-label="Mechanize in GitHub">
-  <img src="./app/src/main/res/drawable/logo_tech_warriors.jpeg" alt="Tech Warriors logo" width="60">
+  <img src="./app/src/main/res/drawable/logo_tech_warriors.jpeg" alt="Tech Warriors logo" height="60">
 </a>
