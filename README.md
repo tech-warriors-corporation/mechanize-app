@@ -52,6 +52,11 @@ Passwords are encrypted and saved with Bcrypt, which uses an adaptive salt.
 
 ![Bcrypt explanation](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/bfb699bc-6af9-431c-b8be-7b05b628a477)
 
+### EncryptedSharedPreferences
+In the app, the local data are saved with [EncryptedSharedPreferences](https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences) and secret key.
+
+![EncryptedSharedPreferences cover](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/abaee20f-f082-4c07-84bc-c9330e7978f1)
+
 ## Case types 
 - The classes should be in _PascalCase_, example: `SnackbarExtensions.kt`;
 - The layouts should be in _snake_case_, example: `search_mechanic.xml`.
