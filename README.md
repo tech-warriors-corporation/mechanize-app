@@ -17,6 +17,9 @@ MAPS_API_KEY=<set the mapsApiKey here 🔑> # The key to access the Google Maps 
 USES_CLEARTEXT_TRAFFIC=true # Production is false
 ```
 
+## Start
+To run the project, use the Android Studio (JetBrains IDE) and click in _"run app"_.
+
 ## We use
 The technologies are used for better usability and security.
 <div>
