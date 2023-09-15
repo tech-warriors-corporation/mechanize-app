@@ -57,6 +57,9 @@ In the app, the local data are saved with [EncryptedSharedPreferences](https://d
 
 ![EncryptedSharedPreferences cover](https://github.com/tech-warriors-corporation/mechanize-app/assets/46814712/abaee20f-f082-4c07-84bc-c9330e7978f1)
 
+### Wait to try login again
+When you make an email or password mistake on login, you have to wait 10 seconds to try again. This delay prevent attacks to our APIs. 
+
 ## Case types 
 - The classes should be in _PascalCase_, example: `SnackbarExtensions.kt`;
 - The layouts should be in _snake_case_, example: `search_mechanic.xml`.
