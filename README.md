@@ -176,6 +176,7 @@ Read our [LICENSE](https://github.com/tech-warriors-corporation/mechanize-app/bl
 - [ ] Use the rating value to choose better mechanics for drivers;
 - [ ] Learn as reset input of passwords;
 - [ ] Can't set new password as the current password;
+- [ ] Put SonarQube in all projects;
 - [X] When update password leave to configurations screen;
 - [X] Set [manual link](https://docs.google.com/presentation/d/1MjQlUzd4hBRZ4NESxoi-SRhNRBrXQa_fl91iRVG7BLA/edit?usp=sharing) in home;
 - [X] Set same spaces in borders of alerts, modals and others;
