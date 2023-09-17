@@ -68,7 +68,8 @@ When you make an email or password mistake on login, you have to wait 10 seconds
 - The layouts should be in _snake_case_, example: `search_mechanic.xml`.
 
 ## See more
-- [APIs](https://github.com/tech-warriors-corporation/mechanize-api).
+- [APIs](https://github.com/tech-warriors-corporation/mechanize-api);
+- [App in Google Play](https://play.google.com/store/apps/details?id=com.mechanize).
 
 ## Deploy
 You must build the app before of generate a `.aab` or `.apk` file. The extension `.aab` is more modern. You can find these files in `app/release` directory.
