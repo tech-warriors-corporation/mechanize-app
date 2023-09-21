@@ -18,7 +18,7 @@ USES_CLEARTEXT_TRAFFIC=true # Production is false
 ```
 
 ## Start
-To run the project, use the Android Studio (JetBrains IDE) and click in _"run app"_. To run the `.apk` file, read about [deploy](https://github.com/tech-warriors-corporation/mechanize-app/tree/main#deploy).
+To run the project, use the Android Studio (JetBrains IDE) and click in _"run app"_. To run the `.apk` file, read about [deploy](#deploy).
 
 ## We use
 The technologies are used for better usability and security.
