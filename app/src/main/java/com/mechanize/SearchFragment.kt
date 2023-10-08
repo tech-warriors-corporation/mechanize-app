@@ -534,7 +534,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLon, 15f))
     }
 
-    private fun cancelTicket(callback: (() -> Unit)? = null){
+    private fun cancelTicket(callback: (() -> Unit)? = null, showToast: Boolean = true){
         if(isNotRunning()){
             if(isMechanic){
                 cancelSearching()
@@ -568,7 +568,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                         return
                     }
 
-                    if(canShowFinishingScreen) Snackbar.make(binding.root, R.string.cancelled_ticket, Snackbar.LENGTH_LONG).top()
+                    if(canShowFinishingScreen && showToast) Snackbar.make(binding.root, R.string.cancelled_ticket, Snackbar.LENGTH_LONG).top()
 
                     rollbackToYourVision(true)
 
@@ -1240,6 +1240,6 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                     }
                 })
             }
-        })
+        }, false)
     }
 }
