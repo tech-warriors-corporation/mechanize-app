@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/space"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="@dimen/elevation_space"
+    android:background="@color/black_opaque">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modal_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="@dimen/elevation_space"
+        android:padding="@dimen/space"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/header"
+            android:stretchColumns="0">
+            <TableRow tools:ignore="UselessParent">
+                <TextView
+                    android:text="@string/delete_account_title"
+                    android:textSize="@dimen/small_title_size"
+                    android:textStyle="bold"
+                    android:paddingEnd="@dimen/two_spaces"
+                    android:layout_gravity="center|start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    tools:ignore="RtlSymmetry" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_marginStart="@dimen/two_spaces_negative"
+                    android:layout_width="@dimen/two_spaces"
+                    android:layout_height="@dimen/two_spaces"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:rippleColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/close_button"
+                    android:contentDescription="@string/close"
+                    app:iconTint="@color/black"
+                    app:icon="@drawable/baseline_close_24"
+                    app:iconSize="@dimen/two_spaces"
+                    app:iconGravity="textStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:iconPadding="0dp" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            android:text="@string/delete_account_text"
+            android:id="@+id/text"
+            android:layout_marginTop="@dimen/space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TableLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text"
+            android:layout_marginTop="@dimen/two_half_spaces"
+            android:id="@+id/actions"
+            android:stretchColumns="0, 1">
+            <TableRow tools:ignore="UselessParent">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="@dimen/half_space"
+                    android:id="@+id/back_delete_account"
+                    android:text="@string/back_delete_account"
+                    tools:ignore="ButtonStyle" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="@dimen/half_space"
+                    android:id="@+id/confirm_delete_account"
+                    android:text="@string/confirm_delete_account"
+                    android:backgroundTint="@color/red"
+                    tools:ignore="ButtonStyle" />
+            </TableRow>
+        </TableLayout>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="@dimen/two_spaces"
+            android:layout_height="@dimen/two_spaces"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            android:indeterminateTint="@color/primary"
+            android:layout_marginTop="@dimen/space"
+            app:layout_constraintTop_toBottomOf="@id/actions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

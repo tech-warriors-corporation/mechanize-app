@@ -141,6 +141,12 @@
     <string name="current_password_invalid">Senha atual é inválida</string>
     <string name="new_password_invalid">Nova senha é inválida</string>
     <string name="new_password_confirmation_invalid">Repetição da nova senha é inválida</string>
+    <string name="error_on_delete_account">Ocorreu um problema ao deletar conta</string>
+    <string name="success_on_delete_account">Conta deletada com sucesso</string>
+    <string name="delete_account_title">Confirmação para exclusão de conta</string>
+    <string name="delete_account_text">Esse processo é irreversível, você realmente gostaria de excluir sua conta?</string>
+    <string name="confirm_delete_account">Sim, excluir</string>
+    <string name="back_delete_account">Não, voltar</string>
 
     <string-array name="roles">
         <item>@string/driver</item>

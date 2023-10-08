@@ -239,13 +239,16 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         }
 
         binding.settingsScreen.backButton.setOnClickListener{
-            binding.settingsScreen.root.visibility = View.INVISIBLE
+            closeSettingsScreen()
         }
 
         binding.settingsScreen.itemChangePassword.setOnClickListener{
             binding.settingsScreen.header.visibility = View.INVISIBLE
             binding.settingsScreen.itemChangePassword.visibility = View.INVISIBLE
             binding.settingsScreen.deleteAccountButton.visibility = View.INVISIBLE
+
+            closeDeleteAccountModal()
+
             binding.settingsScreen.changePasswordScreen.root.visibility = View.VISIBLE
         }
 
@@ -258,7 +261,19 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         }
 
         binding.settingsScreen.deleteAccountButton.setOnClickListener{
-            Snackbar.make(binding.root, R.string.we_are_working_in_this_feature, Snackbar.LENGTH_LONG).top()
+            openDeleteAccountModal()
+        }
+
+        binding.deleteAccountModal.closeButton.setOnClickListener{
+            closeDeleteAccountModal()
+        }
+
+        binding.deleteAccountModal.backDeleteAccount.setOnClickListener{
+            closeDeleteAccountModal()
+        }
+
+        binding.deleteAccountModal.confirmDeleteAccount.setOnClickListener{
+            deleteAccount()
         }
 
         binding.privacyPolicyModal.closeButton.setOnClickListener{
@@ -519,10 +534,14 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLon, 15f))
     }
 
-    private fun cancelTicket(){
-        if(isMechanic && isNotRunning()){
-            cancelSearching()
-            cancelChooseOfTicket()
+    private fun cancelTicket(callback: (() -> Unit)? = null){
+        if(isNotRunning()){
+            if(isMechanic){
+                cancelSearching()
+                cancelChooseOfTicket()
+            }
+
+            callback?.invoke()
 
             return
         }
@@ -544,12 +563,16 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
 
                     if(payload == null){
                         Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).top()
+                        callback?.invoke()
+
                         return
                     }
 
                     if(canShowFinishingScreen) Snackbar.make(binding.root, R.string.cancelled_ticket, Snackbar.LENGTH_LONG).top()
 
                     rollbackToYourVision(true)
+
+                    callback?.invoke()
                 }
             }
 
@@ -557,6 +580,7 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
                 hideFinishingScreen()
                 binding.searching.cancelButton.visibility = View.VISIBLE
                 Snackbar.make(binding.root, R.string.error_to_cancel_ticket, Snackbar.LENGTH_LONG).top()
+                callback?.invoke()
             }
         })
     }
@@ -1154,9 +1178,68 @@ class SearchFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleAp
         })
     }
 
+    private fun closeSettingsScreen(){
+        binding.settingsScreen.root.visibility = View.INVISIBLE
+    }
+
     private fun backToConfigurations(){
         openSettingsScreen()
 
         binding.settingsScreen.changePasswordScreen.root.visibility = View.INVISIBLE
+
+        closeDeleteAccountModal()
+    }
+
+    private fun openDeleteAccountModal(){
+        binding.deleteAccountModal.root.visibility = View.VISIBLE
+    }
+
+    private fun closeDeleteAccountModal(){
+        if(binding.deleteAccountModal.loading.visibility == View.VISIBLE) return
+
+        binding.deleteAccountModal.root.visibility = View.INVISIBLE
+    }
+
+    private fun deleteAccount(){
+         binding.deleteAccountModal.backDeleteAccount.isEnabled = false
+         binding.deleteAccountModal.confirmDeleteAccount.isEnabled = false
+         binding.deleteAccountModal.loading.visibility = View.VISIBLE
+
+        cancelTicket(object : () -> Unit{
+            override fun invoke(){
+                val call = RetrofitFactory().retrofitAccountsService(binding.root.context).deleteAccount()
+
+                call.enqueue(object : Callback<Payload<Boolean>> {
+                    override fun onResponse(call: Call<Payload<Boolean>>, response: Response<Payload<Boolean>>) {
+                        response.body().let{
+                            val payload = it?.payload
+
+                            binding.deleteAccountModal.backDeleteAccount.isEnabled = true
+                            binding.deleteAccountModal.confirmDeleteAccount.isEnabled = true
+                            binding.deleteAccountModal.loading.visibility = View.INVISIBLE
+
+                            if(payload == false){
+                                Snackbar.make(binding.root, R.string.error_on_delete_account, Snackbar.LENGTH_LONG).top()
+
+                                return
+                            }
+
+                            Snackbar.make(binding.root, R.string.success_on_delete_account, Snackbar.LENGTH_LONG).top()
+
+                            backToConfigurations()
+                            closeSettingsScreen()
+                            logout()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Payload<Boolean>>, throwable: Throwable) {
+                        Snackbar.make(binding.root, R.string.error_on_delete_account, Snackbar.LENGTH_LONG).top()
+                        binding.deleteAccountModal.backDeleteAccount.isEnabled = true
+                        binding.deleteAccountModal.confirmDeleteAccount.isEnabled = true
+                        binding.deleteAccountModal.loading.visibility = View.INVISIBLE
+                    }
+                })
+            }
+        })
     }
 }
