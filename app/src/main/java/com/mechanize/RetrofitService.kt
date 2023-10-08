@@ -5,6 +5,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.GET
 import retrofit2.http.PATCH
+import retrofit2.http.DELETE
 import retrofit2.http.Path
 
 interface RetrofitAccountsService {
@@ -19,6 +20,9 @@ interface RetrofitAccountsService {
 
     @PATCH("change-password")
     fun changePassword(@Body body: Map<String, String>): Call<Payload<ChangePasswordPayload>>
+
+    @DELETE("delete-account")
+    fun deleteAccount(): Call<Payload<Boolean>>
 }
 
 interface RetrofitHelpsService {

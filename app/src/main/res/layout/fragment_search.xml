@@ -206,5 +206,9 @@
         <include layout="@layout/settings_screen"
             android:id="@+id/settings_screen"
             android:visibility="invisible" />
+
+        <include layout="@layout/delete_account_modal"
+            android:id="@+id/delete_account_modal"
+            android:visibility="invisible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </fragment>
